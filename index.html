@@ -980,7 +980,7 @@
       pbsHomeTitle.innerText = titleWithIndex;
       headerMarqueeText.innerText = titleWithIndex;
 
-      audioElement.src = ep.audio;
+      audioElement.src = encodeURI(ep.audio);
       audioElement.load();
       audioElement.playbackRate = selectedSpeed;
 
@@ -1033,7 +1033,7 @@
       }
 
       try {
-        const res = await fetch(vttUrl + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
+        const res = await fetch(encodeURI(vttUrl) + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
         if (!res.ok) throw new Error("HTTP " + res.status);
         const text = await res.text();
         cues = parseVtt(text);
