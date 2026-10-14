@@ -809,6 +809,7 @@
     let currentEpisode = null;
     let cues = [];
     let activeCueIndex = -1;
+    let wasPlayingBeforeTranslate = false;
 
     const speedOptions = [
       { val: 0.75, label: "0,75" },
@@ -1400,7 +1401,7 @@ async function loadTranscript(vttUrl) {
       const sel = window.getSelection();
       const txt = sel ? sel.toString().trim() : '';
       if (!txt || txt.length < 2) return;
-      if (!audioElement.paused) audioElement.pause();
+      if (!audioElement.paused) { wasPlayingBeforeTranslate = true; audioElement.pause(); } else { wasPlayingBeforeTranslate = false; }
 
       popover.style.display = 'block';
       popoverContent.innerText = 'Translating…';
