@@ -704,13 +704,13 @@
           <input type="checkbox" id="hideCompletedCheck" onchange="renderEpisodeList()">
           Hide Done
         </label>
-        <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
-          <option value="date-desc">Date ↓</option>
-          <option value="date-asc">Date ↑</option>
-          <option value="alpha-asc">Title A→Z ↑</option>
-          <option value="alpha-desc">Title Z→A ↓</option>
-        </select>
-        <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
+      <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
+        <option value="date-asc" selected>Date ↑</option>
+        <option value="date-desc">Date ↓</option>
+        <option value="alpha-asc">Title A→Z ↑</option>
+        <option value="alpha-desc">Title Z→A ↓</option>
+      </select>  
+      <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
       </div>
 
       <div class="list-view" id="episodesListView">
@@ -970,8 +970,11 @@
         const res = await fetch(playlistUrl);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const fetchedList = await res.json();
-        
-        // Assign immutable original indices to all episodes
+
+        // 1. Sort base playlist oldest-to-newest first so index 1 is the first episode
+        fetchedList.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+
+        // 2. Assign permanent original index (1, 2, 3...)
         rawEpisodes = fetchedList.map((ep, idx) => ({
           ...ep,
           originalIndex: idx + 1
@@ -1016,9 +1019,9 @@
         const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
         const card = document.createElement('div');
         card.className = `card ${isDone ? 'completed' : ''}`;
-        
-        // Preserve original numbering index
-        const displayIndex = ep.originalIndex;
+
+        // If searching: keep original numbering. Otherwise: count from 1 sequentially
+        const displayIndex = query ? ep.originalIndex : visible;
 
         card.innerHTML = `
           <div class="card-index">${displayIndex}.</div>
@@ -1042,6 +1045,9 @@
         episodesListView.innerHTML = '<div class="empty-state">No episodes match your criteria.</div>';
       }
     }
+        
+
+
 
     // Audio Playback
     async function playEpisode(ep, displayIndex, startPaused = false) {
@@ -1146,28 +1152,39 @@
     }
 
     function parseVtt(text) {
-      const lines = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+      // Normalize linebreaks and strip UTF-8 BOM
+      const clean = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      const lines = clean.split('\n');
       const list = [];
       let i = 0;
 
       while (i < lines.length) {
-        const line = lines[i].trim();
+        let line = lines[i].trim();
 
         if (line.includes('-->')) {
           const parts = line.split('-->');
-          const start = parseVttTime(parts[0].trim().split(' ')[0]);
-          const end = parseVttTime(parts[1].trim().split(' ')[0]);
+          const start = parseVttTime(parts[0].trim().split(/\s+/)[0]);
+          const end = parseVttTime(parts[1].trim().split(/\s+/)[0]);
           const textLines = [];
           i++;
 
-          while (i < lines.length && lines[i].trim() !== '') {
-            if (!lines[i].includes('-->')) {
-              textLines.push(lines[i].trim());
+          while (i < lines.length) {
+            const subLine = lines[i].trim();
+            // Stop at an empty line or the start of the next cue
+            if (subLine === '' || subLine.includes('-->')) {
+              break;
             }
+            textLines.push(subLine);
             i++;
           }
 
-          const cueText = textLines.join(' ').replace(/<[^>]*>/g, '').trim();
+          // Strip inline subtitle timestamps like <00:00:01.000> and tags like <c> </c>
+          const cueText = textLines
+            .join(' ')
+            .replace(/<\d{2}:\d{2}:\d{2}\.\d{3}>/g, '')
+            .replace(/<[^>]*>/g, '')
+            .trim();
+
           if (cueText) {
             list.push({ start, end, text: cueText });
           }
