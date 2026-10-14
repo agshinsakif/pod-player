@@ -1405,10 +1405,10 @@ async function loadTranscript(vttUrl) {
       popover.style.display = 'block';
       popoverContent.innerText = 'Translating…';
 
-      fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(txt)}`)
+      fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
         .then(r => r.json())
         .then(data => {
-          if (data && data[0]) popoverContent.innerText = data[0].map(i => i[0]).join('');
+          if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
         })
         .catch(() => {
           popoverContent.innerText = 'Translation failed.';
