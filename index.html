@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Genius Podcast</title>
+  <title>Genius Podcasts</title>
 
   <!-- iOS PWA Setup -->
   <link rel="apple-touch-icon" sizes="180x180" href="./web-logo.png?v=1">
   <link rel="icon" type="image/png" href="./web-logo.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Genius Podcast">
+  <meta name="apple-mobile-web-app-title" content="Genius Podcasts">
 
   <style>
     :root {
@@ -24,7 +24,7 @@
       --success: #10b981;
       --border: rgba(255, 255, 255, 0.09);
       --danger: #ef4444;
-      --r2-base: https://pub-4749f414275141eea47a778cb1cb7288.r2.dev;
+      --r2-base: https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev;
     }
 
     * {
@@ -185,27 +185,37 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
 
-    .search-input::placeholder {
-      color: var(--text-muted);
-    }
+    .search-input::placeholder { color: var(--text-muted); }
 
     /* Show Screen (SS) */
     .ss-hero {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
       text-align: center;
+      width: 100%;
+    }
+
+    .ss-poster-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 12px;
     }
 
     .ss-poster-wrap {
       position: relative;
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       border-radius: 20px;
       overflow: hidden;
-      margin-bottom: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      flex-shrink: 0;
     }
 
     .ss-poster-wrap img {
@@ -218,6 +228,30 @@
       font-size: 24px;
       bottom: 8px;
       right: 8px;
+    }
+
+    .btn-ss-back {
+      position: absolute;
+      left: 4px; /* changed from right: 4px */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: background 0.15s, transform 0.12s;
+    }
+     
+    .btn-ss-back:active {
+      transform: translateY(-50%) scale(0.92);
+      background: var(--card-active);
     }
 
     .ss-title {
@@ -238,7 +272,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding: 10px 12px;
+      padding: 8px 12px;
       background: rgba(16, 13, 24, 0.85);
       border-radius: 14px;
       border: 1px solid var(--border);
@@ -253,6 +287,7 @@
       color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .toggle-label input {
@@ -265,22 +300,31 @@
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 5px 8px;
+      padding: 6px 6px;
       border-radius: 8px;
       font-size: 11px;
       font-weight: 600;
       outline: none;
+      flex-shrink: 0;
+      cursor: pointer;
     }
 
     .ss-search-input {
-      width: 110px;
+      width: 82px;
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 5px 8px;
+      padding: 6px 10px;
       border-radius: 8px;
       font-size: 11px;
       outline: none;
+      transition: width 0.22s ease, background 0.15s ease;
+    }
+
+    .ss-search-input:focus {
+      width: 135px;
+      background: rgba(255, 255, 255, 0.14);
+      border-color: var(--accent);
     }
 
     /* Episode Cards */
@@ -321,7 +365,7 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--text-muted);
-      min-width: 26px;
+      min-width: 28px;
       padding-top: 2px;
       font-variant-numeric: tabular-nums;
     }
@@ -542,7 +586,7 @@
       cursor: pointer;
     }
 
-    /* Mini mode (Active everywhere outside Player View) */
+    /* Mini mode (Active outside Player View) */
     .playback-buttons-section.mini-mode {
       flex-direction: row;
       align-items: center;
@@ -639,9 +683,17 @@
     <!-- Screen 2: Show Screen (SS) -->
     <div id="showScreen" class="screen">
       <div class="ss-hero">
-        <div class="ss-poster-wrap">
-          <img id="ssPoster" src="" alt="Show poster">
-          <span class="flag-badge" id="ssFlag"></span>
+        <div class="ss-poster-row">
+          <div class="ss-poster-wrap">
+            <img id="ssPoster" src="" alt="Show poster">
+            <span class="flag-badge" id="ssFlag"></span>
+          </div>
+          <!-- Go Back Button aligned with poster -->
+          <button class="btn-ss-back" onclick="switchScreen('home')" title="Back to shows">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
         </div>
         <div class="ss-title" id="ssTitle">Show Title</div>
         <div class="ss-count" id="ssEpisodeCount">0 episodes</div>
@@ -653,12 +705,12 @@
           Hide Done
         </label>
         <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
-          <option value="date-desc">Newest</option>
-          <option value="date-asc">Oldest</option>
-          <option value="alpha-asc">A → Z</option>
-          <option value="alpha-desc">Z → A</option>
+          <option value="date-desc">Date ↓</option>
+          <option value="date-asc">Date ↑</option>
+          <option value="alpha-asc">Title A→Z ↑</option>
+          <option value="alpha-desc">Title Z→A ↓</option>
         </select>
-        <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Filter..." oninput="renderEpisodeList()">
+        <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
       </div>
 
       <div class="list-view" id="episodesListView">
@@ -723,7 +775,6 @@
         </svg>
       </button>
 
-      <!-- Show Button (Navigates directly to the Show Screen) -->
       <button class="btn-dock btn-show" onclick="navigateToCurrentShow()" title="Go to show">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="3" width="7" height="7"></rect>
@@ -751,7 +802,7 @@
   </div>
 
   <script>
-    const R2_BASE = "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev";
+    const R2_BASE = "https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev";
     let showsData = {};
     let currentShow = null;
     let rawEpisodes = [];
@@ -808,15 +859,20 @@
     const popover = document.getElementById('popover');
     const popoverContent = document.getElementById('popoverContent');
 
-    
+    // Bulletproof URL path encoder
     function safeUrl(path) {
-  if (!path) return "";
-  try {
-    return encodeURI(decodeURI(path));
-  } catch (e) {
-    return encodeURI(path);
-  }
-}
+      if (!path) return "";
+      try {
+        if (path.startsWith("http://") || path.startsWith("https://")) {
+          const urlObj = new URL(path);
+          urlObj.pathname = urlObj.pathname.split('/').map(seg => encodeURIComponent(decodeURIComponent(seg))).join('/');
+          return urlObj.toString();
+        }
+        return path.split('/').map(seg => encodeURIComponent(decodeURIComponent(seg))).join('/');
+      } catch (e) {
+        return encodeURI(path);
+      }
+    }
 
     function formatTime(sec) {
       if (isNaN(sec) || sec <= 0) return "0:00";
@@ -825,7 +881,7 @@
       return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
-    // Routing
+    // Screen Routing
     function switchScreen(screen) {
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
@@ -844,7 +900,7 @@
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
         playbackButtonsSection.classList.add('mini-mode');
-        // Reset episode filter input on returning to SS
+        // Reset search field when navigating back to Show Screen
         ssSearchInput.value = '';
         renderEpisodeList();
       } else if (screen === 'player') {
@@ -857,10 +913,11 @@
       }
     }
 
-    // Home Screen (HS) Initialization
+    // Load Shows from shows.json
     async function loadShows() {
       try {
         const res = await fetch('shows.json?nocache=' + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
         showsData = await res.json();
         renderShowsGrid(showsData);
         restoreLastState();
@@ -875,7 +932,7 @@
         const s = shows[key];
         const card = document.createElement('div');
         card.className = 'show-card';
-        const logoUrl = `${R2_BASE}/logos/${encodeURIComponent(s.folder)}.png`;
+        const logoUrl = safeUrl(`${R2_BASE}/logos/${s.folder}.png`);
         card.innerHTML = `
           <div class="show-poster-wrap">
             <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
@@ -897,25 +954,32 @@
       renderShowsGrid(filtered);
     }
 
-    // Show Screen (SS) Logic
+    // Show Screen Handling
     async function openShow(show) {
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
-      ssPoster.src = `${R2_BASE}/logos/${encodeURIComponent(show.folder)}.png`;
+      ssPoster.src = safeUrl(`${R2_BASE}/logos/${show.folder}.png`);
       ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
       episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
 
       switchScreen('show');
 
       try {
-        const playlistUrl = `${R2_BASE}/episodes/${encodeURIComponent(show.folder)}/playlist.json?nocache=${Date.now()}`;
+        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${show.folder}/playlist.json`) + '?nocache=' + Date.now();
         const res = await fetch(playlistUrl);
         if (!res.ok) throw new Error("HTTP " + res.status);
-        rawEpisodes = await res.json();
+        const fetchedList = await res.json();
+        
+        // Assign immutable original indices to all episodes
+        rawEpisodes = fetchedList.map((ep, idx) => ({
+          ...ep,
+          originalIndex: idx + 1
+        }));
+
         renderEpisodeList();
       } catch (err) {
-        episodesListView.innerHTML = `<div class="empty-state">Could not load show playlist.</div>`;
+        episodesListView.innerHTML = `<div class="empty-state">Could not load show playlist (${err.message}).</div>`;
         ssEpisodeCount.innerText = "0 episodes";
       }
     }
@@ -952,8 +1016,12 @@
         const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
         const card = document.createElement('div');
         card.className = `card ${isDone ? 'completed' : ''}`;
+        
+        // Preserve original numbering index
+        const displayIndex = ep.originalIndex;
+
         card.innerHTML = `
-          <div class="card-index">${visible}.</div>
+          <div class="card-index">${displayIndex}.</div>
           <div class="card-content">
             <div class="card-title">${ep.title}</div>
             <div class="card-meta">
@@ -965,8 +1033,7 @@
             </div>
           </div>
         `;
-        const epIndex = visible;
-        card.onclick = () => playEpisode(ep, epIndex);
+        card.onclick = () => playEpisode(ep, displayIndex);
         episodesListView.appendChild(card);
       });
 
@@ -976,7 +1043,7 @@
       }
     }
 
-    // Playback Logic
+    // Audio Playback
     async function playEpisode(ep, displayIndex, startPaused = false) {
       currentEpisode = ep;
       currentEpisode.displayIndex = displayIndex;
@@ -1032,6 +1099,7 @@
       }
     }
 
+    // Robust Transcript Parser & Loader
     async function loadTranscript(vttUrl) {
       cues = [];
       activeCueIndex = -1;
@@ -1043,14 +1111,16 @@
       }
 
       try {
-        const res = await fetch(safeUrl(vttUrl) + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
+        const urlToFetch = safeUrl(vttUrl);
+        const glue = urlToFetch.includes('?') ? '&' : '?';
+        const res = await fetch(urlToFetch + glue + 'nocache=' + Date.now());
         if (!res.ok) throw new Error("HTTP " + res.status);
         const text = await res.text();
         cues = parseVtt(text);
         if (cues.length > 0) {
           renderTranscript();
         } else {
-          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text lines.</div>';
+          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text cues.</div>';
         }
       } catch (err) {
         transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
@@ -1076,38 +1146,37 @@
     }
 
     function parseVtt(text) {
-  // Normalize line endings and strip BOM/header
-  const lines = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
-  const list = [];
-  let i = 0;
+      const lines = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+      const list = [];
+      let i = 0;
 
-  while (i < lines.length) {
-    const line = lines[i].trim();
+      while (i < lines.length) {
+        const line = lines[i].trim();
 
-    if (line.includes('-->')) {
-      const parts = line.split('-->');
-      const start = parseVttTime(parts[0].trim().split(' ')[0]);
-      const end = parseVttTime(parts[1].trim().split(' ')[0]);
-      const textLines = [];
-      i++;
+        if (line.includes('-->')) {
+          const parts = line.split('-->');
+          const start = parseVttTime(parts[0].trim().split(' ')[0]);
+          const end = parseVttTime(parts[1].trim().split(' ')[0]);
+          const textLines = [];
+          i++;
 
-      while (i < lines.length && lines[i].trim() !== '') {
-        if (!lines[i].includes('-->')) {
-          textLines.push(lines[i].trim());
+          while (i < lines.length && lines[i].trim() !== '') {
+            if (!lines[i].includes('-->')) {
+              textLines.push(lines[i].trim());
+            }
+            i++;
+          }
+
+          const cueText = textLines.join(' ').replace(/<[^>]*>/g, '').trim();
+          if (cueText) {
+            list.push({ start, end, text: cueText });
+          }
+        } else {
+          i++;
         }
-        i++;
       }
-
-      const cueText = textLines.join(' ').replace(/<[^>]*>/g, '').trim();
-      if (cueText) {
-        list.push({ start, end, text: cueText });
-      }
-    } else {
-      i++;
+      return list;
     }
-  }
-  return list;
-}
 
     function renderTranscript() {
       transcriptView.innerHTML = '';
@@ -1126,6 +1195,7 @@
       });
     }
 
+    // Playback Controls
     function togglePlay(e) {
       if (e) e.stopPropagation();
       closeSpeedPopover();
@@ -1250,7 +1320,6 @@
         const deltaY = e.changedTouches[0].clientY - touchStartY;
         const elapsed = Date.now() - touchStartTime;
 
-        // Swipe right from left edge to go back
         if (touchStartX < 50 && deltaX > 70 && Math.abs(deltaY) < 60 && elapsed < 400) {
           if (showScreen.classList.contains('active')) {
             switchScreen('home');
@@ -1276,7 +1345,7 @@
       });
     }
 
-    // Restore State from Yesterday / Previous Session
+    // Restore State from previous session
     function restoreLastState() {
       const savedState = localStorage.getItem('last_played_state');
       if (savedState) {
