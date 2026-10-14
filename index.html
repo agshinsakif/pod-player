@@ -400,7 +400,7 @@
 
     /* Player Screen (PS) */
     .transcript-view {
-      display: none;
+      display: block;
       max-width: 680px;
       margin: 0 auto;
     }
@@ -1422,6 +1422,11 @@ async function loadTranscript(vttUrl) {
 
     renderSpeedMenu();
     loadShows();
-  </script>
+    document.addEventListener("keydown", (e) => {
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
+    if (e.code === "Space" || e.key === " ") { e.preventDefault(); togglePlay(); }
+  });
+</script>
 </body>
 </html>
