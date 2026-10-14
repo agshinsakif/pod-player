@@ -861,18 +861,39 @@
 
     // Bulletproof URL path encoder
     function safeUrl(path) {
-      if (!path) return "";
-      try {
-        if (path.startsWith("http://") || path.startsWith("https://")) {
-          const urlObj = new URL(path);
-          urlObj.pathname = urlObj.pathname.split('/').map(seg => encodeURIComponent(decodeURIComponent(seg))).join('/');
-          return urlObj.toString();
-        }
-        return path.split('/').map(seg => encodeURIComponent(decodeURIComponent(seg))).join('/');
-      } catch (e) {
-        return encodeURI(path);
-      }
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return encodeURI(decodeURI(path));
+  }
+  return path.split('/').map(part => encodeURIComponent(decodeURIComponent(part))).join('/');
+}
+
+async function loadTranscript(vttUrl) {
+  cues = [];
+  activeCueIndex = -1;
+  transcriptView.innerHTML = '';
+
+  if (!vttUrl) {
+    transcriptView.innerHTML = '<div style="text-align: center; color: var(--text-muted); margin-top: 60px;">No transcript file available for this track.</div>';
+    return;
+  }
+
+  try {
+    const resolvedUrl = safeUrl(vttUrl);
+    const glue = resolvedUrl.includes('?') ? '&' : '?';
+    const res = await fetch(resolvedUrl + glue + 'nocache=' + Date.now());
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const text = await res.text();
+    cues = parseVtt(text);
+    if (cues.length > 0) {
+      renderTranscript();
+    } else {
+      transcriptView.innerHTML = '<div style="text-align: center; color: var(--text-muted); margin-top: 60px;">Transcript file had no lines.</div>';
     }
+  } catch (err) {
+    transcriptView.innerHTML = `<div style="text-align: center; color: var(--danger); margin-top: 60px;">Could not load transcript (${err.message}).</div>`;
+  }
+}
 
     function formatTime(sec) {
       if (isNaN(sec) || sec <= 0) return "0:00";
