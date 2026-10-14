@@ -99,12 +99,23 @@
     .screen { display: none; }
     .screen.active { display: block; }
 
-    /* Home Screen: Shows Grid */
+    /* Home Screen */
     .shows-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
       margin-bottom: 70px;
+    }
+
+    @media (min-width: 768px) {
+      .shows-grid {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 24px;
+      }
+      .ss-poster-wrap {
+        width: 170px !important;
+        height: 170px !important;
+      }
     }
 
     .show-card {
@@ -157,7 +168,6 @@
       word-break: break-word;
     }
 
-    /* Home Bottom Search */
     .home-search-wrap {
       position: fixed;
       bottom: calc(80px + env(safe-area-inset-bottom));
@@ -187,13 +197,21 @@
 
     .search-input::placeholder { color: var(--text-muted); }
 
-    /* Show Screen (SS) */
+    /* Show Screen Sticky Header & Controls */
+    .ss-sticky-header {
+      position: sticky;
+      top: -16px;
+      z-index: 45;
+      background: var(--bg);
+      padding: 12px 0 8px;
+    }
+
     .ss-hero {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       text-align: center;
       width: 100%;
     }
@@ -205,13 +223,13 @@
       justify-content: center;
       width: 100%;
       max-width: 360px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .ss-poster-wrap {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
@@ -225,14 +243,14 @@
     }
 
     .ss-poster-wrap .flag-badge {
-      font-size: 24px;
+      font-size: 22px;
       bottom: 8px;
       right: 8px;
     }
 
     .btn-ss-back {
       position: absolute;
-      left: 4px; /* changed from right: 4px */
+      left: 4px;
       top: 50%;
       transform: translateY(-50%);
       width: 44px;
@@ -248,35 +266,35 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.3);
       transition: background 0.15s, transform 0.12s;
     }
-     
+
     .btn-ss-back:active {
       transform: translateY(-50%) scale(0.92);
       background: var(--card-active);
     }
 
     .ss-title {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .ss-count {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    /* Controls Bar: Hide Completed (Left), Sort (Center), Search (Right) */
     .ss-controls-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       padding: 8px 12px;
-      background: rgba(16, 13, 24, 0.85);
+      background: rgba(24, 20, 36, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 14px;
       border: 1px solid var(--border);
-      margin-bottom: 16px;
     }
 
     .toggle-label {
@@ -327,11 +345,34 @@
       border-color: var(--accent);
     }
 
+    /* Scroll to Top Floating Button */
+    .btn-scroll-top {
+      position: fixed;
+      right: 20px;
+      bottom: calc(90px + env(safe-area-inset-bottom));
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 85;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      transition: transform 0.15s;
+    }
+
+    .btn-scroll-top:active { transform: scale(0.9); }
+
     /* Episode Cards */
     .list-view {
       display: flex;
       flex-direction: column;
       gap: 10px;
+      margin-top: 14px;
     }
 
     .empty-state {
@@ -398,7 +439,7 @@
     .badge-resume { color: var(--accent); background: rgba(139, 92, 246, 0.15); }
     .badge-audio { color: #eab308; background: rgba(234, 179, 8, 0.12); }
 
-    /* Player Screen (PS) */
+    /* Player Screen */
     .transcript-view {
       display: block;
       max-width: 680px;
@@ -421,7 +462,7 @@
       font-weight: 700;
     }
 
-    /* Playback Dock / Persistent Player */
+    /* Playback Dock */
     .playback-buttons-section {
       position: fixed;
       bottom: 0;
@@ -586,7 +627,7 @@
       cursor: pointer;
     }
 
-    /* Mini mode (Active outside Player View) */
+    /* Mini mode */
     .playback-buttons-section.mini-mode {
       flex-direction: row;
       align-items: center;
@@ -661,65 +702,6 @@
       user-select: text;
       -webkit-user-select: text;
     }
-  
-    /* Larger posters on desktop/PC */
-    @media (min-width: 768px) {
-      .shows-grid {
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-        gap: 24px;
-      }
-      .ss-poster-wrap {
-        width: 190px !important;
-        height: 190px !important;
-      }
-    }
-
-    /* Collapse poster when scrolling down on Show Screen */
-    .ss-hero {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: var(--bg);
-      padding: 10px 0;
-      transition: all 0.25s ease;
-    }
-    .ss-hero.collapsed .ss-poster-row {
-      max-height: 0;
-      opacity: 0;
-      margin-bottom: 0;
-      pointer-events: none;
-      overflow: hidden;
-      transform: scale(0.85);
-    }
-    .ss-hero .ss-poster-row {
-      max-height: 240px;
-      opacity: 1;
-      transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease;
-    }
-
-    /* Scroll to top floating button */
-    .btn-scroll-top {
-      position: fixed;
-      right: 20px;
-      bottom: calc(90px + env(safe-area-inset-bottom));
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 85;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-      transition: transform 0.15s, opacity 0.2s;
-    }
-    .btn-scroll-top:active {
-      transform: scale(0.9);
-    }
-
   </style>
 </head>
 <body>
@@ -741,38 +723,38 @@
 
     <!-- Screen 2: Show Screen (SS) -->
     <div id="showScreen" class="screen">
-      <div class="ss-hero">
-        <div class="ss-poster-row">
-          <div class="ss-poster-wrap">
-            <img id="ssPoster" src="" alt="Show poster">
-            <span class="flag-badge" id="ssFlag"></span>
+      <div class="ss-sticky-header">
+        <div class="ss-hero">
+          <div class="ss-poster-row">
+            <button class="btn-ss-back" onclick="switchScreen('home')" title="Back to shows">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <div class="ss-poster-wrap">
+              <img id="ssPoster" src="" alt="Show poster">
+              <span class="flag-badge" id="ssFlag"></span>
+            </div>
           </div>
-          <!-- Go Back Button aligned with poster -->
-          <button class="btn-ss-back" onclick="switchScreen('home')" title="Back to shows">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-          </button>
+          <div class="ss-title" id="ssTitle">Show Title</div>
+          <div class="ss-count" id="ssEpisodeCount">0 episodes</div>
         </div>
-        <div class="ss-title" id="ssTitle">Show Title</div>
-        <div class="ss-count" id="ssEpisodeCount">0 episodes</div>
+
+        <div class="ss-controls-bar">
+          <label class="toggle-label">
+            <input type="checkbox" id="hideCompletedCheck" onchange="renderEpisodeList()">
+            Hide Done
+          </label>
+          <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
+            <option value="date-asc" selected>Date ↑</option>
+            <option value="date-desc">Date ↓</option>
+            <option value="alpha-asc">Title A→Z ↑</option>
+            <option value="alpha-desc">Title Z→A ↓</option>
+          </select>
+          <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
+        </div>
       </div>
 
-      <div class="ss-controls-bar">
-        <label class="toggle-label">
-          <input type="checkbox" id="hideCompletedCheck" onchange="renderEpisodeList()">
-          Hide Done
-        </label>
-      <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
-        <option value="date-asc" selected>Date ↑</option>
-        <option value="date-desc">Date ↓</option>
-        <option value="alpha-asc">Title A→Z ↑</option>
-        <option value="alpha-desc">Title Z→A ↓</option>
-      </select>  
-      <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
-      </div>
-
-      
       <button class="btn-scroll-top" id="ssScrollTopBtn" onclick="scrollToTopSS()" title="Return to top">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M18 15l-6-6-6 6"/>
@@ -790,12 +772,11 @@
     </div>
   </main>
 
-  <!-- Home Screen Bottom Search -->
   <div class="home-search-wrap" id="homeSearchWrap">
     <input type="text" class="search-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
   </div>
 
-  <!-- Persistent Playback Dock -->
+  <!-- Playback Dock -->
   <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
     <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper" onclick="openPlayerScreen()">
       <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
@@ -875,49 +856,524 @@
     let currentEpisode = null;
     let cues = [];
     let activeCueIndex = -1;
-    
+
     let wasPlayingBeforeTranslate = false;
     let isTranslatingOpen = false;
 
-    document.addEventListener("selectionchange", () => {
-      const sel = window.getSelection();
-      const txt = sel ? sel.toString().trim() : "";
-      if (!txt || txt.length < 2) return;
+    const speedOptions = [
+      { val: 0.75, label: "0,75" },
+      { val: 0.9,  label: "0,9" },
+      { val: 1.0,  label: "1x" },
+      { val: 1.1,  label: "1,1" },
+      { val: 1.25, label: "1,25" },
+      { val: 1.5,  label: "1,5" },
+      { val: 2.0,  label: "2" }
+    ];
+    let selectedSpeed = 1.0;
 
-      if (!isTranslatingOpen) {
-        wasPlayingBeforeTranslate = !audioElement.paused;
-        if (!audioElement.paused) audioElement.pause();
-        isTranslatingOpen = true;
+    const mainContainer = document.getElementById('mainContainer');
+    const homeScreen = document.getElementById('homeScreen');
+    const showScreen = document.getElementById('showScreen');
+    const playerScreen = document.getElementById('playerScreen');
+    const showsGrid = document.getElementById('showsGrid');
+    const homeSearchWrap = document.getElementById('homeSearchWrap');
+    const homeSearchInput = document.getElementById('homeSearchInput');
+
+    const ssPoster = document.getElementById('ssPoster');
+    const ssFlag = document.getElementById('ssFlag');
+    const ssTitle = document.getElementById('ssTitle');
+    const ssEpisodeCount = document.getElementById('ssEpisodeCount');
+    const ssSearchInput = document.getElementById('ssSearchInput');
+    const hideCompletedCheck = document.getElementById('hideCompletedCheck');
+    const sortSelect = document.getElementById('sortSelect');
+    const episodesListView = document.getElementById('episodesListView');
+    const ssScrollTopBtn = document.getElementById('ssScrollTopBtn');
+
+    const headerBrandTitle = document.getElementById('headerBrandTitle');
+    const headerMarqueeWrapper = document.getElementById('headerMarqueeWrapper');
+    const headerMarqueeText = document.getElementById('headerMarqueeText');
+
+    const playbackButtonsSection = document.getElementById('playbackButtonsSection');
+    const pbsHomeTitleWrapper = document.getElementById('pbsHomeTitleWrapper');
+    const pbsHomeTitle = document.getElementById('pbsHomeTitle');
+    const audioElement = document.getElementById('audioElement');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const timeCurrent = document.getElementById('timeCurrent');
+    const timeTotal = document.getElementById('timeTotal');
+    const seekBar = document.getElementById('seekBar');
+    const speedBtn = document.getElementById('speedBtn');
+    const speedPopover = document.getElementById('speedPopover');
+    const speedChips = document.getElementById('speedChips');
+    const volumeBar = document.getElementById('volumeBar');
+    const transcriptView = document.getElementById('transcriptView');
+    const popover = document.getElementById('popover');
+    const popoverContent = document.getElementById('popoverContent');
+
+    function safeUrl(path) {
+      if (!path) return "";
+      if (path.startsWith("http://") || path.startsWith("https://")) {
+        return encodeURI(decodeURI(path));
+      }
+      return path.split('/').map(seg => encodeURIComponent(decodeURIComponent(seg))).join('/');
+    }
+
+    function formatTime(sec) {
+      if (isNaN(sec) || sec <= 0) return "0:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function switchScreen(screen) {
+      homeScreen.classList.remove('active');
+      showScreen.classList.remove('active');
+      playerScreen.classList.remove('active');
+
+      if (screen === 'home') {
+        homeScreen.classList.add('active');
+        homeSearchWrap.style.display = 'flex';
+        headerBrandTitle.style.display = 'block';
+        headerBrandTitle.innerText = "Genius Podcasts";
+        headerMarqueeWrapper.style.display = 'none';
+        playbackButtonsSection.classList.add('mini-mode');
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+      } else if (screen === 'show') {
+        showScreen.classList.add('active');
+        homeSearchWrap.style.display = 'none';
+        headerBrandTitle.style.display = 'none';
+        headerMarqueeWrapper.style.display = 'none';
+        playbackButtonsSection.classList.add('mini-mode');
+        ssSearchInput.value = '';
+        renderEpisodeList();
+      } else if (screen === 'player') {
+        playerScreen.classList.add('active');
+        homeSearchWrap.style.display = 'none';
+        headerBrandTitle.style.display = 'none';
+        headerMarqueeWrapper.style.display = 'block';
+        playbackButtonsSection.classList.remove('mini-mode');
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+        updateMarquees();
+      }
+    }
+
+    async function loadShows() {
+      try {
+        const res = await fetch('shows.json?nocache=' + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        showsData = await res.json();
+        renderShowsGrid(showsData);
+        restoreLastState();
+      } catch (err) {
+        showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json (${err.message})</div>`;
+      }
+    }
+
+    function renderShowsGrid(shows) {
+      showsGrid.innerHTML = '';
+      Object.keys(shows).forEach(key => {
+        const s = shows[key];
+        const card = document.createElement('div');
+        card.className = 'show-card';
+        const logoUrl = safeUrl(`${R2_BASE}/logos/${s.folder}.png`);
+        card.innerHTML = `
+          <div class="show-poster-wrap">
+            <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
+            <span class="flag-badge">${s.flag || ''}</span>
+          </div>
+          <div class="show-name">${s.name}</div>
+        `;
+        card.onclick = () => openShow(s);
+        showsGrid.appendChild(card);
+      });
+    }
+
+    function filterShows() {
+      const q = homeSearchInput.value.toLowerCase().trim();
+      const filtered = {};
+      Object.keys(showsData).forEach(k => {
+        if (showsData[k].name.toLowerCase().includes(q)) filtered[k] = showsData[k];
+      });
+      renderShowsGrid(filtered);
+    }
+
+    async function openShow(show) {
+      currentShow = show;
+      ssTitle.innerText = show.name;
+      ssFlag.innerText = show.flag || '';
+      ssPoster.src = safeUrl(`${R2_BASE}/logos/${show.folder}.png`);
+      ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
+      episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
+
+      switchScreen('show');
+      mainContainer.scrollTo({ top: 0 });
+
+      try {
+        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${show.folder}/playlist.json`) + '?nocache=' + Date.now();
+        const res = await fetch(playlistUrl);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const fetchedList = await res.json();
+
+        // Sort oldest to newest so index 1 is original episode 1
+        fetchedList.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+
+        rawEpisodes = fetchedList.map((ep, idx) => ({
+          ...ep,
+          originalIndex: idx + 1
+        }));
+
+        renderEpisodeList();
+      } catch (err) {
+        episodesListView.innerHTML = `<div class="empty-state">Could not load playlist (${err.message}).</div>`;
+        ssEpisodeCount.innerText = "0 episodes";
+      }
+    }
+
+    function renderEpisodeList() {
+      const query = ssSearchInput.value.toLowerCase().trim();
+      const hideCompleted = hideCompletedCheck.checked;
+      const mode = sortSelect.value;
+
+      let list = [...rawEpisodes];
+
+      if (query) {
+        list = list.filter(ep => ep.title.toLowerCase().includes(query));
       }
 
-      popover.style.display = "block";
-      popoverContent.innerText = "Translating…";
-      fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
-        .then(r => r.json())
-        .then(data => {
-          if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
-        })
-        .catch(() => {
-          popoverContent.innerText = "Translation failed.";
-        });
-    });
+      if (mode === 'date-desc') {
+        list.sort((a, b) => (b.raw_date || '').localeCompare(a.raw_date || ''));
+      } else if (mode === 'date-asc') {
+        list.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+      } else if (mode === 'alpha-asc') {
+        list.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (mode === 'alpha-desc') {
+        list.sort((a, b) => b.title.localeCompare(a.title));
+      }
 
-    document.addEventListener("pointerdown", (e) => {
-      if (popover && !popover.contains(e.target)) {
-        if (isTranslatingOpen) {
-          popover.style.display = "none";
-          isTranslatingOpen = false;
-          window.getSelection()?.removeAllRanges();
-          if (wasPlayingBeforeTranslate) {
-            wasPlayingBeforeTranslate = false;
-            audioElement.play().catch(() => {});
+      episodesListView.innerHTML = '';
+      let visible = 0;
+
+      list.forEach(ep => {
+        const isDone = localStorage.getItem('done_' + ep.title) === 'true';
+        if (hideCompleted && isDone) return;
+        visible++;
+
+        const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
+        const card = document.createElement('div');
+        card.className = `card ${isDone ? 'completed' : ''}`;
+
+        // Always keep persistent original numbering
+        const displayIndex = ep.originalIndex;
+
+        card.innerHTML = `
+          <div class="card-index">${displayIndex}.</div>
+          <div class="card-content">
+            <div class="card-title">${ep.title}</div>
+            <div class="card-meta">
+              ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
+              <span>${ep.format || 'M4A'}</span>
+              ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
+              ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
+              ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
+            </div>
+          </div>
+        `;
+        card.onclick = () => playEpisode(ep, displayIndex);
+        episodesListView.appendChild(card);
+      });
+
+      ssEpisodeCount.innerText = `${rawEpisodes.length} episode${rawEpisodes.length === 1 ? '' : 's'}`;
+      if (visible === 0) {
+        episodesListView.innerHTML = '<div class="empty-state">No episodes match your criteria.</div>';
+      }
+    }
+
+    async function playEpisode(ep, displayIndex, startPaused = false) {
+      currentEpisode = ep;
+      currentEpisode.displayIndex = displayIndex;
+      localStorage.setItem('last_played_state', JSON.stringify({
+        show: currentShow,
+        episode: ep,
+        displayIndex: displayIndex
+      }));
+
+      const titleWithIndex = displayIndex ? `${displayIndex}. ${ep.title}` : ep.title;
+      pbsHomeTitle.innerText = titleWithIndex;
+      headerMarqueeText.innerText = titleWithIndex;
+
+      audioElement.src = safeUrl(ep.audio);
+      audioElement.load();
+      audioElement.playbackRate = selectedSpeed;
+
+      const wasDone = localStorage.getItem('done_' + ep.title) === 'true';
+      const savedTime = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
+
+      if (wasDone) {
+        localStorage.removeItem('done_' + ep.title);
+        localStorage.setItem('pos_' + ep.title, '0');
+        audioElement.currentTime = 0;
+      }
+
+      audioElement.onloadedmetadata = () => {
+        timeTotal.innerText = formatTime(audioElement.duration);
+        seekBar.max = audioElement.duration || 100;
+        if (!wasDone && savedTime > 0 && savedTime < (audioElement.duration - 5)) {
+          audioElement.currentTime = savedTime;
+        }
+      };
+
+      loadTranscript(ep.vtt);
+
+      if (!startPaused) {
+        audioElement.play().catch(() => {});
+        openPlayerScreen();
+      }
+    }
+
+    function openPlayerScreen() {
+      if (!currentEpisode) return;
+      switchScreen('player');
+    }
+
+    function navigateToCurrentShow() {
+      if (currentShow) {
+        switchScreen('show');
+      } else {
+        switchScreen('home');
+      }
+    }
+
+    function parseVttTime(str) {
+      const parts = str.trim().split(":");
+      let h = 0, m = 0, s = 0, ms = 0;
+      if (parts.length === 3) {
+        h = parseInt(parts[0], 10) || 0;
+        m = parseInt(parts[1], 10) || 0;
+        const sParts = parts[2].split(".");
+        s = parseInt(sParts[0], 10) || 0;
+        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
+      } else if (parts.length === 2) {
+        m = parseInt(parts[0], 10) || 0;
+        const sParts = parts[1].split(".");
+        s = parseInt(sParts[1], 10) || 0;
+        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
+      }
+      return h * 3600 + m * 60 + s + ms / 1000;
+    }
+
+    function parseVtt(text) {
+      const clean = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      const lines = clean.split('\n');
+      const list = [];
+      let i = 0;
+
+      while (i < lines.length) {
+        const line = lines[i].trim();
+        if (line.includes('-->')) {
+          const parts = line.split('-->');
+          const start = parseVttTime(parts[0].trim().split(/\s+/)[0]);
+          const end = parseVttTime(parts[1].trim().split(/\s+/)[0]);
+          const textLines = [];
+          i++;
+
+          while (i < lines.length) {
+            const subLine = lines[i].trim();
+            if (subLine === '' || subLine.includes('-->')) break;
+            textLines.push(subLine);
+            i++;
           }
+
+          const cueText = textLines
+            .join(' ')
+            .replace(/<\d{2}:\d{2}:\d{2}\.\d{3}>/g, '')
+            .replace(/<[^>]*>/g, '')
+            .trim();
+
+          if (cueText) list.push({ start, end, text: cueText });
+        } else {
+          i++;
         }
       }
-      if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
+      return list;
+    }
+
+    async function loadTranscript(vttUrl) {
+      cues = [];
+      activeCueIndex = -1;
+      transcriptView.innerHTML = '';
+
+      if (!vttUrl) {
+        transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
+        return;
+      }
+
+      try {
+        const urlToFetch = safeUrl(vttUrl);
+        const glue = urlToFetch.includes('?') ? '&' : '?';
+        const res = await fetch(urlToFetch + glue + 'nocache=' + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const text = await res.text();
+        cues = parseVtt(text);
+        if (cues.length > 0) {
+          renderTranscript();
+        } else {
+          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text cues.</div>';
+        }
+      } catch (err) {
+        transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
+      }
+    }
+
+    function renderTranscript() {
+      transcriptView.innerHTML = '';
+      cues.forEach((cue, i) => {
+        const p = document.createElement('p');
+        p.className = 'cue';
+        p.id = `cue-${i}`;
+        p.innerText = cue.text;
+        p.onclick = () => {
+          const sel = window.getSelection().toString().trim();
+          if (sel.length > 0) return;
+          audioElement.currentTime = cue.start;
+          audioElement.play().catch(() => {});
+        };
+        transcriptView.appendChild(p);
+      });
+    }
+
+    function togglePlay(e) {
+      if (e) e.stopPropagation();
+      closeSpeedPopover();
+      if (!audioElement.src) return;
+      if (audioElement.paused) {
+        audioElement.play().catch(() => {});
+      } else {
+        audioElement.pause();
+      }
+    }
+
+    function seekRelative(sec) {
+      closeSpeedPopover();
+      if (!audioElement.duration) return;
+      audioElement.currentTime = Math.max(0, Math.min(audioElement.duration, audioElement.currentTime + sec));
+    }
+
+    audioElement.addEventListener('play', () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
     });
 
-// Touch Gestures: Back-swipe from Show Screen to Home Screen
+    audioElement.addEventListener('pause', () => {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    });
+
+    audioElement.addEventListener('timeupdate', () => {
+      const cur = audioElement.currentTime;
+      const dur = audioElement.duration || 0;
+      timeCurrent.innerText = formatTime(cur);
+      seekBar.value = cur;
+
+      if (currentEpisode && cur > 0) {
+        localStorage.setItem('pos_' + currentEpisode.title, cur.toString());
+        if (dur > 0 && (cur >= dur - 5 || cur / dur >= 0.98)) {
+          localStorage.setItem('done_' + currentEpisode.title, 'true');
+        } else if (localStorage.getItem('done_' + currentEpisode.title) === 'true' && cur < dur - 10) {
+          localStorage.removeItem('done_' + currentEpisode.title);
+        }
+      }
+
+      let idx = -1;
+      for (let i = cues.length - 1; i >= 0; i--) {
+        if (cur >= cues[i].start) {
+          idx = i;
+          break;
+        }
+      }
+
+      if (idx !== -1 && idx !== activeCueIndex) {
+        if (activeCueIndex !== -1) {
+          const old = document.getElementById(`cue-${activeCueIndex}`);
+          if (old) old.classList.remove('active');
+        }
+        activeCueIndex = idx;
+        const current = document.getElementById(`cue-${activeCueIndex}`);
+        if (current) {
+          current.classList.add('active');
+          current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+
+    seekBar.addEventListener('input', (e) => {
+      audioElement.currentTime = Number(e.target.value);
+    });
+
+    function setSpeed(val, label) {
+      selectedSpeed = val;
+      audioElement.playbackRate = val;
+      speedBtn.innerText = label || (val + "x");
+      renderSpeedMenu();
+    }
+
+    function renderSpeedMenu() {
+      speedChips.innerHTML = '';
+      speedOptions.forEach(opt => {
+        const chip = document.createElement('button');
+        chip.className = `speed-chip ${opt.val === selectedSpeed ? 'selected' : ''}`;
+        chip.innerText = opt.label;
+        chip.onclick = (e) => {
+          e.stopPropagation();
+          setSpeed(opt.val, opt.label);
+          closeSpeedPopover();
+        };
+        speedChips.appendChild(chip);
+      });
+    }
+
+    function toggleSpeedPopover(e) {
+      e.stopPropagation();
+      const isOpen = speedPopover.style.display === 'block';
+      if (isOpen) closeSpeedPopover();
+      else speedPopover.style.display = 'block';
+    }
+
+    function closeSpeedPopover() {
+      speedPopover.style.display = 'none';
+    }
+
+    volumeBar.addEventListener('input', (e) => {
+      audioElement.volume = parseFloat(e.target.value);
+    });
+
+    // Scroll-to-top button visibility
+    mainContainer.addEventListener('scroll', () => {
+      if (!showScreen.classList.contains('active')) {
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+        return;
+      }
+      if (mainContainer.scrollTop > 180) {
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'flex';
+      } else {
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+      }
+    });
+
+    function scrollToTopSS() {
+      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Spacebar Play/Pause toggle
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+      if (e.code === 'Space' || e.key === ' ') {
+        e.preventDefault();
+        togglePlay();
+      }
+    });
+
+    // Touch Swipe navigation
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
@@ -961,7 +1417,6 @@
       });
     }
 
-    // Restore State from previous session
     function restoreLastState() {
       const savedState = localStorage.getItem('last_played_state');
       if (savedState) {
@@ -973,31 +1428,36 @@
       }
     }
 
-    // Interactive Translation Popover
-    document.addEventListener("selectionchange", () => {
+    // Translation Popover with Auto-Pause and Auto-Resume
+    document.addEventListener('selectionchange', () => {
       const sel = window.getSelection();
-      const txt = sel ? sel.toString().trim() : "";
+      const txt = sel ? sel.toString().trim() : '';
       if (!txt || txt.length < 2) return;
-      if (!audioElement.paused) {
-        wasPlayingBeforeTranslate = true;
-        audioElement.pause();
+
+      if (!isTranslatingOpen) {
+        wasPlayingBeforeTranslate = !audioElement.paused;
+        if (!audioElement.paused) audioElement.pause();
+        isTranslatingOpen = true;
       }
-      popover.style.display = "block";
-      popoverContent.innerText = "Translating…";
+
+      popover.style.display = 'block';
+      popoverContent.innerText = 'Translating…';
+
       fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
         .then(r => r.json())
         .then(data => {
           if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
         })
         .catch(() => {
-          popoverContent.innerText = "Translation failed.";
+          popoverContent.innerText = 'Translation failed.';
         });
     });
 
-    document.addEventListener("pointerdown", (e) => {
-      if (!popover.contains(e.target)) {
-        if (popover.style.display === "block") {
-          popover.style.display = "none";
+    document.addEventListener('pointerdown', (e) => {
+      if (popover && !popover.contains(e.target)) {
+        if (isTranslatingOpen) {
+          popover.style.display = 'none';
+          isTranslatingOpen = false;
           window.getSelection()?.removeAllRanges();
           if (wasPlayingBeforeTranslate) {
             wasPlayingBeforeTranslate = false;
@@ -1007,18 +1467,9 @@
       }
       if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
     });
-document.addEventListener('pointerdown', (e) => {
-      if (!popover.contains(e.target)) popover.style.display = 'none';
-      if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
-    });
 
     renderSpeedMenu();
     loadShows();
-    document.addEventListener("keydown", (e) => {
-    const tag = (e.target.tagName || "").toLowerCase();
-    if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
-    if (e.code === "Space" || e.key === " ") { e.preventDefault(); togglePlay(); }
-  });
-</script>
+  </script>
 </body>
 </html>
