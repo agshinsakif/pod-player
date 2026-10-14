@@ -1397,26 +1397,40 @@ async function loadTranscript(vttUrl) {
     }
 
     // Interactive Translation Popover
-    document.addEventListener('selectionchange', () => {
+    document.addEventListener("selectionchange", () => {
       const sel = window.getSelection();
-      const txt = sel ? sel.toString().trim() : '';
+      const txt = sel ? sel.toString().trim() : "";
       if (!txt || txt.length < 2) return;
-      if (!audioElement.paused) { wasPlayingBeforeTranslate = true; audioElement.pause(); } else { wasPlayingBeforeTranslate = false; }
-
-      popover.style.display = 'block';
-      popoverContent.innerText = 'Translating…';
-
+      if (!audioElement.paused) {
+        wasPlayingBeforeTranslate = true;
+        audioElement.pause();
+      }
+      popover.style.display = "block";
+      popoverContent.innerText = "Translating…";
       fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
         .then(r => r.json())
         .then(data => {
           if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
         })
         .catch(() => {
-          popoverContent.innerText = 'Translation failed.';
+          popoverContent.innerText = "Translation failed.";
         });
     });
 
-    document.addEventListener('pointerdown', (e) => {
+    document.addEventListener("pointerdown", (e) => {
+      if (!popover.contains(e.target)) {
+        if (popover.style.display === "block") {
+          popover.style.display = "none";
+          window.getSelection()?.removeAllRanges();
+          if (wasPlayingBeforeTranslate) {
+            wasPlayingBeforeTranslate = false;
+            audioElement.play().catch(() => {});
+          }
+        }
+      }
+      if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
+    });
+document.addEventListener('pointerdown', (e) => {
       if (!popover.contains(e.target)) popover.style.display = 'none';
       if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
     });
