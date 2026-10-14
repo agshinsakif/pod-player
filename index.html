@@ -661,6 +661,65 @@
       user-select: text;
       -webkit-user-select: text;
     }
+  
+    /* Larger posters on desktop/PC */
+    @media (min-width: 768px) {
+      .shows-grid {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 24px;
+      }
+      .ss-poster-wrap {
+        width: 190px !important;
+        height: 190px !important;
+      }
+    }
+
+    /* Collapse poster when scrolling down on Show Screen */
+    .ss-hero {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg);
+      padding: 10px 0;
+      transition: all 0.25s ease;
+    }
+    .ss-hero.collapsed .ss-poster-row {
+      max-height: 0;
+      opacity: 0;
+      margin-bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      transform: scale(0.85);
+    }
+    .ss-hero .ss-poster-row {
+      max-height: 240px;
+      opacity: 1;
+      transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease;
+    }
+
+    /* Scroll to top floating button */
+    .btn-scroll-top {
+      position: fixed;
+      right: 20px;
+      bottom: calc(90px + env(safe-area-inset-bottom));
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 85;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .btn-scroll-top:active {
+      transform: scale(0.9);
+    }
+
   </style>
 </head>
 <body>
@@ -712,6 +771,13 @@
       </select>  
       <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
       </div>
+
+      
+      <button class="btn-scroll-top" id="ssScrollTopBtn" onclick="scrollToTopSS()" title="Return to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
 
       <div class="list-view" id="episodesListView">
         <div class="empty-state">Loading episodes…</div>
@@ -809,538 +875,49 @@
     let currentEpisode = null;
     let cues = [];
     let activeCueIndex = -1;
+    
     let wasPlayingBeforeTranslate = false;
+    let isTranslatingOpen = false;
 
-    const speedOptions = [
-      { val: 0.75, label: "0,75" },
-      { val: 0.9,  label: "0,9" },
-      { val: 1.0,  label: "1x" },
-      { val: 1.1,  label: "1,1" },
-      { val: 1.25, label: "1,25" },
-      { val: 1.5,  label: "1,5" },
-      { val: 2.0,  label: "2" }
-    ];
-    let selectedSpeed = 1.0;
+    document.addEventListener("selectionchange", () => {
+      const sel = window.getSelection();
+      const txt = sel ? sel.toString().trim() : "";
+      if (!txt || txt.length < 2) return;
 
-    // Element References
-    const homeScreen = document.getElementById('homeScreen');
-    const showScreen = document.getElementById('showScreen');
-    const playerScreen = document.getElementById('playerScreen');
-    const showsGrid = document.getElementById('showsGrid');
-    const homeSearchWrap = document.getElementById('homeSearchWrap');
-    const homeSearchInput = document.getElementById('homeSearchInput');
-
-    const ssPoster = document.getElementById('ssPoster');
-    const ssFlag = document.getElementById('ssFlag');
-    const ssTitle = document.getElementById('ssTitle');
-    const ssEpisodeCount = document.getElementById('ssEpisodeCount');
-    const ssSearchInput = document.getElementById('ssSearchInput');
-    const hideCompletedCheck = document.getElementById('hideCompletedCheck');
-    const sortSelect = document.getElementById('sortSelect');
-    const episodesListView = document.getElementById('episodesListView');
-
-    const headerBrandTitle = document.getElementById('headerBrandTitle');
-    const headerMarqueeWrapper = document.getElementById('headerMarqueeWrapper');
-    const headerMarqueeText = document.getElementById('headerMarqueeText');
-
-    const playbackButtonsSection = document.getElementById('playbackButtonsSection');
-    const pbsHomeTitleWrapper = document.getElementById('pbsHomeTitleWrapper');
-    const pbsHomeTitle = document.getElementById('pbsHomeTitle');
-    const audioElement = document.getElementById('audioElement');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
-    const timeCurrent = document.getElementById('timeCurrent');
-    const timeTotal = document.getElementById('timeTotal');
-    const seekBar = document.getElementById('seekBar');
-    const speedBtn = document.getElementById('speedBtn');
-    const speedPopover = document.getElementById('speedPopover');
-    const speedChips = document.getElementById('speedChips');
-    const volumeBar = document.getElementById('volumeBar');
-    const transcriptView = document.getElementById('transcriptView');
-    const popover = document.getElementById('popover');
-    const popoverContent = document.getElementById('popoverContent');
-
-    // Bulletproof URL path encoder
-    function safeUrl(path) {
-  if (!path) return "";
-  if (path.startsWith("http://") || path.startsWith("https://")) {
-    return encodeURI(decodeURI(path));
-  }
-  return path.split('/').map(part => encodeURIComponent(decodeURIComponent(part))).join('/');
-}
-
-async function loadTranscript(vttUrl) {
-  cues = [];
-  activeCueIndex = -1;
-  transcriptView.innerHTML = '';
-
-  if (!vttUrl) {
-    transcriptView.innerHTML = '<div style="text-align: center; color: var(--text-muted); margin-top: 60px;">No transcript file available for this track.</div>';
-    return;
-  }
-
-  try {
-    const resolvedUrl = safeUrl(vttUrl);
-    const glue = resolvedUrl.includes('?') ? '&' : '?';
-    const res = await fetch(resolvedUrl + glue + 'nocache=' + Date.now());
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const text = await res.text();
-    cues = parseVtt(text);
-    if (cues.length > 0) {
-      renderTranscript();
-    } else {
-      transcriptView.innerHTML = '<div style="text-align: center; color: var(--text-muted); margin-top: 60px;">Transcript file had no lines.</div>';
-    }
-  } catch (err) {
-    transcriptView.innerHTML = `<div style="text-align: center; color: var(--danger); margin-top: 60px;">Could not load transcript (${err.message}).</div>`;
-  }
-}
-
-    function formatTime(sec) {
-      if (isNaN(sec) || sec <= 0) return "0:00";
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      return `${m}:${s.toString().padStart(2, '0')}`;
-    }
-
-    // Screen Routing
-    function switchScreen(screen) {
-      homeScreen.classList.remove('active');
-      showScreen.classList.remove('active');
-      playerScreen.classList.remove('active');
-
-      if (screen === 'home') {
-        homeScreen.classList.add('active');
-        homeSearchWrap.style.display = 'flex';
-        headerBrandTitle.style.display = 'block';
-        headerBrandTitle.innerText = "Genius Podcasts";
-        headerMarqueeWrapper.style.display = 'none';
-        playbackButtonsSection.classList.add('mini-mode');
-      } else if (screen === 'show') {
-        showScreen.classList.add('active');
-        homeSearchWrap.style.display = 'none';
-        headerBrandTitle.style.display = 'none';
-        headerMarqueeWrapper.style.display = 'none';
-        playbackButtonsSection.classList.add('mini-mode');
-        // Reset search field when navigating back to Show Screen
-        ssSearchInput.value = '';
-        renderEpisodeList();
-      } else if (screen === 'player') {
-        playerScreen.classList.add('active');
-        homeSearchWrap.style.display = 'none';
-        headerBrandTitle.style.display = 'none';
-        headerMarqueeWrapper.style.display = 'block';
-        playbackButtonsSection.classList.remove('mini-mode');
-        updateMarquees();
-      }
-    }
-
-    // Load Shows from shows.json
-    async function loadShows() {
-      try {
-        const res = await fetch('shows.json?nocache=' + Date.now());
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        showsData = await res.json();
-        renderShowsGrid(showsData);
-        restoreLastState();
-      } catch (err) {
-        showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json</div>`;
-      }
-    }
-
-    function renderShowsGrid(shows) {
-      showsGrid.innerHTML = '';
-      Object.keys(shows).forEach(key => {
-        const s = shows[key];
-        const card = document.createElement('div');
-        card.className = 'show-card';
-        const logoUrl = safeUrl(`${R2_BASE}/logos/${s.folder}.png`);
-        card.innerHTML = `
-          <div class="show-poster-wrap">
-            <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
-            <span class="flag-badge">${s.flag || ''}</span>
-          </div>
-          <div class="show-name">${s.name}</div>
-        `;
-        card.onclick = () => openShow(s);
-        showsGrid.appendChild(card);
-      });
-    }
-
-    function filterShows() {
-      const q = homeSearchInput.value.toLowerCase().trim();
-      const filtered = {};
-      Object.keys(showsData).forEach(k => {
-        if (showsData[k].name.toLowerCase().includes(q)) filtered[k] = showsData[k];
-      });
-      renderShowsGrid(filtered);
-    }
-
-    // Show Screen Handling
-    async function openShow(show) {
-      currentShow = show;
-      ssTitle.innerText = show.name;
-      ssFlag.innerText = show.flag || '';
-      ssPoster.src = safeUrl(`${R2_BASE}/logos/${show.folder}.png`);
-      ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
-      episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
-
-      switchScreen('show');
-
-      try {
-        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${show.folder}/playlist.json`) + '?nocache=' + Date.now();
-        const res = await fetch(playlistUrl);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const fetchedList = await res.json();
-
-        // 1. Sort base playlist oldest-to-newest first so index 1 is the first episode
-        fetchedList.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
-
-        // 2. Assign permanent original index (1, 2, 3...)
-        rawEpisodes = fetchedList.map((ep, idx) => ({
-          ...ep,
-          originalIndex: idx + 1
-        }));
-
-        renderEpisodeList();
-      } catch (err) {
-        episodesListView.innerHTML = `<div class="empty-state">Could not load show playlist (${err.message}).</div>`;
-        ssEpisodeCount.innerText = "0 episodes";
-      }
-    }
-
-    function renderEpisodeList() {
-      const query = ssSearchInput.value.toLowerCase().trim();
-      const hideCompleted = hideCompletedCheck.checked;
-      const mode = sortSelect.value;
-
-      let list = [...rawEpisodes];
-
-      if (query) {
-        list = list.filter(ep => ep.title.toLowerCase().includes(query));
+      if (!isTranslatingOpen) {
+        wasPlayingBeforeTranslate = !audioElement.paused;
+        if (!audioElement.paused) audioElement.pause();
+        isTranslatingOpen = true;
       }
 
-      if (mode === 'date-desc') {
-        list.sort((a, b) => (b.raw_date || '').localeCompare(a.raw_date || ''));
-      } else if (mode === 'date-asc') {
-        list.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
-      } else if (mode === 'alpha-asc') {
-        list.sort((a, b) => a.title.localeCompare(b.title));
-      } else if (mode === 'alpha-desc') {
-        list.sort((a, b) => b.title.localeCompare(a.title));
-      }
+      popover.style.display = "block";
+      popoverContent.innerText = "Translating…";
+      fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
+        })
+        .catch(() => {
+          popoverContent.innerText = "Translation failed.";
+        });
+    });
 
-      episodesListView.innerHTML = '';
-      let visible = 0;
-
-      list.forEach(ep => {
-        const isDone = localStorage.getItem('done_' + ep.title) === 'true';
-        if (hideCompleted && isDone) return;
-        visible++;
-
-        const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
-        const card = document.createElement('div');
-        card.className = `card ${isDone ? 'completed' : ''}`;
-
-        // If searching: keep original numbering. Otherwise: count from 1 sequentially
-        const displayIndex = query ? ep.originalIndex : visible;
-
-        card.innerHTML = `
-          <div class="card-index">${displayIndex}.</div>
-          <div class="card-content">
-            <div class="card-title">${ep.title}</div>
-            <div class="card-meta">
-              ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
-              <span>${ep.format || 'M4A'}</span>
-              ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
-              ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
-              ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
-            </div>
-          </div>
-        `;
-        card.onclick = () => playEpisode(ep, displayIndex);
-        episodesListView.appendChild(card);
-      });
-
-      ssEpisodeCount.innerText = `${rawEpisodes.length} episode${rawEpisodes.length === 1 ? '' : 's'}`;
-      if (visible === 0) {
-        episodesListView.innerHTML = '<div class="empty-state">No episodes match your criteria.</div>';
-      }
-    }
-        
-
-
-
-    // Audio Playback
-    async function playEpisode(ep, displayIndex, startPaused = false) {
-      currentEpisode = ep;
-      currentEpisode.displayIndex = displayIndex;
-      localStorage.setItem('last_played_state', JSON.stringify({
-        show: currentShow,
-        episode: ep,
-        displayIndex: displayIndex
-      }));
-
-      const titleWithIndex = displayIndex ? `${displayIndex}. ${ep.title}` : ep.title;
-      pbsHomeTitle.innerText = titleWithIndex;
-      headerMarqueeText.innerText = titleWithIndex;
-
-      audioElement.src = safeUrl(ep.audio);
-      audioElement.load();
-      audioElement.playbackRate = selectedSpeed;
-
-      const wasDone = localStorage.getItem('done_' + ep.title) === 'true';
-      const savedTime = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
-
-      if (wasDone) {
-        localStorage.removeItem('done_' + ep.title);
-        localStorage.setItem('pos_' + ep.title, '0');
-        audioElement.currentTime = 0;
-      }
-
-      audioElement.onloadedmetadata = () => {
-        timeTotal.innerText = formatTime(audioElement.duration);
-        seekBar.max = audioElement.duration || 100;
-        if (!wasDone && savedTime > 0 && savedTime < (audioElement.duration - 5)) {
-          audioElement.currentTime = savedTime;
-        }
-      };
-
-      loadTranscript(ep.vtt);
-
-      if (!startPaused) {
-        audioElement.play().catch(() => {});
-        openPlayerScreen();
-      }
-    }
-
-    function openPlayerScreen() {
-      if (!currentEpisode) return;
-      switchScreen('player');
-    }
-
-    function navigateToCurrentShow() {
-      if (currentShow) {
-        switchScreen('show');
-      } else {
-        switchScreen('home');
-      }
-    }
-
-    // Robust Transcript Parser & Loader
-    async function loadTranscript(vttUrl) {
-      cues = [];
-      activeCueIndex = -1;
-      transcriptView.innerHTML = '';
-
-      if (!vttUrl) {
-        transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
-        return;
-      }
-
-      try {
-        const urlToFetch = safeUrl(vttUrl);
-        const glue = urlToFetch.includes('?') ? '&' : '?';
-        const res = await fetch(urlToFetch + glue + 'nocache=' + Date.now());
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const text = await res.text();
-        cues = parseVtt(text);
-        if (cues.length > 0) {
-          renderTranscript();
-        } else {
-          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text cues.</div>';
-        }
-      } catch (err) {
-        transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
-      }
-    }
-
-    function parseVttTime(str) {
-      const parts = str.trim().split(":");
-      let h = 0, m = 0, s = 0, ms = 0;
-      if (parts.length === 3) {
-        h = parseInt(parts[0], 10) || 0;
-        m = parseInt(parts[1], 10) || 0;
-        const sParts = parts[2].split(".");
-        s = parseInt(sParts[0], 10) || 0;
-        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
-      } else if (parts.length === 2) {
-        m = parseInt(parts[0], 10) || 0;
-        const sParts = parts[1].split(".");
-        s = parseInt(sParts[1], 10) || 0;
-        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
-      }
-      return h * 3600 + m * 60 + s + ms / 1000;
-    }
-
-    function parseVtt(text) {
-      // Normalize linebreaks and strip UTF-8 BOM
-      const clean = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-      const lines = clean.split('\n');
-      const list = [];
-      let i = 0;
-
-      while (i < lines.length) {
-        let line = lines[i].trim();
-
-        if (line.includes('-->')) {
-          const parts = line.split('-->');
-          const start = parseVttTime(parts[0].trim().split(/\s+/)[0]);
-          const end = parseVttTime(parts[1].trim().split(/\s+/)[0]);
-          const textLines = [];
-          i++;
-
-          while (i < lines.length) {
-            const subLine = lines[i].trim();
-            // Stop at an empty line or the start of the next cue
-            if (subLine === '' || subLine.includes('-->')) {
-              break;
-            }
-            textLines.push(subLine);
-            i++;
+    document.addEventListener("pointerdown", (e) => {
+      if (popover && !popover.contains(e.target)) {
+        if (isTranslatingOpen) {
+          popover.style.display = "none";
+          isTranslatingOpen = false;
+          window.getSelection()?.removeAllRanges();
+          if (wasPlayingBeforeTranslate) {
+            wasPlayingBeforeTranslate = false;
+            audioElement.play().catch(() => {});
           }
-
-          // Strip inline subtitle timestamps like <00:00:01.000> and tags like <c> </c>
-          const cueText = textLines
-            .join(' ')
-            .replace(/<\d{2}:\d{2}:\d{2}\.\d{3}>/g, '')
-            .replace(/<[^>]*>/g, '')
-            .trim();
-
-          if (cueText) {
-            list.push({ start, end, text: cueText });
-          }
-        } else {
-          i++;
         }
       }
-      return list;
-    }
-
-    function renderTranscript() {
-      transcriptView.innerHTML = '';
-      cues.forEach((cue, i) => {
-        const p = document.createElement('p');
-        p.className = 'cue';
-        p.id = `cue-${i}`;
-        p.innerText = cue.text;
-        p.onclick = () => {
-          const sel = window.getSelection().toString().trim();
-          if (sel.length > 0) return;
-          audioElement.currentTime = cue.start;
-          audioElement.play().catch(() => {});
-        };
-        transcriptView.appendChild(p);
-      });
-    }
-
-    // Playback Controls
-    function togglePlay(e) {
-      if (e) e.stopPropagation();
-      closeSpeedPopover();
-      if (!audioElement.src) return;
-      if (audioElement.paused) {
-        audioElement.play().catch(() => {});
-      } else {
-        audioElement.pause();
-      }
-    }
-
-    function seekRelative(sec) {
-      closeSpeedPopover();
-      if (!audioElement.duration) return;
-      audioElement.currentTime = Math.max(0, Math.min(audioElement.duration, audioElement.currentTime + sec));
-    }
-
-    audioElement.addEventListener('play', () => {
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = 'block';
+      if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
     });
 
-    audioElement.addEventListener('pause', () => {
-      playIcon.style.display = 'block';
-      pauseIcon.style.display = 'none';
-    });
-
-    audioElement.addEventListener('timeupdate', () => {
-      const cur = audioElement.currentTime;
-      const dur = audioElement.duration || 0;
-      timeCurrent.innerText = formatTime(cur);
-      seekBar.value = cur;
-
-      if (currentEpisode && cur > 0) {
-        localStorage.setItem('pos_' + currentEpisode.title, cur.toString());
-        if (dur > 0 && (cur >= dur - 5 || cur / dur >= 0.98)) {
-          localStorage.setItem('done_' + currentEpisode.title, 'true');
-        } else if (localStorage.getItem('done_' + currentEpisode.title) === 'true' && cur < dur - 10) {
-          localStorage.removeItem('done_' + currentEpisode.title);
-        }
-      }
-
-      let idx = -1;
-      for (let i = cues.length - 1; i >= 0; i--) {
-        if (cur >= cues[i].start) {
-          idx = i;
-          break;
-        }
-      }
-
-      if (idx !== -1 && idx !== activeCueIndex) {
-        if (activeCueIndex !== -1) {
-          const old = document.getElementById(`cue-${activeCueIndex}`);
-          if (old) old.classList.remove('active');
-        }
-        activeCueIndex = idx;
-        const current = document.getElementById(`cue-${activeCueIndex}`);
-        if (current) {
-          current.classList.add('active');
-          current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    });
-
-    seekBar.addEventListener('input', (e) => {
-      audioElement.currentTime = Number(e.target.value);
-    });
-
-    function setSpeed(val, label) {
-      selectedSpeed = val;
-      audioElement.playbackRate = val;
-      speedBtn.innerText = label || (val + "x");
-      renderSpeedMenu();
-    }
-
-    function renderSpeedMenu() {
-      speedChips.innerHTML = '';
-      speedOptions.forEach(opt => {
-        const chip = document.createElement('button');
-        chip.className = `speed-chip ${opt.val === selectedSpeed ? 'selected' : ''}`;
-        chip.innerText = opt.label;
-        chip.onclick = (e) => {
-          e.stopPropagation();
-          setSpeed(opt.val, opt.label);
-          closeSpeedPopover();
-        };
-        speedChips.appendChild(chip);
-      });
-    }
-
-    function toggleSpeedPopover(e) {
-      e.stopPropagation();
-      const isOpen = speedPopover.style.display === 'block';
-      if (isOpen) closeSpeedPopover();
-      else speedPopover.style.display = 'block';
-    }
-
-    function closeSpeedPopover() {
-      speedPopover.style.display = 'none';
-    }
-
-    volumeBar.addEventListener('input', (e) => {
-      audioElement.volume = parseFloat(e.target.value);
-    });
-
-    // Touch Gestures: Back-swipe from Show Screen to Home Screen
+// Touch Gestures: Back-swipe from Show Screen to Home Screen
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
