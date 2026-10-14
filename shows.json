@@ -1,0 +1,20 @@
+{
+  "eh": {
+    "name": "Easy Hungarian",
+    "folder": "Easy Hungarian",
+    "lang": "hu",
+    "flag": "🇭🇺"
+  },
+  "hs": {
+    "name": "Hungarian with Sziszi",
+    "folder": "Hungarian with Sziszi",
+    "lang": "hu",
+    "flag": "🇭🇺"
+  },
+  "if": {
+    "name": "InnerFrench",
+    "folder": "InnerFrench",
+    "lang": "fr",
+    "flag": "🇫🇷"
+  }
+}

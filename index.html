@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Genius Podcast</title>
+
+  <!-- iOS PWA Setup -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./web-logo.png?v=1">
+  <link rel="icon" type="image/png" href="./web-logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Genius Podcast">
+
+  <style>
+    :root {
+      --bg: #0c0a14;
+      --card-bg: rgba(24, 20, 36, 0.94);
+      --card-active: rgba(43, 36, 62, 0.98);
+      --text: #f4efff;
+      --text-muted: #958ea8;
+      --accent: #8b5cf6;
+      --accent-hover: #7c3aed;
+      --success: #10b981;
+      --border: rgba(255, 255, 255, 0.09);
+      --danger: #ef4444;
+      --r2-base: https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    header {
+      position: relative;
+      padding: max(14px, env(safe-area-inset-top)) 16px 14px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      z-index: 50;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      text-align: center;
+    }
+
+    .header-marquee-wrapper {
+      display: none;
+      width: 70vw;
+      max-width: 480px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      text-align: center;
+      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    }
+
+    .header-marquee-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      display: inline-block;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px 140px;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+
+    /* Screen Management */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* Home Screen: Shows Grid */
+    .shows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 70px;
+    }
+
+    .show-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .show-card:active {
+      background: var(--card-active);
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    .show-poster-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1f1b2e;
+      margin-bottom: 10px;
+    }
+
+    .show-poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .flag-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      font-size: 18px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+    }
+
+    .show-name {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    /* Home Bottom Search */
+    .home-search-wrap {
+      position: fixed;
+      bottom: calc(80px + env(safe-area-inset-bottom));
+      left: 20px;
+      right: 20px;
+      z-index: 80;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .search-input {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 420px;
+      background: rgba(24, 20, 36, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      padding: 10px 16px;
+      font-size: 13px;
+      outline: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Show Screen (SS) */
+    .ss-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .ss-poster-wrap {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .ss-poster-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ss-poster-wrap .flag-badge {
+      font-size: 24px;
+      bottom: 8px;
+      right: 8px;
+    }
+
+    .ss-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .ss-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Controls Bar: Hide Completed (Left), Sort (Center), Search (Right) */
+    .ss-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(16, 13, 24, 0.85);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .toggle-label input {
+      accent-color: var(--accent);
+      width: 14px;
+      height: 14px;
+    }
+
+    .sort-select {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .ss-search-input {
+      width: 110px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      outline: none;
+    }
+
+    /* Episode Cards */
+    .list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: 50px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .card:active {
+      background: var(--card-active);
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    .card.completed { opacity: 0.55; }
+
+    .card-index {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      min-width: 26px;
+      padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-content { flex: 1; }
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      word-break: break-word;
+      line-height: 1.35;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      align-items: center;
+    }
+
+    .badge {
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-completed { color: var(--success); background: rgba(16, 185, 129, 0.15); }
+    .badge-resume { color: var(--accent); background: rgba(139, 92, 246, 0.15); }
+    .badge-audio { color: #eab308; background: rgba(234, 179, 8, 0.12); }
+
+    /* Player Screen (PS) */
+    .transcript-view {
+      display: none;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cue {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      cursor: pointer;
+      user-select: text;
+      -webkit-user-select: text;
+      transition: color 0.15s;
+    }
+
+    .cue.active {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Playback Dock / Persistent Player */
+    .playback-buttons-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-top: 1px solid var(--border);
+      padding: 14px 20px calc(18px + env(safe-area-inset-bottom));
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+
+    .pbs-home-title-wrapper {
+      display: none;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    }
+
+    .pbs-home-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0c0a14;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .time-label {
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-muted);
+      min-width: 38px;
+    }
+
+    .slider {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+      height: 5px;
+      touch-action: none;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .btn-dock {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speed-btn-wrapper { position: relative; }
+    .btn-speed {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .speed-popover {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: -8px;
+      background: rgba(26, 22, 38, 0.96);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 6px 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      display: none;
+      z-index: 250;
+    }
+
+    .speed-chips { display: flex; gap: 5px; }
+    .speed-chip {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 12px;
+      min-width: 34px;
+      height: 28px;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .speed-chip.selected { background: #f4efff; color: #0c0a14; font-weight: 800; }
+
+    .btn-seek {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-play-pause {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
+      flex-shrink: 0;
+    }
+
+    .btn-show {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 82%;
+      max-width: 320px;
+      touch-action: none;
+    }
+
+    .volume-icon { color: var(--text-muted); flex-shrink: 0; }
+    .volume-slider {
+      flex: 1;
+      height: 6px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Mini mode (Active everywhere outside Player View) */
+    .playback-buttons-section.mini-mode {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      left: 20px;
+      right: 20px;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      border-radius: 16px;
+      background: #c4b5fd;
+      border: 2px solid rgba(139, 92, 246, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      padding: 8px 16px;
+      gap: 12px;
+    }
+
+    .playback-buttons-section.mini-mode .pbs-home-title-wrapper { display: block; }
+    .playback-buttons-section.mini-mode .progress-bar-container,
+    .playback-buttons-section.mini-mode .controls-row .speed-btn-wrapper,
+    .playback-buttons-section.mini-mode .controls-row .btn-seek,
+    .playback-buttons-section.mini-mode .controls-row .btn-show,
+    .playback-buttons-section.mini-mode .volume-row {
+      display: none !important;
+    }
+
+    .playback-buttons-section.mini-mode .controls-row {
+      margin-bottom: 0;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .playback-buttons-section.mini-mode .btn-play-pause {
+      width: 38px;
+      height: 38px;
+      background: var(--bg);
+      color: #c4b5fd;
+      box-shadow: 0 2px 8px rgba(12, 10, 20, 0.35);
+    }
+
+    .playback-buttons-section.mini-mode .btn-play-pause svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .marquee-active {
+      display: inline-block !important;
+      white-space: nowrap !important;
+      will-change: transform;
+      animation: marquee-scroll 12s linear infinite;
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(10%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    #popover {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: 16px;
+      right: 16px;
+      margin: 0 auto;
+      max-width: 560px;
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 14px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+      z-index: 300;
+      display: none;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="brand-title" id="headerBrandTitle">Genius Podcasts</span>
+    <div class="header-marquee-wrapper" id="headerMarqueeWrapper">
+      <span class="header-marquee-text" id="headerMarqueeText">—</span>
+    </div>
+  </header>
+
+  <main id="mainContainer">
+    <!-- Screen 1: Home Screen (HS) -->
+    <div id="homeScreen" class="screen active">
+      <div class="shows-grid" id="showsGrid">
+        <div class="empty-state">Loading shows…</div>
+      </div>
+    </div>
+
+    <!-- Screen 2: Show Screen (SS) -->
+    <div id="showScreen" class="screen">
+      <div class="ss-hero">
+        <div class="ss-poster-wrap">
+          <img id="ssPoster" src="" alt="Show poster">
+          <span class="flag-badge" id="ssFlag"></span>
+        </div>
+        <div class="ss-title" id="ssTitle">Show Title</div>
+        <div class="ss-count" id="ssEpisodeCount">0 episodes</div>
+      </div>
+
+      <div class="ss-controls-bar">
+        <label class="toggle-label">
+          <input type="checkbox" id="hideCompletedCheck" onchange="renderEpisodeList()">
+          Hide Done
+        </label>
+        <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
+          <option value="date-desc">Newest</option>
+          <option value="date-asc">Oldest</option>
+          <option value="alpha-asc">A → Z</option>
+          <option value="alpha-desc">Z → A</option>
+        </select>
+        <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Filter..." oninput="renderEpisodeList()">
+      </div>
+
+      <div class="list-view" id="episodesListView">
+        <div class="empty-state">Loading episodes…</div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Player Screen (PS) -->
+    <div id="playerScreen" class="screen">
+      <div class="transcript-view" id="transcriptView"></div>
+    </div>
+  </main>
+
+  <!-- Home Screen Bottom Search -->
+  <div class="home-search-wrap" id="homeSearchWrap">
+    <input type="text" class="search-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
+  </div>
+
+  <!-- Persistent Playback Dock -->
+  <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
+    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper" onclick="openPlayerScreen()">
+      <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
+    </div>
+
+    <div class="progress-bar-container">
+      <span class="time-label" id="timeCurrent">0:00</span>
+      <input type="range" class="slider" id="seekBar" min="0" max="100" value="0">
+      <span class="time-label" id="timeTotal">0:00</span>
+    </div>
+
+    <div class="controls-row">
+      <div class="speed-btn-wrapper">
+        <div class="speed-popover" id="speedPopover">
+          <div class="speed-chips" id="speedChips"></div>
+        </div>
+        <button class="btn-dock btn-speed" id="speedBtn" onclick="toggleSpeedPopover(event)">1x</button>
+      </div>
+
+      <button class="btn-dock btn-seek" onclick="seekRelative(-10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+          <text x="12" y="15" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle" stroke="none">10</text>
+        </svg>
+      </button>
+
+      <button class="btn-dock btn-play-pause" id="playPauseBtn" onclick="togglePlay(event)">
+        <svg id="playIcon" width="34" height="34" fill="currentColor" viewBox="0 0 24 24">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <svg id="pauseIcon" width="34" height="34" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
+          <rect x="6" y="4" width="4" height="16"/>
+          <rect x="14" y="4" width="4" height="16"/>
+        </svg>
+      </button>
+
+      <button class="btn-dock btn-seek" onclick="seekRelative(10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M21 3v5h-5"/>
+          <text x="12" y="15" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle" stroke="none">10</text>
+        </svg>
+      </button>
+
+      <!-- Show Button (Navigates directly to the Show Screen) -->
+      <button class="btn-dock btn-show" onclick="navigateToCurrentShow()" title="Go to show">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </button>
+    </div>
+
+    <div class="volume-row">
+      <svg class="volume-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      <input type="range" class="volume-slider" id="volumeBar" min="0" max="1" step="0.02" value="0.5">
+    </div>
+
+    <audio id="audioElement" playsinline preload="auto"></audio>
+  </div>
+
+  <div id="popover">
+    <div style="font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 6px;">TRANSLATION</div>
+    <div id="popoverContent" style="font-size: 15px; color: var(--text);">Translating…</div>
+  </div>
+
+  <script>
+    const R2_BASE = "https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev";
+    let showsData = {};
+    let currentShow = null;
+    let rawEpisodes = [];
+    let currentEpisode = null;
+    let cues = [];
+    let activeCueIndex = -1;
+
+    const speedOptions = [
+      { val: 0.75, label: "0,75" },
+      { val: 0.9,  label: "0,9" },
+      { val: 1.0,  label: "1x" },
+      { val: 1.1,  label: "1,1" },
+      { val: 1.25, label: "1,25" },
+      { val: 1.5,  label: "1,5" },
+      { val: 2.0,  label: "2" }
+    ];
+    let selectedSpeed = 1.0;
+
+    // Element References
+    const homeScreen = document.getElementById('homeScreen');
+    const showScreen = document.getElementById('showScreen');
+    const playerScreen = document.getElementById('playerScreen');
+    const showsGrid = document.getElementById('showsGrid');
+    const homeSearchWrap = document.getElementById('homeSearchWrap');
+    const homeSearchInput = document.getElementById('homeSearchInput');
+
+    const ssPoster = document.getElementById('ssPoster');
+    const ssFlag = document.getElementById('ssFlag');
+    const ssTitle = document.getElementById('ssTitle');
+    const ssEpisodeCount = document.getElementById('ssEpisodeCount');
+    const ssSearchInput = document.getElementById('ssSearchInput');
+    const hideCompletedCheck = document.getElementById('hideCompletedCheck');
+    const sortSelect = document.getElementById('sortSelect');
+    const episodesListView = document.getElementById('episodesListView');
+
+    const headerBrandTitle = document.getElementById('headerBrandTitle');
+    const headerMarqueeWrapper = document.getElementById('headerMarqueeWrapper');
+    const headerMarqueeText = document.getElementById('headerMarqueeText');
+
+    const playbackButtonsSection = document.getElementById('playbackButtonsSection');
+    const pbsHomeTitleWrapper = document.getElementById('pbsHomeTitleWrapper');
+    const pbsHomeTitle = document.getElementById('pbsHomeTitle');
+    const audioElement = document.getElementById('audioElement');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const timeCurrent = document.getElementById('timeCurrent');
+    const timeTotal = document.getElementById('timeTotal');
+    const seekBar = document.getElementById('seekBar');
+    const speedBtn = document.getElementById('speedBtn');
+    const speedPopover = document.getElementById('speedPopover');
+    const speedChips = document.getElementById('speedChips');
+    const volumeBar = document.getElementById('volumeBar');
+    const transcriptView = document.getElementById('transcriptView');
+    const popover = document.getElementById('popover');
+    const popoverContent = document.getElementById('popoverContent');
+
+    function formatTime(sec) {
+      if (isNaN(sec) || sec <= 0) return "0:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    // Routing
+    function switchScreen(screen) {
+      homeScreen.classList.remove('active');
+      showScreen.classList.remove('active');
+      playerScreen.classList.remove('active');
+
+      if (screen === 'home') {
+        homeScreen.classList.add('active');
+        homeSearchWrap.style.display = 'flex';
+        headerBrandTitle.style.display = 'block';
+        headerBrandTitle.innerText = "Genius Podcasts";
+        headerMarqueeWrapper.style.display = 'none';
+        playbackButtonsSection.classList.add('mini-mode');
+      } else if (screen === 'show') {
+        showScreen.classList.add('active');
+        homeSearchWrap.style.display = 'none';
+        headerBrandTitle.style.display = 'none';
+        headerMarqueeWrapper.style.display = 'none';
+        playbackButtonsSection.classList.add('mini-mode');
+        // Reset episode filter input on returning to SS
+        ssSearchInput.value = '';
+        renderEpisodeList();
+      } else if (screen === 'player') {
+        playerScreen.classList.add('active');
+        homeSearchWrap.style.display = 'none';
+        headerBrandTitle.style.display = 'none';
+        headerMarqueeWrapper.style.display = 'block';
+        playbackButtonsSection.classList.remove('mini-mode');
+        updateMarquees();
+      }
+    }
+
+    // Home Screen (HS) Initialization
+    async function loadShows() {
+      try {
+        const res = await fetch('shows.json?nocache=' + Date.now());
+        showsData = await res.json();
+        renderShowsGrid(showsData);
+        restoreLastState();
+      } catch (err) {
+        showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json</div>`;
+      }
+    }
+
+    function renderShowsGrid(shows) {
+      showsGrid.innerHTML = '';
+      Object.keys(shows).forEach(key => {
+        const s = shows[key];
+        const card = document.createElement('div');
+        card.className = 'show-card';
+        const logoUrl = `${R2_BASE}/logos/${encodeURIComponent(s.folder)}.png`;
+        card.innerHTML = `
+          <div class="show-poster-wrap">
+            <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
+            <span class="flag-badge">${s.flag || ''}</span>
+          </div>
+          <div class="show-name">${s.name}</div>
+        `;
+        card.onclick = () => openShow(s);
+        showsGrid.appendChild(card);
+      });
+    }
+
+    function filterShows() {
+      const q = homeSearchInput.value.toLowerCase().trim();
+      const filtered = {};
+      Object.keys(showsData).forEach(k => {
+        if (showsData[k].name.toLowerCase().includes(q)) filtered[k] = showsData[k];
+      });
+      renderShowsGrid(filtered);
+    }
+
+    // Show Screen (SS) Logic
+    async function openShow(show) {
+      currentShow = show;
+      ssTitle.innerText = show.name;
+      ssFlag.innerText = show.flag || '';
+      ssPoster.src = `${R2_BASE}/logos/${encodeURIComponent(show.folder)}.png`;
+      ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
+      episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
+
+      switchScreen('show');
+
+      try {
+        const playlistUrl = `${R2_BASE}/episodes/${encodeURIComponent(show.folder)}/playlist.json?nocache=${Date.now()}`;
+        const res = await fetch(playlistUrl);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        rawEpisodes = await res.json();
+        renderEpisodeList();
+      } catch (err) {
+        episodesListView.innerHTML = `<div class="empty-state">Could not load show playlist.</div>`;
+        ssEpisodeCount.innerText = "0 episodes";
+      }
+    }
+
+    function renderEpisodeList() {
+      const query = ssSearchInput.value.toLowerCase().trim();
+      const hideCompleted = hideCompletedCheck.checked;
+      const mode = sortSelect.value;
+
+      let list = [...rawEpisodes];
+
+      if (query) {
+        list = list.filter(ep => ep.title.toLowerCase().includes(query));
+      }
+
+      if (mode === 'date-desc') {
+        list.sort((a, b) => (b.raw_date || '').localeCompare(a.raw_date || ''));
+      } else if (mode === 'date-asc') {
+        list.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+      } else if (mode === 'alpha-asc') {
+        list.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (mode === 'alpha-desc') {
+        list.sort((a, b) => b.title.localeCompare(a.title));
+      }
+
+      episodesListView.innerHTML = '';
+      let visible = 0;
+
+      list.forEach(ep => {
+        const isDone = localStorage.getItem('done_' + ep.title) === 'true';
+        if (hideCompleted && isDone) return;
+        visible++;
+
+        const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
+        const card = document.createElement('div');
+        card.className = `card ${isDone ? 'completed' : ''}`;
+        card.innerHTML = `
+          <div class="card-index">${visible}.</div>
+          <div class="card-content">
+            <div class="card-title">${ep.title}</div>
+            <div class="card-meta">
+              ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
+              <span>${ep.format || 'M4A'}</span>
+              ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
+              ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
+              ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
+            </div>
+          </div>
+        `;
+        const epIndex = visible;
+        card.onclick = () => playEpisode(ep, epIndex);
+        episodesListView.appendChild(card);
+      });
+
+      ssEpisodeCount.innerText = `${rawEpisodes.length} episode${rawEpisodes.length === 1 ? '' : 's'}`;
+      if (visible === 0) {
+        episodesListView.innerHTML = '<div class="empty-state">No episodes match your criteria.</div>';
+      }
+    }
+
+    // Playback Logic
+    async function playEpisode(ep, displayIndex, startPaused = false) {
+      currentEpisode = ep;
+      currentEpisode.displayIndex = displayIndex;
+      localStorage.setItem('last_played_state', JSON.stringify({
+        show: currentShow,
+        episode: ep,
+        displayIndex: displayIndex
+      }));
+
+      const titleWithIndex = displayIndex ? `${displayIndex}. ${ep.title}` : ep.title;
+      pbsHomeTitle.innerText = titleWithIndex;
+      headerMarqueeText.innerText = titleWithIndex;
+
+      audioElement.src = ep.audio;
+      audioElement.load();
+      audioElement.playbackRate = selectedSpeed;
+
+      const wasDone = localStorage.getItem('done_' + ep.title) === 'true';
+      const savedTime = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
+
+      if (wasDone) {
+        localStorage.removeItem('done_' + ep.title);
+        localStorage.setItem('pos_' + ep.title, '0');
+        audioElement.currentTime = 0;
+      }
+
+      audioElement.onloadedmetadata = () => {
+        timeTotal.innerText = formatTime(audioElement.duration);
+        seekBar.max = audioElement.duration || 100;
+        if (!wasDone && savedTime > 0 && savedTime < (audioElement.duration - 5)) {
+          audioElement.currentTime = savedTime;
+        }
+      };
+
+      loadTranscript(ep.vtt);
+
+      if (!startPaused) {
+        audioElement.play().catch(() => {});
+        openPlayerScreen();
+      }
+    }
+
+    function openPlayerScreen() {
+      if (!currentEpisode) return;
+      switchScreen('player');
+    }
+
+    function navigateToCurrentShow() {
+      if (currentShow) {
+        switchScreen('show');
+      } else {
+        switchScreen('home');
+      }
+    }
+
+    async function loadTranscript(vttUrl) {
+      cues = [];
+      activeCueIndex = -1;
+      transcriptView.innerHTML = '';
+
+      if (!vttUrl) {
+        transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
+        return;
+      }
+
+      try {
+        const res = await fetch(vttUrl + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const text = await res.text();
+        cues = parseVtt(text);
+        if (cues.length > 0) {
+          renderTranscript();
+        } else {
+          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text lines.</div>';
+        }
+      } catch (err) {
+        transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
+      }
+    }
+
+    function parseVttTime(str) {
+      const parts = str.trim().split(":");
+      let h = 0, m = 0, s = 0, ms = 0;
+      if (parts.length === 3) {
+        h = parseInt(parts[0], 10) || 0;
+        m = parseInt(parts[1], 10) || 0;
+        const sParts = parts[2].split(".");
+        s = parseInt(sParts[0], 10) || 0;
+        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
+      } else if (parts.length === 2) {
+        m = parseInt(parts[0], 10) || 0;
+        const sParts = parts[1].split(".");
+        s = parseInt(sParts[1], 10) || 0;
+        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
+      }
+      return h * 3600 + m * 60 + s + ms / 1000;
+    }
+
+    function parseVtt(text) {
+      const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+      const list = [];
+      let i = 0;
+      while (i < lines.length && !lines[i].includes("-->")) i++;
+      while (i < lines.length) {
+        const line = lines[i].trim();
+        if (line.includes("-->")) {
+          const parts = line.split("-->");
+          const start = parseVttTime(parts[0].trim().split(" ")[0]);
+          const end = parseVttTime(parts[1].trim().split(" ")[0]);
+          const textLines = [];
+          i++;
+          while (i < lines.length && lines[i].trim() !== "") {
+            if (!lines[i].includes("-->")) textLines.push(lines[i].trim());
+            i++;
+          }
+          const cueText = textLines.join(" ").replace(/<[^>]*>/g, "").trim();
+          if (cueText) list.push({ start, end, text: cueText });
+        } else {
+          i++;
+        }
+      }
+      return list;
+    }
+
+    function renderTranscript() {
+      transcriptView.innerHTML = '';
+      cues.forEach((cue, i) => {
+        const p = document.createElement('p');
+        p.className = 'cue';
+        p.id = `cue-${i}`;
+        p.innerText = cue.text;
+        p.onclick = () => {
+          const sel = window.getSelection().toString().trim();
+          if (sel.length > 0) return;
+          audioElement.currentTime = cue.start;
+          audioElement.play().catch(() => {});
+        };
+        transcriptView.appendChild(p);
+      });
+    }
+
+    function togglePlay(e) {
+      if (e) e.stopPropagation();
+      closeSpeedPopover();
+      if (!audioElement.src) return;
+      if (audioElement.paused) {
+        audioElement.play().catch(() => {});
+      } else {
+        audioElement.pause();
+      }
+    }
+
+    function seekRelative(sec) {
+      closeSpeedPopover();
+      if (!audioElement.duration) return;
+      audioElement.currentTime = Math.max(0, Math.min(audioElement.duration, audioElement.currentTime + sec));
+    }
+
+    audioElement.addEventListener('play', () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    });
+
+    audioElement.addEventListener('pause', () => {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    });
+
+    audioElement.addEventListener('timeupdate', () => {
+      const cur = audioElement.currentTime;
+      const dur = audioElement.duration || 0;
+      timeCurrent.innerText = formatTime(cur);
+      seekBar.value = cur;
+
+      if (currentEpisode && cur > 0) {
+        localStorage.setItem('pos_' + currentEpisode.title, cur.toString());
+        if (dur > 0 && (cur >= dur - 5 || cur / dur >= 0.98)) {
+          localStorage.setItem('done_' + currentEpisode.title, 'true');
+        } else if (localStorage.getItem('done_' + currentEpisode.title) === 'true' && cur < dur - 10) {
+          localStorage.removeItem('done_' + currentEpisode.title);
+        }
+      }
+
+      let idx = -1;
+      for (let i = cues.length - 1; i >= 0; i--) {
+        if (cur >= cues[i].start) {
+          idx = i;
+          break;
+        }
+      }
+
+      if (idx !== -1 && idx !== activeCueIndex) {
+        if (activeCueIndex !== -1) {
+          const old = document.getElementById(`cue-${activeCueIndex}`);
+          if (old) old.classList.remove('active');
+        }
+        activeCueIndex = idx;
+        const current = document.getElementById(`cue-${activeCueIndex}`);
+        if (current) {
+          current.classList.add('active');
+          current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+
+    seekBar.addEventListener('input', (e) => {
+      audioElement.currentTime = Number(e.target.value);
+    });
+
+    function setSpeed(val, label) {
+      selectedSpeed = val;
+      audioElement.playbackRate = val;
+      speedBtn.innerText = label || (val + "x");
+      renderSpeedMenu();
+    }
+
+    function renderSpeedMenu() {
+      speedChips.innerHTML = '';
+      speedOptions.forEach(opt => {
+        const chip = document.createElement('button');
+        chip.className = `speed-chip ${opt.val === selectedSpeed ? 'selected' : ''}`;
+        chip.innerText = opt.label;
+        chip.onclick = (e) => {
+          e.stopPropagation();
+          setSpeed(opt.val, opt.label);
+          closeSpeedPopover();
+        };
+        speedChips.appendChild(chip);
+      });
+    }
+
+    function toggleSpeedPopover(e) {
+      e.stopPropagation();
+      const isOpen = speedPopover.style.display === 'block';
+      if (isOpen) closeSpeedPopover();
+      else speedPopover.style.display = 'block';
+    }
+
+    function closeSpeedPopover() {
+      speedPopover.style.display = 'none';
+    }
+
+    volumeBar.addEventListener('input', (e) => {
+      audioElement.volume = parseFloat(e.target.value);
+    });
+
+    // Touch Gestures: Back-swipe from Show Screen to Home Screen
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (e.changedTouches.length === 1) {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+
+        // Swipe right from left edge to go back
+        if (touchStartX < 50 && deltaX > 70 && Math.abs(deltaY) < 60 && elapsed < 400) {
+          if (showScreen.classList.contains('active')) {
+            switchScreen('home');
+          } else if (playerScreen.classList.contains('active')) {
+            navigateToCurrentShow();
+          }
+        }
+      }
+    }, { passive: true });
+
+    function updateMarquees() {
+      headerMarqueeText.classList.remove("marquee-active");
+      pbsHomeTitle.classList.remove("marquee-active");
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (headerMarqueeWrapper.style.display === "block" && headerMarqueeText.scrollWidth > headerMarqueeWrapper.clientWidth) {
+            headerMarqueeText.classList.add("marquee-active");
+          }
+          if (pbsHomeTitle.scrollWidth > pbsHomeTitleWrapper.clientWidth) {
+            pbsHomeTitle.classList.add("marquee-active");
+          }
+        }, 100);
+      });
+    }
+
+    // Restore State from Yesterday / Previous Session
+    function restoreLastState() {
+      const savedState = localStorage.getItem('last_played_state');
+      if (savedState) {
+        try {
+          const parsed = JSON.parse(savedState);
+          currentShow = parsed.show;
+          playEpisode(parsed.episode, parsed.displayIndex, true);
+        } catch (e) {}
+      }
+    }
+
+    // Interactive Translation Popover
+    document.addEventListener('selectionchange', () => {
+      const sel = window.getSelection();
+      const txt = sel ? sel.toString().trim() : '';
+      if (!txt || txt.length < 2) return;
+      if (!audioElement.paused) audioElement.pause();
+
+      popover.style.display = 'block';
+      popoverContent.innerText = 'Translating…';
+
+      fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(txt)}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data && data[0]) popoverContent.innerText = data[0].map(i => i[0]).join('');
+        })
+        .catch(() => {
+          popoverContent.innerText = 'Translation failed.';
+        });
+    });
+
+    document.addEventListener('pointerdown', (e) => {
+      if (!popover.contains(e.target)) popover.style.display = 'none';
+      if (!speedPopover.contains(e.target) && e.target !== speedBtn) closeSpeedPopover();
+    });
+
+    renderSpeedMenu();
+    loadShows();
+  </script>
+</body>
+</html>
