@@ -808,6 +808,16 @@
     const popover = document.getElementById('popover');
     const popoverContent = document.getElementById('popoverContent');
 
+    
+    function safeUrl(path) {
+  if (!path) return "";
+  try {
+    return encodeURI(decodeURI(path));
+  } catch (e) {
+    return encodeURI(path);
+  }
+}
+
     function formatTime(sec) {
       if (isNaN(sec) || sec <= 0) return "0:00";
       const m = Math.floor(sec / 60);
@@ -980,7 +990,7 @@
       pbsHomeTitle.innerText = titleWithIndex;
       headerMarqueeText.innerText = titleWithIndex;
 
-      audioElement.src = encodeURI(ep.audio);
+      audioElement.src = safeUrl(ep.audio);
       audioElement.load();
       audioElement.playbackRate = selectedSpeed;
 
@@ -1033,7 +1043,7 @@
       }
 
       try {
-        const res = await fetch(encodeURI(vttUrl) + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
+        const res = await fetch(safeUrl(vttUrl) + (vttUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now());
         if (!res.ok) throw new Error("HTTP " + res.status);
         const text = await res.text();
         cues = parseVtt(text);
