@@ -1066,30 +1066,38 @@
     }
 
     function parseVtt(text) {
-      const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
-      const list = [];
-      let i = 0;
-      while (i < lines.length && !lines[i].includes("-->")) i++;
-      while (i < lines.length) {
-        const line = lines[i].trim();
-        if (line.includes("-->")) {
-          const parts = line.split("-->");
-          const start = parseVttTime(parts[0].trim().split(" ")[0]);
-          const end = parseVttTime(parts[1].trim().split(" ")[0]);
-          const textLines = [];
-          i++;
-          while (i < lines.length && lines[i].trim() !== "") {
-            if (!lines[i].includes("-->")) textLines.push(lines[i].trim());
-            i++;
-          }
-          const cueText = textLines.join(" ").replace(/<[^>]*>/g, "").trim();
-          if (cueText) list.push({ start, end, text: cueText });
-        } else {
-          i++;
+  // Normalize line endings and strip BOM/header
+  const lines = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  const list = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i].trim();
+
+    if (line.includes('-->')) {
+      const parts = line.split('-->');
+      const start = parseVttTime(parts[0].trim().split(' ')[0]);
+      const end = parseVttTime(parts[1].trim().split(' ')[0]);
+      const textLines = [];
+      i++;
+
+      while (i < lines.length && lines[i].trim() !== '') {
+        if (!lines[i].includes('-->')) {
+          textLines.push(lines[i].trim());
         }
+        i++;
       }
-      return list;
+
+      const cueText = textLines.join(' ').replace(/<[^>]*>/g, '').trim();
+      if (cueText) {
+        list.push({ start, end, text: cueText });
+      }
+    } else {
+      i++;
     }
+  }
+  return list;
+}
 
     function renderTranscript() {
       transcriptView.innerHTML = '';
