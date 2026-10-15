@@ -975,7 +975,8 @@
         const s = shows[key];
         const card = document.createElement('div');
         card.className = 'show-card';
-        const logoUrl = safeUrl(`${R2_BASE}/logos/${s.folder}.png`);
+        const showId = s.show_id || key;
+        const logoUrl = safeUrl(`${R2_BASE}/logos/${showId}.webp`);
         card.innerHTML = `
           <div class="show-poster-wrap">
             <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
@@ -1001,7 +1002,8 @@
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
-      ssPoster.src = safeUrl(`${R2_BASE}/logos/${show.folder}.png`);
+      const showId = show.show_id || show.folder;
+      ssPoster.src = safeUrl(`${R2_BASE}/logos/${showId}.webp`);
       ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
       episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
 
@@ -1009,7 +1011,7 @@
       mainContainer.scrollTo({ top: 0 });
 
       try {
-        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${show.folder}/playlist.json`) + '?nocache=' + Date.now();
+        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${showId}/playlist.json`) + '?nocache=' + Date.now();
         const res = await fetch(playlistUrl);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const fetchedList = await res.json();
