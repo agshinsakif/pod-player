@@ -1,6 +1,15 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass a pihenésről és az alvásról!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.hu.vtt",
+    "upload_date": "2026-08-05",
+    "raw_date": "20260805",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "A magyarok és a szieszta",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.m4a",
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
