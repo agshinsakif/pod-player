@@ -702,7 +702,11 @@
       user-select: text;
       -webkit-user-select: text;
     }
-  </style>
+  
+.show-avatar-wrapper { position: relative; display: inline-flex; }
+.show-flag-badge { position: absolute; bottom: -2px; left: -2px; font-size: 15px; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6)); pointer-events: none; }
+
+</style>
 </head>
 <body>
 
@@ -849,6 +853,17 @@
   </div>
 
   <script>
+
+function getLangFlag(show) {
+  if (show && show.flag && show.flag !== "🌐") return show.flag;
+  const lang = ((show && show.lang) || "").toLowerCase().slice(0, 2);
+  const country = { en: "gb", ja: "jp", ko: "kr", zh: "cn", da: "dk", el: "gr", cs: "cz" }[lang] || lang;
+  if (/^[a-z]{2}$/.test(country)) {
+    return String.fromCodePoint(...[...country.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
+  }
+  return (show && show.flag) || "🌐";
+}
+
     const R2_BASE = "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev";
     let showsData = {};
     let currentShow = null;
