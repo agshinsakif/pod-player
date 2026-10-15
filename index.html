@@ -976,7 +976,7 @@
         const card = document.createElement('div');
         card.className = 'show-card';
         const showId = s.show_id || key;
-        const logoUrl = safeUrl(`${R2_BASE}/logos/${showId}.webp`);
+        const logoUrl = safeUrl(`${R2_BASE}/logos/${showId}.png`);
         card.innerHTML = `
           <div class="show-poster-wrap">
             <img class="show-poster" src="${logoUrl}" onerror="this.src='./web-logo.png'" alt="${s.name}">
@@ -1003,7 +1003,7 @@
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
       const showId = show.show_id || show.folder;
-      ssPoster.src = safeUrl(`${R2_BASE}/logos/${showId}.webp`);
+      ssPoster.src = safeUrl(`${R2_BASE}/logos/${showId}.png`);
       ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
       episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
 
