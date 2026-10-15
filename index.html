@@ -1011,7 +1011,7 @@
       mainContainer.scrollTo({ top: 0 });
 
       try {
-        const playlistUrl = safeUrl(`${R2_BASE}/episodes/${showId}/playlist.json`) + '?nocache=' + Date.now();
+        const playlistUrl = "playlist.json?nocache=" + Date.now();
         const res = await fetch(playlistUrl);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const allEpisodes = await res.json();
