@@ -16,5 +16,11 @@
     "folder": "InnerFrench",
     "lang": "fr",
     "flag": "🇫🇷"
+  },
+  "000001": {
+    "show_id": "000001",
+    "name": "Easy Hungarian",
+    "lang": "hu",
+    "flag": "🌐"
   }
 }
