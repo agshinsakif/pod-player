@@ -7,5 +7,14 @@
     "upload_date": "2026-10-05",
     "raw_date": "20261005",
     "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass a könnyű és nehéz nyelvekről!",
+    "audio": "https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.m4a",
+    "vtt": "https://pub-e36d7a3aa50045b2b7c26a8a0abb2e2a.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.hu.vtt",
+    "upload_date": "2026-10-05",
+    "raw_date": "20261005",
+    "format": "M4A"
   }
 ]
