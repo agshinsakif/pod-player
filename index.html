@@ -1014,7 +1014,8 @@
         const playlistUrl = safeUrl(`${R2_BASE}/episodes/${showId}/playlist.json`) + '?nocache=' + Date.now();
         const res = await fetch(playlistUrl);
         if (!res.ok) throw new Error("HTTP " + res.status);
-        const fetchedList = await res.json();
+        const allEpisodes = await res.json();
+        const fetchedList = allEpisodes.filter(ep => ep.show_id === showId || ep.folder === showId);
 
         // Sort oldest to newest so index 1 is original episode 1
         fetchedList.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
