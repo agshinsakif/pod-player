@@ -702,11 +702,7 @@
       user-select: text;
       -webkit-user-select: text;
     }
-  
-.show-avatar-wrapper { position: relative; display: inline-flex; }
-.show-flag-badge { position: absolute; bottom: -2px; left: -2px; font-size: 15px; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6)); pointer-events: none; }
-
-</style>
+  </style>
 </head>
 <body>
 
@@ -730,7 +726,7 @@
       <div class="ss-sticky-header">
         <div class="ss-hero">
           <div class="ss-poster-row">
-            <button class="btn-ss-back" onclick="switchScreen('home')" title="Back to shows">
+            <button class="btn-ss-back" onclick="navigate('home')" title="Back to shows">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
@@ -782,7 +778,7 @@
 
   <!-- Playback Dock -->
   <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
-    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper" onclick="openPlayerScreen()">
+    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper" onclick="navigate('player')">
       <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
     </div>
 
@@ -853,17 +849,6 @@
   </div>
 
   <script>
-
-function getLangFlag(show) {
-  if (show && show.flag && show.flag !== "🌐") return show.flag;
-  const lang = ((show && show.lang) || "").toLowerCase().slice(0, 2);
-  const country = { en: "gb", ja: "jp", ko: "kr", zh: "cn", da: "dk", el: "gr", cs: "cz" }[lang] || lang;
-  if (/^[a-z]{2}$/.test(country)) {
-    return String.fromCodePoint(...[...country.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
-  }
-  return (show && show.flag) || "🌐";
-}
-
     const R2_BASE = "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev";
     let showsData = {};
     let currentShow = null;
@@ -940,6 +925,58 @@ function getLangFlag(show) {
       return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
+    // --- History Navigation Management ---
+    function navigate(screen, extraId = null) {
+      let targetHash = "#/";
+      if (screen === 'show' && (extraId || currentShow)) {
+        const sId = extraId || currentShow.show_id || currentShow.folder;
+        targetHash = `#/show/${sId}`;
+      } else if (screen === 'player' && currentEpisode) {
+        const sId = currentShow ? (currentShow.show_id || currentShow.folder) : "";
+        targetHash = `#/player/${sId}/${encodeURIComponent(currentEpisode.title)}`;
+      }
+
+      if (window.location.hash !== targetHash) {
+        history.pushState(null, "", targetHash);
+      }
+      applyRoute();
+    }
+
+    async function applyRoute() {
+      const hash = window.location.hash || "#/";
+      const parts = hash.slice(1).split("/").filter(Boolean);
+
+      if (parts.length === 0 || parts[0] === "") {
+        switchScreen('home');
+      } else if (parts[0] === "show" && parts[1]) {
+        const showId = parts[1];
+        const s = showsData[showId] || Object.values(showsData).find(x => (x.show_id === showId || x.folder === showId));
+        if (s) {
+          if (!currentShow || (currentShow.show_id || currentShow.folder) !== showId) {
+            await openShow(s, false);
+          } else {
+            switchScreen('show');
+          }
+        } else {
+          switchScreen('home');
+        }
+      } else if (parts[0] === "player") {
+        const showId = parts[1];
+        const epTitle = decodeURIComponent(parts[2] || "");
+        if (showId && (!currentShow || (currentShow.show_id || currentShow.folder) !== showId)) {
+          const s = showsData[showId] || Object.values(showsData).find(x => (x.show_id === showId || x.folder === showId));
+          if (s) await openShow(s, false);
+        }
+        if (epTitle && (!currentEpisode || currentEpisode.title !== epTitle)) {
+          const found = rawEpisodes.find(e => e.title === epTitle);
+          if (found) await playEpisode(found, found.originalIndex, false);
+        }
+        switchScreen('player');
+      }
+    }
+
+    window.addEventListener("popstate", applyRoute);
+
     function switchScreen(screen) {
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
@@ -979,6 +1016,7 @@ function getLangFlag(show) {
         showsData = await res.json();
         renderShowsGrid(showsData);
         restoreLastState();
+        applyRoute();
       } catch (err) {
         showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json (${err.message})</div>`;
       }
@@ -999,7 +1037,9 @@ function getLangFlag(show) {
           </div>
           <div class="show-name">${s.name}</div>
         `;
-        card.onclick = () => openShow(s);
+        card.onclick = () => {
+          navigate('show', showId);
+        };
         showsGrid.appendChild(card);
       });
     }
@@ -1013,7 +1053,7 @@ function getLangFlag(show) {
       renderShowsGrid(filtered);
     }
 
-    async function openShow(show) {
+    async function openShow(show, shouldSwitch = true) {
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
@@ -1022,8 +1062,10 @@ function getLangFlag(show) {
       ssPoster.onerror = () => { ssPoster.src = './web-logo.png'; };
       episodesListView.innerHTML = '<div class="empty-state">Loading episodes…</div>';
 
-      switchScreen('show');
-      mainContainer.scrollTo({ top: 0 });
+      if (shouldSwitch) {
+        switchScreen('show');
+        mainContainer.scrollTo({ top: 0 });
+      }
 
       try {
         const playlistUrl = "playlist.json?nocache=" + Date.now();
@@ -1032,7 +1074,6 @@ function getLangFlag(show) {
         const allEpisodes = await res.json();
         const fetchedList = allEpisodes.filter(ep => ep.show_id === showId || ep.folder === showId);
 
-        // Sort oldest to newest so index 1 is original episode 1
         fetchedList.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
 
         rawEpisodes = fetchedList.map((ep, idx) => ({
@@ -1058,13 +1099,7 @@ function getLangFlag(show) {
         list = list.filter(ep => ep.title.toLowerCase().includes(query));
       }
 
-      if (mode === 'date-desc') {
-        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
-      } else if (mode === 'date-asc') {
-        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
-      } else if (mode === 'alpha-asc') {
-        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
-      } else if (mode === 'alpha-desc') {
+      if (mode === 'date-desc' || mode === 'date-asc' || mode === 'alpha-asc' || mode === 'alpha-desc') {
         list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       }
 
@@ -1080,7 +1115,6 @@ function getLangFlag(show) {
         const card = document.createElement('div');
         card.className = `card ${isDone ? 'completed' : ''}`;
 
-        // Always keep persistent original numbering
         const displayIndex = ep.originalIndex;
 
         card.innerHTML = `
@@ -1096,7 +1130,10 @@ function getLangFlag(show) {
             </div>
           </div>
         `;
-        card.onclick = () => playEpisode(ep, displayIndex);
+        card.onclick = () => {
+          playEpisode(ep, displayIndex);
+          navigate('player');
+        };
         episodesListView.appendChild(card);
       });
 
@@ -1144,20 +1181,14 @@ function getLangFlag(show) {
 
       if (!startPaused) {
         audioElement.play().catch(() => {});
-        openPlayerScreen();
       }
-    }
-
-    function openPlayerScreen() {
-      if (!currentEpisode) return;
-      switchScreen('player');
     }
 
     function navigateToCurrentShow() {
       if (currentShow) {
-        switchScreen('show');
+        navigate('show', currentShow.show_id || currentShow.folder);
       } else {
-        switchScreen('home');
+        navigate('home');
       }
     }
 
@@ -1364,7 +1395,6 @@ function getLangFlag(show) {
       audioElement.volume = parseFloat(e.target.value);
     });
 
-    // Scroll-to-top button visibility
     mainContainer.addEventListener('scroll', () => {
       if (!showScreen.classList.contains('active')) {
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
@@ -1381,7 +1411,6 @@ function getLangFlag(show) {
       mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Spacebar Play/Pause toggle
     document.addEventListener('keydown', (e) => {
       const tag = (e.target.tagName || '').toLowerCase();
       if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
@@ -1391,7 +1420,6 @@ function getLangFlag(show) {
       }
     });
 
-    // Touch Swipe navigation
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
@@ -1412,7 +1440,7 @@ function getLangFlag(show) {
 
         if (touchStartX < 50 && deltaX > 70 && Math.abs(deltaY) < 60 && elapsed < 400) {
           if (showScreen.classList.contains('active')) {
-            switchScreen('home');
+            navigate('home');
           } else if (playerScreen.classList.contains('active')) {
             navigateToCurrentShow();
           }
@@ -1446,7 +1474,6 @@ function getLangFlag(show) {
       }
     }
 
-    // Translation Popover with Auto-Pause and Auto-Resume
     document.addEventListener('selectionchange', () => {
       const sel = window.getSelection();
       const txt = sel ? sel.toString().trim() : '';
