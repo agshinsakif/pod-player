@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Akarsz beszélgetni a nyárról？",
+    "url": "https://www.youtube.com/watch?v=SAGKm5Zu_a8",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Akarsz beszélgetni a nyárról？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Akarsz beszélgetni a nyárról？.hu.vtt",
+    "upload_date": "2023-07-27",
+    "raw_date": "20230727",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass érdekes sztorikat!",
     "url": "https://www.youtube.com/watch?v=z5b5SPzr1dk",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass érdekes sztorikat!.m4a",
