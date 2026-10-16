@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Magyar karácsony ⧸ Hungarian Christmas",
+    "url": "https://www.youtube.com/watch?v=TQsuMhDvMz0",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar karácsony ⧸ Hungarian Christmas.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar karácsony ⧸ Hungarian Christmas.hu.vtt",
+    "upload_date": "2023-12-23",
+    "raw_date": "20231223",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "2023 és 2024 az Easy Hungariannél",
     "url": "https://www.youtube.com/watch?v=F_2yjFPhTLo",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/2023 és 2024 az Easy Hungariannél.m4a",
