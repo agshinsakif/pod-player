@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Furcsa elméletek",
+    "url": "https://www.youtube.com/watch?v=dd7_PcuhOso",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa elméletek.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa elméletek.hu.vtt",
+    "upload_date": "2025-06-10",
+    "raw_date": "20250610",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Elvis él!(？)",
     "url": "https://www.youtube.com/watch?v=ZDhzz8XAqPU",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elvis él!(？).m4a",
