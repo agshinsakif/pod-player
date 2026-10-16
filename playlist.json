@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Nyelvtani jegyzetek",
+    "url": "https://www.youtube.com/watch?v=cl4Bh8o9xXI",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.m4a",
+    "vtt": null,
+    "upload_date": "2023-06-01",
+    "raw_date": "20230601",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a magyarokról!",
     "url": "https://www.youtube.com/watch?v=abg6VXyJsYU",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a magyarokról!.m4a",
@@ -17,16 +27,6 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyárról!.en.vtt",
     "upload_date": "2023-07-04",
     "raw_date": "20230704",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Nyelvtani jegyzetek",
-    "url": "https://www.youtube.com/watch?v=azfwbOD6HU4",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.m4a",
-    "vtt": null,
-    "upload_date": "2023-07-07",
-    "raw_date": "20230707",
     "format": "M4A"
   },
   {
