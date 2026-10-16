@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A magyar emberek mindenhol ott vannak!",
+    "url": "https://www.youtube.com/watch?v=Jcb6E-hkp4E",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar emberek mindenhol ott vannak!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar emberek mindenhol ott vannak!.hu.vtt",
+    "upload_date": "2025-03-19",
+    "raw_date": "20250319",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Tavaszi időjárás és a török tulipánok",
     "url": "https://www.youtube.com/watch?v=SOhnaiygwCI",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Tavaszi időjárás és a török tulipánok.m4a",
