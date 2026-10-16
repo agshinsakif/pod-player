@@ -1219,19 +1219,17 @@
 
     function parseVttTime(str) {
       const parts = str.trim().split(":");
-      let h = 0, m = 0, s = 0, ms = 0;
+      let h = 0, m = 0, sParts;
       if (parts.length === 3) {
         h = parseInt(parts[0], 10) || 0;
         m = parseInt(parts[1], 10) || 0;
-        const sParts = parts[2].split(".");
-        s = parseInt(sParts[0], 10) || 0;
-        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
-      } else if (parts.length === 2) {
+        sParts = (parts[2] || "").split(".");
+      } else {
         m = parseInt(parts[0], 10) || 0;
-        const sParts = parts[1].split(".");
-        s = parseInt(sParts[1], 10) || 0;
-        ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
+        sParts = (parts[1] || "").split(".");
       }
+      const s = parseInt(sParts[0], 10) || 0;
+      const ms = sParts[1] ? parseInt(sParts[1].padEnd(3, "0").slice(0, 3), 10) : 0;
       return h * 3600 + m * 60 + s + ms / 1000;
     }
 
