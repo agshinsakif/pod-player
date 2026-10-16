@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Fesztiválok, koncertek, konferenciák",
+    "url": "https://www.youtube.com/watch?v=EqGRMvIoaK8",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Fesztiválok, koncertek, konferenciák.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Fesztiválok, koncertek, konferenciák.hu.vtt",
+    "upload_date": "2024-08-30",
+    "raw_date": "20240830",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Easy Hungarian szeptemberben",
     "url": "https://www.youtube.com/watch?v=lYO4vs7yTmY",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian szeptemberben.m4a",
