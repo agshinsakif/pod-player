@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Beszélj magyarul a betegségekről, gyógyszerekről!",
+    "url": "https://www.youtube.com/watch?v=ZvrBgiOWq0E",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Beszélj magyarul a betegségekről, gyógyszerekről!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Beszélj magyarul a betegségekről, gyógyszerekről!.hu.vtt",
+    "upload_date": "2026-02-13",
+    "raw_date": "20260213",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Gyógyszerek a '80-as években",
     "url": "https://www.youtube.com/watch?v=Dosi3xdjlYg",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Gyógyszerek a '80-as években.m4a",
