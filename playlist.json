@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Tanulj magyarul a ChatGPT-vel!",
+    "url": "https://www.youtube.com/watch?v=AA2_Mzp58vc",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Tanulj magyarul a ChatGPT-vel!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Tanulj magyarul a ChatGPT-vel!.en.vtt",
+    "upload_date": "2025-09-25",
+    "raw_date": "20250925",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Környezetvédelemről magyarul",
     "url": "https://www.youtube.com/watch?v=zf-d6XrLFJg",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Környezetvédelemről magyarul.m4a",
