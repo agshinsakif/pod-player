@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvassunk magyarul!",
+    "url": "https://www.youtube.com/watch?v=vPQeMZ7YT5s",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvassunk magyarul!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvassunk magyarul!.hu.vtt",
+    "upload_date": "2025-01-28",
+    "raw_date": "20250128",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass és beszélj!",
     "url": "https://www.youtube.com/watch?v=H7pLJr67JqI",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass és beszélj!.m4a",
