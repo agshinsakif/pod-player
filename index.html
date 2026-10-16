@@ -854,10 +854,11 @@
 
   <script>
 
-// --- URL Hash Router with Browser History ---
+// --- URL Hash Router ---
 let isRouting = false;
 
 function setRoute(hash) {
+  if (isRouting) return;
   if (window.location.hash !== hash) {
     history.pushState(null, "", hash);
   }
@@ -865,7 +866,6 @@ function setRoute(hash) {
 
 function handleRouting() {
   if (typeof shows === "undefined" || !shows || (Array.isArray(shows) ? shows.length === 0 : Object.keys(shows).length === 0)) {
-    setTimeout(handleRouting, 80);
     return;
   }
 
@@ -875,14 +875,14 @@ function handleRouting() {
 
   try {
     if (parts.length === 0 || parts[0] === "") {
-      switchScreen(homeScreen);
+      if (!window.location.hash || window.location.hash === "#/" || window.location.hash === "#") { switchScreen(homeScreen); }
     } else if (parts[0] === "show" && parts[1]) {
       const showId = parts[1];
       const targetShow = Array.isArray(shows) ? shows.find(s => (s.show_id || s.id) === showId) : shows[showId];
       if (targetShow) {
         openShow(targetShow);
       } else {
-        switchScreen(homeScreen);
+        if (!window.location.hash || window.location.hash === "#/" || window.location.hash === "#") { switchScreen(homeScreen); }
       }
     } else if (parts[0] === "player" && parts[1]) {
       const showId = parts[1];
@@ -894,14 +894,9 @@ function handleRouting() {
       const epList = typeof playlist !== "undefined" && playlist ? playlist : [];
       const ep = epList.find(e => e.show_id === showId && (!epTitle || e.title === epTitle));
       if (ep) {
-        if (typeof currentEpisode === "undefined" || !currentEpisode || currentEpisode.title !== ep.title) {
-          playEpisode(ep, 0, false);
-        } else {
-          switchScreen(playerScreen);
-        }
-      } else {
-        switchScreen(playerScreen);
+        playEpisode(ep, 0, false);
       }
+      switchScreen(playerScreen);
     }
   } catch (err) {
     console.error("Routing error:", err);
@@ -910,8 +905,11 @@ function handleRouting() {
   }
 }
 
-window.addEventListener("popstate", handleRouting);
-window.addEventListener("hashchange", handleRouting);
+window.addEventListener("popstate", () => setTimeout(handleRouting, 0));
+window.addEventListener("hashchange", () => setTimeout(handleRouting, 0));
+
+
+
 
 
 function getLangFlag(show) {
@@ -1003,6 +1001,9 @@ function getLangFlag(show) {
     function switchScreen(screen) {
   if (!isRouting) {
     if (typeof homeScreen !== 'undefined' && screen === homeScreen) setRoute('#/');
+  }
+  if (!isRouting) {
+    if (typeof homeScreen !== 'undefined' && screen === homeScreen) setRoute('#/');
     else if (typeof playerScreen !== 'undefined' && screen === playerScreen && typeof currentEpisode !== 'undefined' && currentEpisode) setRoute('#/player/' + currentEpisode.show_id + '/' + encodeURIComponent(currentEpisode.title));
   }
       homeScreen.classList.remove('active');
@@ -1042,6 +1043,7 @@ function getLangFlag(show) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         showsData = await res.json();
         renderShowsGrid(showsData);
+    handleRouting();
         restoreLastState();
       } catch (err) {
         showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json (${err.message})</div>`;
@@ -1075,10 +1077,12 @@ function getLangFlag(show) {
         if (showsData[k].name.toLowerCase().includes(q)) filtered[k] = showsData[k];
       });
       renderShowsGrid(filtered);
+    handleRouting();
     }
 
     async function openShow(show) {
   if (!isRouting && show) { setRoute('#/show/' + (show.show_id || show.id)); }
+   }
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
@@ -1173,6 +1177,7 @@ function getLangFlag(show) {
 
     async function playEpisode(ep, displayIndex, startPaused = false) {
   if (!isRouting && ep) { setRoute('#/player/' + ep.show_id + '/' + encodeURIComponent(ep.title)); }
+   }
       currentEpisode = ep;
       currentEpisode.displayIndex = displayIndex;
       localStorage.setItem('last_played_state', JSON.stringify({
