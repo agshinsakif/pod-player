@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A 4 legjobb hely Magyarországon",
+    "url": "https://www.youtube.com/watch?v=CHh8VBXBuv4",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A 4 legjobb hely Magyarországon.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A 4 legjobb hely Magyarországon.en.vtt",
+    "upload_date": "2025-07-25",
+    "raw_date": "20250725",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Vegánok, svédasztal és magyar ételek",
     "url": "https://www.youtube.com/watch?v=ITZ-gjTOKKA",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Vegánok, svédasztal és magyar ételek.m4a",
