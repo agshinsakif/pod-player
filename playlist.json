@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A mesterséges intelligenciáról",
+    "url": "https://www.youtube.com/watch?v=xXQTNR20pnE",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A mesterséges intelligenciáról.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A mesterséges intelligenciáról.hu.vtt",
+    "upload_date": "2025-09-02",
+    "raw_date": "20250902",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "A ChatGPT az ideális tanár",
     "url": "https://www.youtube.com/watch?v=AZ1uPUhEalE",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A ChatGPT az ideális tanár.m4a",
