@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass a viccekről és a humorról!",
+    "url": "https://www.youtube.com/watch?v=r5VHon7_xjc",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a viccekről és a humorról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a viccekről és a humorról!.hu.vtt",
+    "upload_date": "2026-04-04",
+    "raw_date": "20260404",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "How to say 'punchline' in Hungarian",
     "url": "https://www.youtube.com/watch?v=TAiA_JfM2vA",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.m4a",
