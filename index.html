@@ -1077,12 +1077,10 @@ function getLangFlag(show) {
         if (showsData[k].name.toLowerCase().includes(q)) filtered[k] = showsData[k];
       });
       renderShowsGrid(filtered);
-    handleRouting();
     }
 
     async function openShow(show) {
   if (!isRouting && show) { setRoute('#/show/' + (show.show_id || show.id)); }
-   }
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
@@ -1176,8 +1174,7 @@ function getLangFlag(show) {
     }
 
     async function playEpisode(ep, displayIndex, startPaused = false) {
-  if (!isRouting && ep) { setRoute('#/player/' + ep.show_id + '/' + encodeURIComponent(ep.title)); }
-   }
+      if (!isRouting && ep) { setRoute('#/player/' + ep.show_id + '/' + encodeURIComponent(ep.title)); }
       currentEpisode = ep;
       currentEpisode.displayIndex = displayIndex;
       localStorage.setItem('last_played_state', JSON.stringify({
