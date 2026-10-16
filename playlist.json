@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass a nyelvtanulásról!",
+    "url": "https://www.youtube.com/watch?v=xknVvPs1VDs",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyelvtanulásról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyelvtanulásról!.hu.vtt",
+    "upload_date": "2024-04-07",
+    "raw_date": "20240407",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "A magyarok és a nyelvtanulás(？)",
     "url": "https://www.youtube.com/watch?v=rlAr_0B1aSw",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a nyelvtanulás(？).m4a",
