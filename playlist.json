@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A magyar a legjobb nyelv a világon!",
+    "url": "https://www.youtube.com/watch?v=n5ihziNkGvw",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.hu.vtt",
+    "upload_date": "2026-06-19",
+    "raw_date": "20260619",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Balkezesként Magyarországon",
     "url": "https://www.youtube.com/watch?v=GtDCztnNHA0",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.m4a",
