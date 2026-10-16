@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Új év ⧸ New Year",
+    "url": "https://www.youtube.com/watch?v=Ja613J6l0gk",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Új év ⧸ New Year.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Új év ⧸ New Year.hu.vtt",
+    "upload_date": "2024-01-25",
+    "raw_date": "20240125",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a karneválokról!",
     "url": "https://www.youtube.com/watch?v=Ig3fOi-d8Tg",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a karneválokról!.m4a",
