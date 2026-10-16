@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Easy Hungarian júliusban",
+    "url": "https://www.youtube.com/watch?v=A2DywdeObQ4",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júliusban.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júliusban.hu.vtt",
+    "upload_date": "2024-07-04",
+    "raw_date": "20240704",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Utazzunk a Balatonra! Let's go to Lake",
     "url": "https://www.youtube.com/watch?v=wnBSgktOJgI",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Utazzunk a Balatonra! Let's go to Lake.m4a",
