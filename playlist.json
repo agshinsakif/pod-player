@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A magyarok és a nyelvtanulás(？)",
+    "url": "https://www.youtube.com/watch?v=rlAr_0B1aSw",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a nyelvtanulás(？).m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a nyelvtanulás(？).hu.vtt",
+    "upload_date": "2024-04-15",
+    "raw_date": "20240415",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Nyelvtanulás Magyarországon",
     "url": "https://www.youtube.com/watch?v=fqQGteP5dWY",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtanulás Magyarországon.m4a",
