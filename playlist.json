@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Milyenek a magyarok？",
+    "url": "https://www.youtube.com/watch?v=CP2BzG4DCuY",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Milyenek a magyarok？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Milyenek a magyarok？.hu.vtt",
+    "upload_date": "2024-12-02",
+    "raw_date": "20241202",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Read about families in Easy Hungarian Magazine",
     "url": "https://www.youtube.com/watch?v=qBPu-zrJRD0",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Read about families in Easy Hungarian Magazine.m4a",
