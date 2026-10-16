@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Hogyan tanulsz magyarul？",
+    "url": "https://www.youtube.com/watch?v=Qbsmzd7xYM4",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanulsz magyarul？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanulsz magyarul？.hu.vtt",
+    "upload_date": "2024-09-26",
+    "raw_date": "20240926",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "What is Hungarian like？",
     "url": "https://www.youtube.com/watch?v=uJSNH68x1zo",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/What is Hungarian like？.m4a",
