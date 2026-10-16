@@ -1,22 +1,22 @@
 [
   {
     "show_id": "000001",
+    "title": "Magyarország nyáron és ősszel",
+    "url": "https://www.youtube.com/watch?v=ZZrdHJXTq48",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
+    "upload_date": "2026-09-22",
+    "raw_date": "20260922",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "How to learn Hungarian on your own",
     "url": "https://www.youtube.com/watch?v=ZT7htzws8U8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.m4a",
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.hu.vtt",
     "upload_date": "2026-09-23",
     "raw_date": "20260923",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Magyarország nyáron és ősszel",
-    "url": "https://www.youtube.com/watch?v=zqyOorKgA8M",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
-    "upload_date": "2026-10-05",
-    "raw_date": "20261005",
     "format": "M4A"
   },
   {
