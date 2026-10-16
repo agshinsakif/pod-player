@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Magyar városok, szóló utazás, nyár",
+    "url": "https://www.youtube.com/watch?v=KYv5lZUo2r8",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar városok, szóló utazás, nyár.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar városok, szóló utazás, nyár.hu.vtt",
+    "upload_date": "2025-07-01",
+    "raw_date": "20250701",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Romantikus magyar városok",
     "url": "https://www.youtube.com/watch?v=8c0VksGBbso",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Romantikus magyar városok.m4a",
