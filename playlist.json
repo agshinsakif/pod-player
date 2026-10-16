@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Ez most környezetbarát vagy nem？",
+    "url": "https://www.youtube.com/watch?v=DuRPuqSf3QE",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Ez most környezetbarát vagy nem？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Ez most környezetbarát vagy nem？.en.vtt",
+    "upload_date": "2025-10-29",
+    "raw_date": "20251029",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Könyvekről, olvasásról magyarul",
     "url": "https://www.youtube.com/watch?v=8X2J3PrHzaE",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Könyvekről, olvasásról magyarul.m4a",
