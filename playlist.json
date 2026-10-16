@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Mit hoz a jövő？",
+    "url": "https://www.youtube.com/watch?v=PiwJ5IOqMCs",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Mit hoz a jövő？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Mit hoz a jövő？.hu.vtt",
+    "upload_date": "2023-10-25",
+    "raw_date": "20231025",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a filmekről!",
     "url": "https://www.youtube.com/watch?v=FVq8nBFiY6s",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a filmekről!.m4a",
