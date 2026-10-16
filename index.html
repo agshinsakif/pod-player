@@ -925,12 +925,14 @@
       return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
-    // --- History Navigation Management ---
+        // --- History Navigation Management ---
+    let isRoutingTransition = false;
+
     function navigate(screen, extraId = null) {
       let targetHash = "#/";
-      if (screen === 'show' && (extraId || currentShow)) {
-        const sId = extraId || currentShow.show_id || currentShow.folder;
-        targetHash = `#/show/${sId}`;
+      if (screen === 'show') {
+        const sId = extraId || (currentShow ? (currentShow.show_id || currentShow.folder) : null);
+        if (sId) targetHash = `#/show/${sId}`;
       } else if (screen === 'player' && currentEpisode) {
         const sId = currentShow ? (currentShow.show_id || currentShow.folder) : "";
         targetHash = `#/player/${sId}/${encodeURIComponent(currentEpisode.title)}`;
@@ -938,44 +940,57 @@
 
       if (window.location.hash !== targetHash) {
         history.pushState(null, "", targetHash);
+        applyRoute();
       }
-      applyRoute();
     }
 
     async function applyRoute() {
-      const hash = window.location.hash || "#/";
-      const parts = hash.slice(1).split("/").filter(Boolean);
+      if (isRoutingTransition) return;
+      isRoutingTransition = true;
 
-      if (parts.length === 0 || parts[0] === "") {
-        switchScreen('home');
-      } else if (parts[0] === "show" && parts[1]) {
-        const showId = parts[1];
-        const s = showsData[showId] || Object.values(showsData).find(x => (x.show_id === showId || x.folder === showId));
-        if (s) {
-          if (!currentShow || (currentShow.show_id || currentShow.folder) !== showId) {
-            await openShow(s, false);
-          } else {
-            switchScreen('show');
-          }
-        } else {
+      try {
+        // Wait until showsData is populated
+        if (!showsData || Object.keys(showsData).length === 0) {
+          return;
+        }
+
+        const hash = window.location.hash || "#/";
+        const parts = hash.slice(1).split("/").filter(Boolean);
+        console.log("[Router] Applying route:", hash, parts);
+
+        if (parts.length === 0 || parts[0] === "") {
           switchScreen('home');
-        }
-      } else if (parts[0] === "player") {
-        const showId = parts[1];
-        const epTitle = decodeURIComponent(parts[2] || "");
-        if (showId && (!currentShow || (currentShow.show_id || currentShow.folder) !== showId)) {
+        } else if (parts[0] === 'show' && parts[1]) {
+          const showId = parts[1];
           const s = showsData[showId] || Object.values(showsData).find(x => (x.show_id === showId || x.folder === showId));
-          if (s) await openShow(s, false);
+          if (s) {
+            await openShow(s, true);
+          } else {
+            console.warn("[Router] Show not found:", showId);
+            switchScreen('home');
+          }
+        } else if (parts[0] === 'player') {
+          const showId = parts[1];
+          const epTitle = decodeURIComponent(parts[2] || "");
+          if (showId && (!currentShow || (currentShow.show_id || currentShow.folder) !== showId)) {
+            const s = showsData[showId] || Object.values(showsData).find(x => (x.show_id === showId || x.folder === showId));
+            if (s) await openShow(s, false);
+          }
+          if (epTitle && (!currentEpisode || currentEpisode.title !== epTitle)) {
+            const found = rawEpisodes.find(e => e.title === epTitle);
+            if (found) await playEpisode(found, found.originalIndex, false);
+          }
+          switchScreen('player');
         }
-        if (epTitle && (!currentEpisode || currentEpisode.title !== epTitle)) {
-          const found = rawEpisodes.find(e => e.title === epTitle);
-          if (found) await playEpisode(found, found.originalIndex, false);
-        }
-        switchScreen('player');
+      } catch (err) {
+        console.error("[Router Error]", err);
+      } finally {
+        isRoutingTransition = false;
       }
     }
 
     window.addEventListener("popstate", applyRoute);
+    window.addEventListener("hashchange", applyRoute);
 
     function switchScreen(screen) {
       homeScreen.classList.remove('active');
