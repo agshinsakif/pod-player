@@ -1033,7 +1033,7 @@ function getLangFlag(show) {
         const fetchedList = allEpisodes.filter(ep => ep.show_id === showId || ep.folder === showId);
 
         // Sort oldest to newest so index 1 is original episode 1
-        fetchedList.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+        fetchedList.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
 
         rawEpisodes = fetchedList.map((ep, idx) => ({
           ...ep,
@@ -1059,13 +1059,13 @@ function getLangFlag(show) {
       }
 
       if (mode === 'date-desc') {
-        list.sort((a, b) => (b.raw_date || '').localeCompare(a.raw_date || ''));
+        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       } else if (mode === 'date-asc') {
-        list.sort((a, b) => (a.raw_date || '').localeCompare(b.raw_date || ''));
+        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       } else if (mode === 'alpha-asc') {
-        list.sort((a, b) => a.title.localeCompare(b.title));
+        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       } else if (mode === 'alpha-desc') {
-        list.sort((a, b) => b.title.localeCompare(a.title));
+        list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       }
 
       episodesListView.innerHTML = '';
