@@ -854,12 +854,12 @@
 
   <script>
 
-// --- URL Hash Router ---
+// --- URL Hash Router with Browser History ---
 let isRouting = false;
 
 function setRoute(hash) {
   if (window.location.hash !== hash) {
-    window.location.hash = hash;
+    history.pushState(null, "", hash);
   }
 }
 
@@ -910,6 +910,7 @@ function handleRouting() {
   }
 }
 
+window.addEventListener("popstate", handleRouting);
 window.addEventListener("hashchange", handleRouting);
 
 
