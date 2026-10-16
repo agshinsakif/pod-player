@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass a kutyákról és a macskákról!",
+    "url": "https://www.youtube.com/watch?v=m2ySuOk4DnM",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.hu.vtt",
+    "upload_date": "2026-05-04",
+    "raw_date": "20260504",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Hogyan tanuljunk nyelvtant",
     "url": "https://www.youtube.com/watch?v=1BEaWnxeAwE",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant.m4a",
