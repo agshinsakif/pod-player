@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Hallgatás vs. nyelvtani táblázatok",
+    "url": "https://www.youtube.com/watch?v=ME_P6EBISL0",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hallgatás vs. nyelvtani táblázatok.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hallgatás vs. nyelvtani táblázatok.hu.vtt",
+    "upload_date": "2026-03-03",
+    "raw_date": "20260303",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Csak 5 perc olvasás naponta",
     "url": "https://www.youtube.com/watch?v=_N3JK-_WDEk",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Csak 5 perc olvasás naponta.m4a",
