@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Magyar gyerekjátékok régen",
+    "url": "https://www.youtube.com/watch?v=H1YJ8GsecXY",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar gyerekjátékok régen.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar gyerekjátékok régen.en.vtt",
+    "upload_date": "2025-04-24",
+    "raw_date": "20250424",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Kultúra és művészet",
     "url": "https://www.youtube.com/watch?v=PbbMWP7WqIY",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kultúra és művészet.m4a",
