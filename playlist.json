@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Easy Hungarian augusztusban",
+    "url": "https://www.youtube.com/watch?v=F22VoozRYpg",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian augusztusban.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian augusztusban.hu.vtt",
+    "upload_date": "2024-08-01",
+    "raw_date": "20240801",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Imádom az olimpiát!",
     "url": "https://www.youtube.com/watch?v=yutS5M0S_Aw",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Imádom az olimpiát!.m4a",
