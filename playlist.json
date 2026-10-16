@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Miért tanulnak az emberek magyarul？",
+    "url": "https://www.youtube.com/watch?v=CgiwwPJT9Bg",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulnak az emberek magyarul？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulnak az emberek magyarul？.en.vtt",
+    "upload_date": "2024-10-22",
+    "raw_date": "20241022",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Máltán is magyarul beszélnek ：)",
     "url": "https://www.youtube.com/watch?v=q2CUTJ0Hmo8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Máltán is magyarul beszélnek ：).m4a",
