@@ -746,8 +746,8 @@
             Hide Done
           </label>
           <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
-            <option value="date-asc" selected>Date ↑</option>
-            <option value="date-desc">Date ↓</option>
+            <option value="date-desc" selected>Date ↓ (Newest)</option>
+            <option value="date-asc">Date ↑ (Oldest)</option>
             <option value="alpha-asc">Title A→Z ↑</option>
             <option value="alpha-desc">Title Z→A ↓</option>
           </select>
@@ -1114,8 +1114,18 @@
         list = list.filter(ep => ep.title.toLowerCase().includes(query));
       }
 
-      if (mode === 'date-desc' || mode === 'date-asc' || mode === 'alpha-asc' || mode === 'alpha-desc') {
+      if (mode === 'date-desc') {
+        // Newest to Oldest (default)
         list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
+      } else if (mode === 'date-asc') {
+        // Oldest to Newest
+        list.sort((a, b) => (a.raw_date || a.upload_date || "").localeCompare(b.raw_date || b.upload_date || ""));
+      } else if (mode === 'alpha-asc') {
+        // Title A -> Z
+        list.sort((a, b) => (a.title || "").localeCompare(b.title || "", undefined, { sensitivity: 'base' }));
+      } else if (mode === 'alpha-desc') {
+        // Title Z -> A
+        list.sort((a, b) => (b.title || "").localeCompare(a.title || "", undefined, { sensitivity: 'base' }));
       }
 
       episodesListView.innerHTML = '';
