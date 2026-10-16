@@ -1526,5 +1526,15 @@
     "upload_date": "2024-03-24",
     "raw_date": "20240324",
     "format": "M4A"
+  },
+  {
+    "show_id": "000002",
+    "title": "07 - Milyen tanuló voltam?┃Iskola, gimnázium, egyetem Magyarországon. (A2-B1)",
+    "url": "local_000014",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/07 - Milyen tanuló voltam?┃Iskola, gimnázium, egyetem Magyarországon. (A2-B1).m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/07 - Milyen tanuló voltam?┃Iskola, gimnázium, egyetem Magyarországon. (A2-B1).vtt",
+    "upload_date": "2021-04-10",
+    "raw_date": "20210410",
+    "format": "M4A"
   }
 ]
