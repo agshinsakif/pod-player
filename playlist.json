@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Magyar filmek és karakterek",
+    "url": "https://www.youtube.com/watch?v=eif46fP66fQ",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar filmek és karakterek.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar filmek és karakterek.hu.vtt",
+    "upload_date": "2024-07-25",
+    "raw_date": "20240725",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Easy Hungarian augusztusban",
     "url": "https://www.youtube.com/watch?v=F22VoozRYpg",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian augusztusban.m4a",
