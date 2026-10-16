@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Kultúra és művészet",
+    "url": "https://www.youtube.com/watch?v=PbbMWP7WqIY",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kultúra és művészet.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kultúra és művészet.en.vtt",
+    "upload_date": "2025-05-03",
+    "raw_date": "20250503",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Mindennapi művészet",
     "url": "https://www.youtube.com/watch?v=Dw7v3ChfKCA",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Mindennapi művészet.m4a",
