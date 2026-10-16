@@ -10,5 +10,11 @@
     "name": "Hungarian with Sziszi",
     "lang": "hu",
     "flag": "🇭🇺"
+  },
+  "000003": {
+    "show_id": "000003",
+    "name": "innerFrench",
+    "lang": "fr",
+    "flag": "🇫🇷"
   }
 }
