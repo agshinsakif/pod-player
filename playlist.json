@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Elvis él!(？)",
+    "url": "https://www.youtube.com/watch?v=ZDhzz8XAqPU",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elvis él!(？).m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elvis él!(？).hu.vtt",
+    "upload_date": "2025-06-26",
+    "raw_date": "20250626",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Magyar városok, szóló utazás, nyár",
     "url": "https://www.youtube.com/watch?v=KYv5lZUo2r8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar városok, szóló utazás, nyár.m4a",
