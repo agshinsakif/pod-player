@@ -1,29 +1,11 @@
 [
   {
     "show_id": "000001",
-    "title": "A magyar a legjobb nyelv a világon!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.hu.vtt",
-    "upload_date": "2026-06-19",
-    "raw_date": "20260619",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "A magyar a legnehezebb nyelv a világon! Vagy nem？",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legnehezebb nyelv a világon! Vagy nem？.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legnehezebb nyelv a világon! Vagy nem？.hu.vtt",
-    "upload_date": "2026-03-26",
-    "raw_date": "20260326",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "A magyarok és a szieszta",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
-    "upload_date": "2026-08-27",
-    "raw_date": "20260827",
+    "title": "How to learn Hungarian on your own",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.hu.vtt",
+    "upload_date": "2019-03-05",
+    "raw_date": "20190305",
     "format": "M4A"
   },
   {
@@ -37,11 +19,12 @@
   },
   {
     "show_id": "000001",
-    "title": "Balkezesként Magyarországon",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.hu.vtt",
-    "upload_date": "2026-06-28",
-    "raw_date": "20260628",
+    "title": "How to learn Hungarian every day - #learnhungarian with a #hungariancourse at #easyhungarian",
+    "url": "https://www.youtube.com/watch?v=XimfsGFpX8U",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian every day - #learnhungarian with a #hungariancourse at #easyhungarian.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian every day - #learnhungarian with a #hungariancourse at #easyhungarian.hu.vtt",
+    "upload_date": "2024-12-19",
+    "raw_date": "20241219",
     "format": "M4A"
   },
   {
@@ -55,92 +38,11 @@
   },
   {
     "show_id": "000001",
-    "title": "Hogyan tanuljunk nyelvtant #magyarul？",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant #magyarul？.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant #magyarul？.hu.vtt",
-    "upload_date": "2026-05-08",
-    "raw_date": "20260508",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to Learn Hungarian Vocabulary in Context",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.hu.vtt",
-    "upload_date": "2026-09-08",
-    "raw_date": "20260908",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to get back to Hungarian after summer",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.hu.vtt",
-    "upload_date": "2026-08-29",
-    "raw_date": "20260829",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to learn Hungarian on your own",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.hu.vtt",
-    "upload_date": "2019-03-05",
-    "raw_date": "20190305",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to say 'punchline' in Hungarian",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.hu.vtt",
-    "upload_date": "2026-04-27",
-    "raw_date": "20260427",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Kutyák Magyarországon a '80",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80.hu.vtt",
-    "upload_date": "2026-05-29",
-    "raw_date": "20260529",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Magyarország nyáron és ősszel",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
-    "upload_date": "2026-09-22",
-    "raw_date": "20260922",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass a kutyákról és a macskákról!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.hu.vtt",
-    "upload_date": "2026-05-04",
-    "raw_date": "20260504",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass a könnyű és nehéz nyelvekről!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.hu.vtt",
-    "upload_date": "2026-10-05",
-    "raw_date": "20261005",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass a pihenésről és az alvásról!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.hu.vtt",
-    "upload_date": "2026-08-05",
-    "raw_date": "20260805",
+    "title": "A magyar a legnehezebb nyelv a világon! Vagy nem？",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legnehezebb nyelv a világon! Vagy nem？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legnehezebb nyelv a világon! Vagy nem？.hu.vtt",
+    "upload_date": "2026-03-26",
+    "raw_date": "20260326",
     "format": "M4A"
   },
   {
@@ -154,20 +56,47 @@
   },
   {
     "show_id": "000001",
-    "title": "Olvass az utazásról!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.hu.vtt",
-    "upload_date": "2026-07-05",
-    "raw_date": "20260705",
+    "title": "How to say 'punchline' in Hungarian",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.hu.vtt",
+    "upload_date": "2026-04-27",
+    "raw_date": "20260427",
     "format": "M4A"
   },
   {
     "show_id": "000001",
-    "title": "Olvass az őszi újrakezdésről!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.hu.vtt",
-    "upload_date": "2026-09-01",
-    "raw_date": "20260901",
+    "title": "Régi magyar viccekről, humorról és életfilozófiáról",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Régi magyar viccekről, humorról és életfilozófiáról.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Régi magyar viccekről, humorról és életfilozófiáról.hu.vtt",
+    "upload_date": "2026-04-29",
+    "raw_date": "20260429",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass a kutyákról és a macskákról!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.hu.vtt",
+    "upload_date": "2026-05-04",
+    "raw_date": "20260504",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Hogyan tanuljunk nyelvtant #magyarul？",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant #magyarul？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant #magyarul？.hu.vtt",
+    "upload_date": "2026-05-08",
+    "raw_date": "20260508",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Kutyák Magyarországon a '80",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80.hu.vtt",
+    "upload_date": "2026-05-29",
+    "raw_date": "20260529",
     "format": "M4A"
   },
   {
@@ -181,11 +110,92 @@
   },
   {
     "show_id": "000001",
-    "title": "Régi magyar viccekről, humorról és életfilozófiáról",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Régi magyar viccekről, humorról és életfilozófiáról.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Régi magyar viccekről, humorról és életfilozófiáról.hu.vtt",
-    "upload_date": "2026-04-29",
-    "raw_date": "20260429",
+    "title": "A magyar a legjobb nyelv a világon!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.hu.vtt",
+    "upload_date": "2026-06-19",
+    "raw_date": "20260619",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Balkezesként Magyarországon",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.hu.vtt",
+    "upload_date": "2026-06-28",
+    "raw_date": "20260628",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass az utazásról!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.hu.vtt",
+    "upload_date": "2026-07-05",
+    "raw_date": "20260705",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass a pihenésről és az alvásról!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.hu.vtt",
+    "upload_date": "2026-08-05",
+    "raw_date": "20260805",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "A magyarok és a szieszta",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
+    "upload_date": "2026-08-27",
+    "raw_date": "20260827",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "How to get back to Hungarian after summer",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.hu.vtt",
+    "upload_date": "2026-08-29",
+    "raw_date": "20260829",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass az őszi újrakezdésről!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.hu.vtt",
+    "upload_date": "2026-09-01",
+    "raw_date": "20260901",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "How to Learn Hungarian Vocabulary in Context",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.hu.vtt",
+    "upload_date": "2026-09-08",
+    "raw_date": "20260908",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Magyarország nyáron és ősszel",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
+    "upload_date": "2026-09-22",
+    "raw_date": "20260922",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
+    "title": "Olvass a könnyű és nehéz nyelvekről!",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.hu.vtt",
+    "upload_date": "2026-10-05",
+    "raw_date": "20261005",
     "format": "M4A"
   },
   {
