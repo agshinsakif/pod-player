@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Hússal vagy hús nélkül？",
+    "url": "https://www.youtube.com/watch?v=CChDb4AbgT8",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hússal vagy hús nélkül？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hússal vagy hús nélkül？.hu.vtt",
+    "upload_date": "2025-08-07",
+    "raw_date": "20250807",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Furcsa magyar ételek",
     "url": "https://www.youtube.com/watch?v=lzObSXBmvhU",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa magyar ételek.m4a",
