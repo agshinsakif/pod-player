@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Hogyan tanuljunk nyelveket？",
+    "url": "https://www.youtube.com/watch?v=VqrykJlz3BQ",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelveket？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelveket？.en.vtt",
+    "upload_date": "2025-01-15",
+    "raw_date": "20250115",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "5 fontos szó a nyelvtanulásról",
     "url": "https://www.youtube.com/watch?v=iW3JkBs-aJM",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/5 fontos szó a nyelvtanulásról.m4a",
