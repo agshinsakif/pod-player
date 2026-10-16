@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Nyelvtani jegyzetek",
+    "url": "https://www.youtube.com/watch?v=azfwbOD6HU4",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.m4a",
+    "vtt": null,
+    "upload_date": "2023-07-07",
+    "raw_date": "20230707",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Akarsz beszélgetni a nyárról？",
     "url": "https://www.youtube.com/watch?v=SAGKm5Zu_a8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Akarsz beszélgetni a nyárról？.m4a",
@@ -67,16 +77,6 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a filmekről!.hu.vtt",
     "upload_date": "2023-11-05",
     "raw_date": "20231105",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Nyelvtani jegyzetek",
-    "url": "https://www.youtube.com/watch?v=mOLKSFTG5ds",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.hu.vtt",
-    "upload_date": "2023-11-30",
-    "raw_date": "20231130",
     "format": "M4A"
   },
   {
