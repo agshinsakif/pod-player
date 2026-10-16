@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "De miért szeretek biciklizni？",
+    "url": "https://www.youtube.com/watch?v=l0XxlfNXt1U",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/De miért szeretek biciklizni？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/De miért szeretek biciklizni？.hu.vtt",
+    "upload_date": "2024-06-18",
+    "raw_date": "20240618",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Okostelefon és teleportálás",
     "url": "https://www.youtube.com/watch?v=eHefoQusfLA",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Okostelefon és teleportálás.m4a",
