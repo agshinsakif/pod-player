@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A magyarok és a szieszta",
+    "url": "https://www.youtube.com/watch?v=3oSpADJC7xo",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
+    "upload_date": "2026-08-27",
+    "raw_date": "20260827",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "How to get back to Hungarian after summer",
     "url": "https://www.youtube.com/watch?v=WzUKvs-OP8I",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.m4a",
