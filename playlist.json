@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A magyar nyelv és a Nobel-díjak",
+    "url": "https://www.youtube.com/watch?v=1UBXyT7PNnk",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar nyelv és a Nobel-díjak.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar nyelv és a Nobel-díjak.en.vtt",
+    "upload_date": "2025-02-25",
+    "raw_date": "20250225",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a tavaszról és a kertről!",
     "url": "https://www.youtube.com/watch?v=hoS5qNzFJWM",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a tavaszról és a kertről!.m4a",
