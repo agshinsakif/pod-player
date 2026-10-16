@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass és beszélj!",
+    "url": "https://www.youtube.com/watch?v=H7pLJr67JqI",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass és beszélj!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass és beszélj!.en.vtt",
+    "upload_date": "2025-02-01",
+    "raw_date": "20250201",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass híres és sikeres magyarokról!",
     "url": "https://www.youtube.com/watch?v=rtnhsoItxuI",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass híres és sikeres magyarokról!.m4a",
