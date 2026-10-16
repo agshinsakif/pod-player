@@ -854,64 +854,6 @@
 
   <script>
 
-// --- URL Hash Router ---
-let isRouting = false;
-
-function setRoute(hash) {
-  if (isRouting) return;
-  if (window.location.hash !== hash) {
-    history.pushState(null, "", hash);
-  }
-}
-
-function handleRouting() {
-  if (typeof shows === "undefined" || !shows || (Array.isArray(shows) ? shows.length === 0 : Object.keys(shows).length === 0)) {
-    return;
-  }
-
-  const rawHash = window.location.hash.slice(1) || "/";
-  const parts = rawHash.split("/").filter(Boolean);
-  isRouting = true;
-
-  try {
-    if (parts.length === 0 || parts[0] === "") {
-      if (!window.location.hash || window.location.hash === "#/" || window.location.hash === "#") { switchScreen(homeScreen); }
-    } else if (parts[0] === "show" && parts[1]) {
-      const showId = parts[1];
-      const targetShow = Array.isArray(shows) ? shows.find(s => (s.show_id || s.id) === showId) : shows[showId];
-      if (targetShow) {
-        openShow(targetShow);
-      } else {
-        if (!window.location.hash || window.location.hash === "#/" || window.location.hash === "#") { switchScreen(homeScreen); }
-      }
-    } else if (parts[0] === "player" && parts[1]) {
-      const showId = parts[1];
-      const epTitle = decodeURIComponent(parts.slice(2).join("/") || "");
-      const targetShow = Array.isArray(shows) ? shows.find(s => (s.show_id || s.id) === showId) : shows[showId];
-      if (targetShow && (typeof currentShow === "undefined" || !currentShow || (currentShow.show_id || currentShow.id) !== showId)) {
-        openShow(targetShow);
-      }
-      const epList = typeof playlist !== "undefined" && playlist ? playlist : [];
-      const ep = epList.find(e => e.show_id === showId && (!epTitle || e.title === epTitle));
-      if (ep) {
-        playEpisode(ep, 0, false);
-      }
-      switchScreen(playerScreen);
-    }
-  } catch (err) {
-    console.error("Routing error:", err);
-  } finally {
-    isRouting = false;
-  }
-}
-
-window.addEventListener("popstate", () => setTimeout(handleRouting, 0));
-window.addEventListener("hashchange", () => setTimeout(handleRouting, 0));
-
-
-
-
-
 function getLangFlag(show) {
   if (show && show.flag && show.flag !== "🌐") return show.flag;
   const lang = ((show && show.lang) || "").toLowerCase().slice(0, 2);
@@ -999,13 +941,6 @@ function getLangFlag(show) {
     }
 
     function switchScreen(screen) {
-  if (!isRouting) {
-    if (typeof homeScreen !== 'undefined' && screen === homeScreen) setRoute('#/');
-  }
-  if (!isRouting) {
-    if (typeof homeScreen !== 'undefined' && screen === homeScreen) setRoute('#/');
-    else if (typeof playerScreen !== 'undefined' && screen === playerScreen && typeof currentEpisode !== 'undefined' && currentEpisode) setRoute('#/player/' + currentEpisode.show_id + '/' + encodeURIComponent(currentEpisode.title));
-  }
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
       playerScreen.classList.remove('active');
@@ -1043,7 +978,6 @@ function getLangFlag(show) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         showsData = await res.json();
         renderShowsGrid(showsData);
-    handleRouting();
         restoreLastState();
       } catch (err) {
         showsGrid.innerHTML = `<div class="empty-state">Could not load shows.json (${err.message})</div>`;
@@ -1080,7 +1014,6 @@ function getLangFlag(show) {
     }
 
     async function openShow(show) {
-  if (!isRouting && show) { setRoute('#/show/' + (show.show_id || show.id)); }
       currentShow = show;
       ssTitle.innerText = show.name;
       ssFlag.innerText = show.flag || '';
@@ -1174,7 +1107,6 @@ function getLangFlag(show) {
     }
 
     async function playEpisode(ep, displayIndex, startPaused = false) {
-      if (!isRouting && ep) { setRoute('#/player/' + ep.show_id + '/' + encodeURIComponent(ep.title)); }
       currentEpisode = ep;
       currentEpisode.displayIndex = displayIndex;
       localStorage.setItem('last_played_state', JSON.stringify({
@@ -1556,7 +1488,6 @@ function getLangFlag(show) {
 
     renderSpeedMenu();
     loadShows();
-  setTimeout(handleRouting, 120);
   </script>
 </body>
 </html>
