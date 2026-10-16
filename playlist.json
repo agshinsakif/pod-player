@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Vörösbor vagy fehérbor？",
+    "url": "https://www.youtube.com/watch?v=Tcd-Ey0Ur08",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Vörösbor vagy fehérbor？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Vörösbor vagy fehérbor？.hu.vtt",
+    "upload_date": "2024-10-10",
+    "raw_date": "20241010",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Hány nyelvet beszél egy poliglott？",
     "url": "https://www.youtube.com/watch?v=E45ZtR2dYtM",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hány nyelvet beszél egy poliglott？.m4a",
