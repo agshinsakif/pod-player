@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Easy Hungarian júniusban",
+    "url": "https://www.youtube.com/watch?v=QPXi4-ee9ZE",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júniusban.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júniusban.hu.vtt",
+    "upload_date": "2024-06-03",
+    "raw_date": "20240603",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Miért tanulsz magyarul？",
     "url": "https://www.youtube.com/watch?v=eZxgSsS6Fsc",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulsz magyarul？.m4a",
