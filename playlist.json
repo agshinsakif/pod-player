@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "A tökéletes nyaralás",
+    "url": "https://www.youtube.com/watch?v=48dvP6zjGMI",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A tökéletes nyaralás.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A tökéletes nyaralás.hu.vtt",
+    "upload_date": "2026-07-24",
+    "raw_date": "20260724",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a pihenésről és az alvásról!",
     "url": "https://www.youtube.com/watch?v=5lzZGvlwZNU",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.m4a",
