@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass a nyárról!",
+    "url": "https://www.youtube.com/watch?v=j471P16w4No",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyárról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyárról!.en.vtt",
+    "upload_date": "2023-07-04",
+    "raw_date": "20230704",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Nyelvtani jegyzetek",
     "url": "https://www.youtube.com/watch?v=azfwbOD6HU4",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtani jegyzetek.m4a",
