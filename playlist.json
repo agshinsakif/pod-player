@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Olvass az iskoláról és a tanulásról!",
+    "url": "https://www.youtube.com/watch?v=jvXEnEcx46Y",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az iskoláról és a tanulásról!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az iskoláról és a tanulásról!.hu.vtt",
+    "upload_date": "2023-09-04",
+    "raw_date": "20230904",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Nehéz nyelv a magyar？",
     "url": "https://www.youtube.com/watch?v=Haw012mpnGw",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nehéz nyelv a magyar？.m4a",
