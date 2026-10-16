@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Nehéz nyelv a magyar？",
+    "url": "https://www.youtube.com/watch?v=Haw012mpnGw",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nehéz nyelv a magyar？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nehéz nyelv a magyar？.hu.vtt",
+    "upload_date": "2023-09-20",
+    "raw_date": "20230920",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass a jövőről!",
     "url": "https://www.youtube.com/watch?v=kZKt273HVT8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a jövőről!.m4a",
