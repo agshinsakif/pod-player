@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Elektromos autók és a 15 perces város",
+    "url": "https://www.youtube.com/watch?v=Qjr7HMwxzpY",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elektromos autók és a 15 perces város.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elektromos autók és a 15 perces város.en.vtt",
+    "upload_date": "2024-11-09",
+    "raw_date": "20241109",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Milyenek a magyarok？",
     "url": "https://www.youtube.com/watch?v=CP2BzG4DCuY",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Milyenek a magyarok？.m4a",
