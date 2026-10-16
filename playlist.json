@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Furcsa magyar ételek",
+    "url": "https://www.youtube.com/watch?v=lzObSXBmvhU",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa magyar ételek.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa magyar ételek.hu.vtt",
+    "upload_date": "2025-08-28",
+    "raw_date": "20250828",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "A mesterséges intelligenciáról",
     "url": "https://www.youtube.com/watch?v=xXQTNR20pnE",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A mesterséges intelligenciáról.m4a",
