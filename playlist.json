@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Imádom az olimpiát!",
+    "url": "https://www.youtube.com/watch?v=yutS5M0S_Aw",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Imádom az olimpiát!.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Imádom az olimpiát!.hu.vtt",
+    "upload_date": "2024-08-18",
+    "raw_date": "20240818",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Fesztiválok, koncertek, konferenciák",
     "url": "https://www.youtube.com/watch?v=EqGRMvIoaK8",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Fesztiválok, koncertek, konferenciák.m4a",
