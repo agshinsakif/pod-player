@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Miért tanulsz magyarul？",
+    "url": "https://www.youtube.com/watch?v=eZxgSsS6Fsc",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulsz magyarul？.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulsz magyarul？.hu.vtt",
+    "upload_date": "2024-06-06",
+    "raw_date": "20240606",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Hungarian verb 'talál'",
     "url": "https://www.youtube.com/watch?v=KSRNeSZF8EA",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hungarian verb 'talál'.m4a",
