@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Hogyan tanuljunk nyelvtant",
+    "url": "https://www.youtube.com/watch?v=1BEaWnxeAwE",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant.hu.vtt",
+    "upload_date": "2026-05-08",
+    "raw_date": "20260508",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Kutyák Magyarországon a '80-as években",
     "url": "https://www.youtube.com/watch?v=QprtBMbu8Uk",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80-as években.m4a",
