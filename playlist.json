@@ -1,83 +1,11 @@
-
+[
   {
-    "show_id": "000001",
-    "title": "A tökéletes nyaralás",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A tökéletes nyaralás.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A tökéletes nyaralás.hu.vtt",
-    "upload_date": "2026-07-24",
-    "raw_date": "20260724",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass a pihenésről és az alvásról!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.hu.vtt",
-    "upload_date": "2026-08-05",
-    "raw_date": "20260805",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "A magyarok és a szieszta",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
-    "upload_date": "2026-08-27",
-    "raw_date": "20260827",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to get back to Hungarian after summer",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.hu.vtt",
-    "upload_date": "2026-08-29",
-    "raw_date": "20260829",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass az őszi újrakezdésről!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.hu.vtt",
-    "upload_date": "2026-09-01",
-    "raw_date": "20260901",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to Learn Hungarian Vocabulary in Context",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.hu.vtt",
-    "upload_date": "2026-09-08",
-    "raw_date": "20260908",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Magyarország nyáron és ősszel",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
-    "upload_date": "2026-09-22",
-    "raw_date": "20260922",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "How to learn Hungarian on your own",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.hu.vtt",
-    "upload_date": "2026-09-23",
-    "raw_date": "20260923",
-    "format": "M4A"
-  },
-  {
-    "show_id": "000001",
-    "title": "Olvass a könnyű és nehéz nyelvekről!",
-    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.m4a",
-    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.hu.vtt",
-    "upload_date": "2026-10-05",
-    "raw_date": "20261005",
+    "show_id": "000002",
+    "title": "Ep 113 🙊 Your Accent Isn’t the Problem",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/Ep 113 🙊 Your Accent Isn’t the Problem.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/Ep 113 🙊 Your Accent Isn’t the Problem.hu.vtt",
+    "upload_date": "2024-08-15",
+    "raw_date": "20240815",
     "format": "M4A"
   }
 ]
