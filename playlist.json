@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Balkezesként Magyarországon",
+    "url": "https://www.youtube.com/watch?v=GtDCztnNHA0",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.hu.vtt",
+    "upload_date": "2026-06-28",
+    "raw_date": "20260628",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Olvass az utazásról!",
     "url": "https://www.youtube.com/watch?v=Ux1Zvk6j5Xk",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.m4a",
