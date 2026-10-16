@@ -1,6 +1,16 @@
 [
   {
     "show_id": "000001",
+    "title": "Könyvekről, olvasásról magyarul",
+    "url": "https://www.youtube.com/watch?v=8X2J3PrHzaE",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Könyvekről, olvasásról magyarul.m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Könyvekről, olvasásról magyarul.hu.vtt",
+    "upload_date": "2025-11-08",
+    "raw_date": "20251108",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000001",
     "title": "Óz, a nagy varázsló és a kedvenc magyar íróim",
     "url": "https://www.youtube.com/watch?v=ZkC2Vq7dOgM",
     "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Óz, a nagy varázsló és a kedvenc magyar íróim.m4a",
