@@ -22,5 +22,11 @@
     "name": "French Mornings Podcast",
     "lang": "fr",
     "flag": "🇫🇷"
+  },
+  "000005": {
+    "show_id": "000005",
+    "name": "Learn German With Falk",
+    "lang": "de",
+    "flag": "🇩🇪"
   }
 }
