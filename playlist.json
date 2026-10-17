@@ -1726,5 +1726,75 @@
     "upload_date": "2023-01-05",
     "raw_date": "20230105",
     "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 21 Fußball (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=5PJcpiPAvac",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 21 Fußball (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-08",
+    "raw_date": "20230108",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 22 Tee und Kaffee (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=mFXJdCRDx-k",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 22 Tee und Kaffee (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-10",
+    "raw_date": "20230110",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 23 Bücher (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=MHSHXdnj8kc",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 23 Bücher (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-14",
+    "raw_date": "20230114",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 24 Videospiele(A1-B1)",
+    "url": "https://www.youtube.com/watch?v=yrjPrQNYU0U",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 24 Videospiele(A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-16",
+    "raw_date": "20230116",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 25 Haushaltsarbeit (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=afWaa3IaQrU",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 25 Haushaltsarbeit (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-18",
+    "raw_date": "20230118",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 26 Winter in Berlin (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=oubPhJGmj80",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 26 Winter in Berlin (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-23",
+    "raw_date": "20230123",
+    "format": "M4A"
+  },
+  {
+    "show_id": "000005",
+    "title": "Slow German Podcast for Beginners ⧸ Episode 27 die Deutsche Bahn (A1-B1)",
+    "url": "https://www.youtube.com/watch?v=IA1SafZVMP0",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 27 die Deutsche Bahn (A1-B1).m4a",
+    "vtt": null,
+    "upload_date": "2023-01-25",
+    "raw_date": "20230125",
+    "format": "M4A"
   }
 ]
