@@ -1148,7 +1148,6 @@
             <div class="card-title">${ep.title}</div>
             <div class="card-meta">
               ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
-              <span>${ep.format || 'M4A'}</span>
               ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
               ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
               ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
