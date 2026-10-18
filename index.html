@@ -934,7 +934,7 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      padding: 18px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
+      padding:  40vh 20px calc(45vh + env(safe-area-inset-bottom, 20px)) !important;
       margin: 0 auto !important;
       width: 100% !important;
       max-width: 680px !important;
@@ -985,7 +985,7 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      padding: 18px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
+      padding:  40vh 20px calc(45vh + env(safe-area-inset-bottom, 20px)) !important;
       margin: 0 auto !important;
       width: 100% !important;
       max-width: 680px !important;
@@ -1488,8 +1488,6 @@
     function switchScreen(screen) {
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
-
-      const appHeader = document.querySelector('header');
       if (screen === 'player') {
         
         playerScreen.style.transform = '';
@@ -1502,15 +1500,11 @@
         playbackButtonsSection.classList.remove('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
         updatePlayerHeroUI();
+        setTimeout(() => { if (activeCueIndex >= 0) centerActiveCue(document.getElementById(`cue-${activeCueIndex}`)); }, 120);
         return;
       }
-
-      const appHeaderRestore = document.querySelector('header');
-      
       playerScreen.style.transform = '';
       playerScreen.style.transition = '';
-      const appHeaderRestore = document.querySelector('header');
-      
       playerScreen.style.transform = '';
       playerScreen.style.transition = '';
       playerScreen.classList.remove('active');
@@ -1815,6 +1809,22 @@
       }
     }
 
+    function centerActiveCue(el) {
+      if (!el || !transcriptView) return;
+      const tvRect = transcriptView.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const dock = document.getElementById('playbackButtonsSection');
+      const dockHeight = (dock && !dock.classList.contains('mini-mode')) ? dock.offsetHeight : 0;
+      const visibleHeight = tvRect.height - dockHeight;
+      const desiredCenterY = tvRect.top + (visibleHeight / 2);
+      const elCenterY = elRect.top + (elRect.height / 2);
+      const delta = elCenterY - desiredCenterY;
+      transcriptView.scrollTo({
+        top: Math.max(0, transcriptView.scrollTop + delta),
+        behavior: 'smooth'
+      });
+    }
+
     function renderTranscript() {
       transcriptView.innerHTML = '';
       cues.forEach((cue, i) => {
@@ -1891,10 +1901,7 @@
         const current = document.getElementById(`cue-${activeCueIndex}`);
         if (current) {
           current.classList.add('active');
-          if (transcriptView) {
-            const targetTop = current.offsetTop - transcriptView.offsetTop - (transcriptView.clientHeight / 2) + (current.clientHeight / 2);
-            transcriptView.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-          }
+          centerActiveCue(current);
         }
         if (isSentenceTranslateActive) updateSentenceTranslation();
       }
