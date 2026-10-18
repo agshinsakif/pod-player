@@ -95,6 +95,12 @@
       scroll-behavior: smooth;
     }
 
+    #mainContainer {
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.3s ease;
+      will-change: transform, opacity;
+    }
+
     /* Screen Management */
     .screen { display: none; }
     .screen.active { display: block; }
@@ -345,7 +351,6 @@
       border-color: var(--accent);
     }
 
-    /* Scroll to Top Floating Button */
     .btn-scroll-top {
       position: fixed;
       right: 20px;
@@ -367,7 +372,6 @@
 
     .btn-scroll-top:active { transform: scale(0.9); }
 
-    /* Episode Cards */
     .list-view {
       display: flex;
       flex-direction: column;
@@ -438,340 +442,6 @@
     .badge-completed { color: var(--success); background: rgba(16, 185, 129, 0.15); }
     .badge-resume { color: var(--accent); background: rgba(139, 92, 246, 0.15); }
     .badge-audio { color: #eab308; background: rgba(234, 179, 8, 0.12); }
-
-    /* Player Screen */
-    .transcript-view {
-      display: block;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .cue {
-      font-size: 19px;
-      line-height: 1.65;
-      color: rgba(255, 255, 255, 0.92) !important;
-      margin-bottom: 24px;
-      cursor: pointer;
-      user-select: text;
-      -webkit-user-select: text;
-      transition: color 0.15s;
-    }
-
-    .cue.active {
-      color: #ffffff !important;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
-      font-weight: 700;
-    }
-
-    /* Playback Dock */
-    .playback-buttons-section {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--card-bg);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border-top: 1px solid var(--border);
-      padding: 14px 20px calc(18px + env(safe-area-inset-bottom));
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    }
-
-    .pbs-home-title-wrapper {
-      display: none;
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      text-align: center;
-      cursor: pointer;
-      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
-    }
-
-    .pbs-home-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #0c0a14;
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .progress-bar-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .time-label {
-      font-size: 12px;
-      font-variant-numeric: tabular-nums;
-      color: var(--text-muted);
-      min-width: 38px;
-    }
-
-    .slider {
-      flex: 1;
-      accent-color: var(--accent);
-      cursor: pointer;
-      height: 5px;
-      touch-action: none;
-    }
-
-    .controls-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    .btn-dock {
-      background: transparent;
-      border: none;
-      color: var(--text);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .speed-btn-wrapper { position: relative; }
-    .btn-speed {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .speed-popover {
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: -8px;
-      background: rgba(26, 22, 38, 0.96);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 6px 8px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
-      display: none;
-      z-index: 250;
-    }
-
-    .speed-chips { display: flex; gap: 5px; }
-    .speed-chip {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 600;
-      border-radius: 12px;
-      min-width: 34px;
-      height: 28px;
-      padding: 0 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    .speed-chip.selected { background: #f4efff; color: #0c0a14; font-weight: 800; }
-
-    .btn-seek {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .btn-play-pause {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
-      flex-shrink: 0;
-    }
-
-    .btn-show {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .volume-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 82%;
-      max-width: 320px;
-      touch-action: none;
-    }
-
-    .volume-icon { color: var(--text-muted); flex-shrink: 0; }
-    .volume-slider {
-      flex: 1;
-      height: 6px;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    
-    /* Mini mode refined */
-    .playback-buttons-section.mini-mode {
-      flex-direction: row !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      left: 16px !important;
-      right: 16px !important;
-      bottom: calc(16px + env(safe-area-inset-bottom)) !important;
-      min-height: 64px !important;
-      padding: 12px 18px !important;
-      border-radius: 18px !important;
-      background: #1a1528 !important;
-      border: 1px solid rgba(139, 92, 246, 0.45) !important;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(139, 92, 246, 0.18) !important;
-      gap: 14px !important;
-      cursor: pointer !important;
-    }
-
-    .playback-buttons-section.mini-mode .pbs-home-title-wrapper {
-      display: block !important;
-      flex: 1 !important;
-      pointer-events: none;
-    }
-
-    .playback-buttons-section.mini-mode .pbs-home-title {
-      font-size: 15px !important;
-      font-weight: 600 !important;
-      color: #f4efff !important;
-      display: inline-block !important;
-    }
-
-    .playback-buttons-section.mini-mode .btn-translate-dock {
-      display: none !important;
-    }
-
-    .playback-buttons-section.mini-mode .btn-play-pause {
-      width: 44px !important;
-      height: 44px !important;
-      background: var(--accent) !important;
-      color: #ffffff !important;
-      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.45) !important;
-      pointer-events: auto !important;
-    }
-
-    .playback-buttons-section.mini-mode .btn-play-pause svg {
-      width: 20px !important;
-      height: 20px !important;
-    }
-
-    .marquee-active {
-      display: inline-block !important;
-      white-space: nowrap !important;
-      will-change: transform;
-      animation: marquee-scroll 12s linear infinite;
-    }
-
-    @keyframes marquee-scroll {
-      0% { transform: translateX(10%); }
-      100% { transform: translateX(-100%); }
-    }
-
-        .transcript-view {
-      display: block;
-      max-width: 680px;
-      margin: 0 auto;
-      padding-right: 56px;
-    }
-
-    .btn-translate-circle {
-      position: fixed;
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1.5px solid #ffffff;
-      background: #4c1d95;
-      color: #ffffff;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 120;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-      transition: background 0.2s, transform 0.15s, border-color 0.2s;
-    }
-    .btn-translate-circle:active {
-      transform: translateY(-50%) scale(0.92);
-    }
-    .btn-translate-circle.active {
-      background: #a855f7;
-      border-color: #ffffff;
-      box-shadow: 0 0 14px rgba(168, 85, 247, 0.55);
-    }
-    .sentence-highlight {
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 4px;
-      padding: 1px 3px;
-    }
-    .inline-translation-box {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #c4b5fd;
-      margin: 8px 0 16px;
-      padding: 8px 12px;
-      border-left: 2px solid var(--accent);
-      background: rgba(139, 92, 246, 0.08);
-      border-radius: 0 8px 8px 0;
-      user-select: text;
-      -webkit-user-select: text;
-    }
-
-    #popover {
-      position: fixed;
-      top: max(16px, env(safe-area-inset-top));
-      left: 16px;
-      right: 16px;
-      margin: 0 auto;
-      max-width: 560px;
-      background: var(--card-bg);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--accent);
-      padding: 14px 18px;
-      border-radius: 14px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
-      z-index: 300;
-      display: none;
-      user-select: text;
-      -webkit-user-select: text;
-    }
-  
-    
-    /* Main container background depth transition */
-    #mainContainer {
-      position: relative;
-      transition: transform 0.3s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.3s ease;
-      will-change: transform, opacity;
-    }
 
     /* Player Screen iOS Modal Sheet */
     #playerScreen {
@@ -895,12 +565,163 @@
       position: relative !important;
     }
 
-
-    body:has(#showScreen.active) header,
-    body:has(#playerScreen.active) header {
-      display: none !important;
+    .cue {
+      font-size: 19px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.88) !important;
+      margin-bottom: 24px;
+      cursor: pointer;
+      user-select: text;
+      -webkit-user-select: text;
+      transition: color 0.15s;
     }
 
+    .cue.active {
+      color: #ffffff !important;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+    }
+
+    /* Playback Dock */
+    .playback-buttons-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-top: 1px solid var(--border);
+      padding: 14px 20px calc(18px + env(safe-area-inset-bottom));
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+
+    .pbs-home-title-wrapper {
+      display: none;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+    }
+
+    .pbs-home-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f4efff;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .time-label {
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-muted);
+      min-width: 38px;
+    }
+
+    .slider {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+      height: 5px;
+      touch-action: none;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .btn-dock {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .speed-btn-wrapper { position: relative; }
+    .btn-speed {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .speed-popover {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: -8px;
+      background: rgba(26, 22, 38, 0.96);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 6px 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      display: none;
+      z-index: 250;
+    }
+
+    .speed-chips { display: flex; gap: 5px; }
+    .speed-chip {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 12px;
+      min-width: 34px;
+      height: 28px;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .speed-chip.selected { background: #f4efff; color: #0c0a14; font-weight: 800; }
+
+    .btn-seek {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-play-pause {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 6px 22px rgba(139, 92, 246, 0.45);
+      flex-shrink: 0;
+    }
 
     /* Translate button in bottom dock */
     button#btnTranslateDock.btn-dock.btn-translate-dock {
@@ -927,16 +748,141 @@
       box-shadow: 0 0 14px rgba(124, 58, 237, 0.8) !important;
     }
 
-</style>
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 82%;
+      max-width: 320px;
+      touch-action: none;
+    }
+
+    .volume-icon { color: var(--text-muted); flex-shrink: 0; }
+    .volume-slider {
+      flex: 1;
+      height: 6px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Mini mode refined */
+    .playback-buttons-section.mini-mode {
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      left: 16px !important;
+      right: 16px !important;
+      bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+      min-height: 64px !important;
+      padding: 12px 18px !important;
+      border-radius: 18px !important;
+      background: #1a1528 !important;
+      border: 1px solid rgba(139, 92, 246, 0.45) !important;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(139, 92, 246, 0.18) !important;
+      gap: 14px !important;
+      cursor: pointer !important;
+    }
+
+    .playback-buttons-section.mini-mode .pbs-home-title-wrapper {
+      display: block !important;
+      flex: 1 !important;
+      pointer-events: none;
+    }
+
+    .playback-buttons-section.mini-mode .pbs-home-title {
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      color: #f4efff !important;
+      display: inline-block !important;
+    }
+
+    .playback-buttons-section.mini-mode .btn-translate-dock,
+    .playback-buttons-section.mini-mode .progress-bar-container,
+    .playback-buttons-section.mini-mode .controls-row .speed-btn-wrapper,
+    .playback-buttons-section.mini-mode .controls-row .btn-seek,
+    .playback-buttons-section.mini-mode .volume-row {
+      display: none !important;
+    }
+
+    .playback-buttons-section.mini-mode .controls-row {
+      margin-bottom: 0;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .playback-buttons-section.mini-mode .btn-play-pause {
+      width: 44px !important;
+      height: 44px !important;
+      background: var(--accent) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.45) !important;
+      pointer-events: auto !important;
+    }
+
+    .playback-buttons-section.mini-mode .btn-play-pause svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    .marquee-active {
+      display: inline-block !important;
+      white-space: nowrap !important;
+      will-change: transform;
+      animation: marquee-scroll 12s linear infinite;
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(10%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .sentence-highlight {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 4px;
+      padding: 1px 3px;
+    }
+    .inline-translation-box {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #c4b5fd;
+      margin: 8px 0 16px;
+      padding: 8px 12px;
+      border-left: 2px solid var(--accent);
+      background: rgba(139, 92, 246, 0.08);
+      border-radius: 0 8px 8px 0;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    #popover {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: 16px;
+      right: 16px;
+      margin: 0 auto;
+      max-width: 560px;
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 14px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+      z-index: 300;
+      display: none;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
+  <header id="mainAppHeader">
     <span class="brand-title" id="headerBrandTitle">Genius Podcast</span>
     <div class="header-marquee-wrapper" id="headerMarqueeWrapper">
       <span class="header-marquee-text" id="headerMarqueeText">—</span>
     </div>
-    
   </header>
 
   <main id="mainContainer">
@@ -993,13 +939,34 @@
     </div>
   </main>
 
+  <!-- Screen 3: Player Screen (PS) outside mainContainer to prevent dimming -->
+  <div id="playerScreen" class="screen">
+    <div class="player-top-sticky-bar" id="playerTopBar">
+      <div class="player-sheet-handle-wrap" id="playerSheetHandle">
+        <div class="player-sheet-handle"></div>
+      </div>
+      <div class="player-hero-header">
+        <div class="player-hero-artwork">
+          <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
+        </div>
+        <div class="player-hero-meta">
+          <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
+            <span class="player-hero-title" id="playerHeroTitle">—</span>
+          </div>
+          <div class="player-hero-show" id="playerHeroShow">—</div>
+        </div>
+      </div>
+    </div>
+    <div class="transcript-view" id="transcriptView"></div>
+  </div>
+
   <div class="home-search-wrap" id="homeSearchWrap">
     <input type="text" class="search-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
   </div>
 
   <!-- Playback Dock -->
   <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
-    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper" onclick="navigate('player')">
+    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper">
       <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
     </div>
 
@@ -1086,7 +1053,7 @@
       '🇵🇱': 'pl', '🇹🇷': 'tr', '🇯🇵': 'ja', '🇨🇳': 'zh', '🇺🇦': 'uk'
     };
 
-            function getSourceLang() {
+    function getSourceLang() {
       if (currentShow) {
         if (currentShow.lang) return currentShow.lang.slice(0, 2).toLowerCase();
         if (currentShow.language) return currentShow.language.slice(0, 2).toLowerCase();
@@ -1098,7 +1065,7 @@
       return 'auto';
     }
 
-        const translationCache = new Map();
+    const translationCache = new Map();
 
     async function prefetchNextSentenceTranslation() {
       if (!isSentenceTranslateActive) return;
@@ -1121,7 +1088,6 @@
       const sl = getSourceLang();
       const q = encodeURIComponent(cleanText);
 
-      // Try Google GTX with detected/mapped show language first, then with 'auto' if unchanged
       const langsToTry = sl === 'auto' ? ['auto'] : [sl, 'auto'];
       for (const lang of langsToTry) {
         try {
@@ -1140,25 +1106,26 @@
         } catch (e) {}
       }
 
-      // Fallback: Google Dictionary / client=dict-chrome-ex endpoint
       try {
         const dUrl = `https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=${sl}&tl=en&q=${q}`;
         const r2 = await fetch(dUrl);
         if (r2.ok) {
           const d2 = await r2.json();
           if (Array.isArray(d2) && d2[0]) {
-            return Array.isArray(d2[0]) ? d2[0][0] : d2[0];
+            const res = Array.isArray(d2[0]) ? d2[0][0] : d2[0];
+            translationCache.set(cleanText, res);
+            return res;
           }
         }
       } catch (e) {}
 
-      // Fallback: MyMemory
       try {
         const pair = `${sl === 'auto' ? 'fr' : sl}|en`;
         const r3 = await fetch(`https://api.mymemory.translated.net/get?q=${q}&langpair=${encodeURIComponent(pair)}`);
         if (r3.ok) {
           const d3 = await r3.json();
           if (d3 && d3.responseData && d3.responseData.translatedText) {
+            translationCache.set(cleanText, d3.responseData.translatedText);
             return d3.responseData.translatedText;
           }
         }
@@ -1215,14 +1182,12 @@
 
       currentTranslatedSentence = info.text;
 
-      // Reset cues text and existing inline translation boxes
       document.querySelectorAll('.inline-translation-box').forEach(el => el.remove());
       cues.forEach((c, idx) => {
         const p = document.getElementById(`cue-${idx}`);
         if (p) p.innerText = c.text;
       });
 
-      // Highlight the active sentence within current cues
       for (let i = info.startCueIdx; i <= info.endCueIdx; i++) {
         const c = cues[i];
         const off = info.cueOffsets[i];
@@ -1247,7 +1212,7 @@
         if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
           box.innerText = translated;
         }
-          prefetchNextSentenceTranslation();
+        prefetchNextSentenceTranslation();
       } catch (e) {
         if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
           box.innerText = 'Translation failed.';
@@ -1258,7 +1223,7 @@
     function toggleSentenceTranslation() {
       const btn = document.getElementById('btnTranslateDock');
       isSentenceTranslateActive = !isSentenceTranslateActive;
-      if (btn) if (btn) btn.classList.toggle('active', isSentenceTranslateActive);
+      if (btn) btn.classList.toggle('active', isSentenceTranslateActive);
 
       if (isSentenceTranslateActive) {
         updateSentenceTranslation(true);
@@ -1266,8 +1231,7 @@
         clearSentenceTranslation(true);
       }
     }
-    
-    
+
     let isTranslatingOpen = false;
 
     const speedOptions = [
@@ -1335,7 +1299,6 @@
       return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
-        // --- History Navigation Management ---
     let isRoutingTransition = false;
 
     function navigate(screen, extraId = null) {
@@ -1359,14 +1322,10 @@
       isRoutingTransition = true;
 
       try {
-        // Wait until showsData is populated
-        if (!showsData || Object.keys(showsData).length === 0) {
-          return;
-        }
+        if (!showsData || Object.keys(showsData).length === 0) return;
 
         const hash = window.location.hash || "#/";
         const parts = hash.slice(1).split("/").filter(Boolean);
-        console.log("[Router] Applying route:", hash, parts);
 
         if (parts.length === 0 || parts[0] === "") {
           switchScreen('home');
@@ -1376,7 +1335,6 @@
           if (s) {
             await openShow(s, true);
           } else {
-            console.warn("[Router] Show not found:", showId);
             switchScreen('home');
           }
         } else if (parts[0] === 'player') {
@@ -1403,13 +1361,11 @@
     window.addEventListener("hashchange", applyRoute);
 
     function dismissPlayerScreen(targetScreen) {
-      const mc = document.getElementById('mainContainer');
-      if (mc) {
-        mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
-        mc.style.transform = '';
-        mc.style.opacity = '';
+      if (mainContainer) {
+        mainContainer.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+        mainContainer.style.transform = '';
+        mainContainer.style.opacity = '';
       }
-      if (mainContainer) { mainContainer.style.transform = ""; mainContainer.style.opacity = ""; }
       if (!playerScreen.classList.contains('active')) {
         navigate(targetScreen || (currentShow ? 'show' : 'home'));
         return;
@@ -1426,39 +1382,45 @@
     }
 
     function switchScreen(screen) {
-      const appHeader = document.querySelector('header');
+      const appHeader = document.getElementById('mainAppHeader');
       if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
-      
-      if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
+
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
+
       if (screen === 'player') {
-        const mc = document.getElementById('mainContainer');
-        if (mc) {
-          mc.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
-          mc.style.transform = 'scale(0.94)';
-          mc.style.opacity = '0.65';
+        if (mainContainer) {
+          mainContainer.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
+          mainContainer.style.transform = 'scale(0.94)';
+          mainContainer.style.opacity = '0.65';
         }
-        
         playerScreen.style.transform = '';
         playerScreen.style.transition = '';
         playerScreen.scrollTop = 0;
         playerScreen.classList.add('active');
-        if (currentShow) showScreen.classList.add('active'); else homeScreen.classList.add('active');
+
+        if (currentShow) showScreen.classList.add('active');
+        else homeScreen.classList.add('active');
+
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
         playbackButtonsSection.classList.remove('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
         updatePlayerHeroUI();
-        setTimeout(() => { if (activeCueIndex >= 0) centerActiveCue(document.getElementById(`cue-${activeCueIndex}`)); }, 120);
+        setTimeout(() => {
+          if (activeCueIndex >= 0) centerActiveCue(document.getElementById(`cue-${activeCueIndex}`));
+        }, 120);
         return;
       }
-      playerScreen.style.transform = '';
-      playerScreen.style.transition = '';
-      playerScreen.style.transform = '';
-      playerScreen.style.transition = '';
+
       playerScreen.classList.remove('active');
+      playerScreen.style.transform = '';
+      playerScreen.style.transition = '';
+      if (mainContainer) {
+        mainContainer.style.transform = '';
+        mainContainer.style.opacity = '';
+      }
       clearSentenceTranslation();
 
       if (screen === 'home') {
@@ -1477,21 +1439,6 @@
         playbackButtonsSection.classList.add('mini-mode');
         ssSearchInput.value = '';
         renderEpisodeList();
-      } else if (screen === 'player') {
-        const mc = document.getElementById('mainContainer');
-        if (mc) {
-          mc.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
-          mc.style.transform = 'scale(0.94)';
-          mc.style.opacity = '0.65';
-        }
-        playerScreen.classList.add('active');
-        if (currentShow) showScreen.classList.add('active'); else homeScreen.classList.add('active');
-        homeSearchWrap.style.display = 'none';
-        headerBrandTitle.style.display = 'none';
-        headerMarqueeWrapper.style.display = 'block';
-        playbackButtonsSection.classList.remove('mini-mode');
-        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
-        updateMarquees();
       }
     }
 
@@ -1586,16 +1533,12 @@
       }
 
       if (mode === 'date-desc') {
-        // Newest to Oldest (default)
         list.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
       } else if (mode === 'date-asc') {
-        // Oldest to Newest
         list.sort((a, b) => (a.raw_date || a.upload_date || "").localeCompare(b.raw_date || b.upload_date || ""));
       } else if (mode === 'alpha-asc') {
-        // Title A -> Z
         list.sort((a, b) => (a.title || "").localeCompare(b.title || "", undefined, { sensitivity: 'base' }));
       } else if (mode === 'alpha-desc') {
-        // Title Z -> A
         list.sort((a, b) => (b.title || "").localeCompare(a.title || "", undefined, { sensitivity: 'base' }));
       }
 
@@ -1680,14 +1623,6 @@
       }
     }
 
-    function navigateToCurrentShow() {
-      if (currentShow) {
-        navigate('show', currentShow.show_id || currentShow.folder);
-      } else {
-        navigate('home');
-      }
-    }
-
     function parseVttTime(str) {
       const parts = str.trim().split(":");
       let h = 0, m = 0, sParts;
@@ -1767,7 +1702,7 @@
       }
     }
 
-        function renderTranscript() {
+    function renderTranscript() {
       if (!transcriptView) return;
       transcriptView.innerHTML = '';
       cues.forEach((cue, index) => {
@@ -1787,13 +1722,25 @@
       if (!el || !transcriptView) return;
       const tvRect = transcriptView.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      // Target slot: offset approx 2 lines down (~85px) so this active cue sits comfortably as the 3rd line
       const targetOffsetFromTop = tvRect.top + 85;
       const delta = elRect.top - targetOffsetFromTop;
       transcriptView.scrollTo({
         top: Math.max(0, transcriptView.scrollTop + delta),
         behavior: 'smooth'
       });
+    }
+
+    function togglePlay(e) {
+      if (e) e.stopPropagation();
+      if (!audioElement.src) {
+        if (rawEpisodes.length > 0) playEpisode(rawEpisodes[0], 1);
+        return;
+      }
+      if (audioElement.paused) {
+        audioElement.play().catch(() => {});
+      } else {
+        audioElement.pause();
+      }
     }
 
     function seekRelative(sec) {
@@ -1812,8 +1759,7 @@
       pauseIcon.style.display = 'none';
     });
 
-    
-        let fastTrackInterval = null;
+    let fastTrackInterval = null;
     audioElement.addEventListener('play', () => {
       if (fastTrackInterval) clearInterval(fastTrackInterval);
       fastTrackInterval = setInterval(() => {
@@ -1840,6 +1786,7 @@
         }
       }, 60);
     });
+
     audioElement.addEventListener('pause', () => {
       if (fastTrackInterval) clearInterval(fastTrackInterval);
     });
@@ -1858,46 +1805,11 @@
           localStorage.removeItem('done_' + currentEpisode.title);
         }
       }
-
-      let idx = -1;
-      for (let i = cues.length - 1; i >= 0; i--) {
-        if (cur >= cues[i].start) {
-          idx = i;
-          break;
-        }
-      }
-
-      if (idx !== -1 && idx !== activeCueIndex) {
-        if (activeCueIndex !== -1) {
-          const old = document.getElementById(`cue-${activeCueIndex}`);
-          if (old) old.classList.remove('active');
-        }
-        activeCueIndex = idx;
-        const current = document.getElementById(`cue-${activeCueIndex}`);
-        if (current) {
-          current.classList.add('active');
-          centerActiveCue(current);
-        }
-        if (isSentenceTranslateActive) updateSentenceTranslation();
-      }
     });
 
     seekBar.addEventListener('input', (e) => {
       audioElement.currentTime = Number(e.target.value);
     });
-
-        function togglePlay(e) {
-      if (e) e.stopPropagation();
-      if (!audioElement.src) {
-        if (rawEpisodes.length > 0) playEpisode(rawEpisodes[0], 1);
-        return;
-      }
-      if (audioElement.paused) {
-        audioElement.play().catch(() => {});
-      } else {
-        audioElement.pause();
-      }
-    }
 
     function setSpeed(val, label) {
       selectedSpeed = val;
@@ -1965,35 +1877,6 @@
       }
     });
 
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchStartTime = 0;
-
-    document.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 1) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
-      }
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-      if (e.changedTouches.length === 1) {
-        const deltaX = e.changedTouches[0].clientX - touchStartX;
-        const deltaY = e.changedTouches[0].clientY - touchStartY;
-        const elapsed = Date.now() - touchStartTime;
-
-        if (touchStartX < 50 && deltaX > 70 && Math.abs(deltaY) < 60 && elapsed < 400) {
-          if (showScreen.classList.contains('active')) {
-            navigate('home');
-          } else if (playerScreen.classList.contains('active')) {
-            navigateToCurrentShow();
-          }
-        }
-      }
-    }, { passive: true });
-
-    
     function updatePlayerHeroUI() {
       const pht = document.getElementById('playerHeroTitle');
       const phs = document.getElementById('playerHeroShow');
@@ -2083,8 +1966,14 @@
     });
 
     renderSpeedMenu();
-    
-                // --- Apple Music-style interactive sheet dismiss controller ---
+
+    playbackButtonsSection.addEventListener('click', (e) => {
+      if (!playbackButtonsSection.classList.contains('mini-mode')) return;
+      if (e.target.closest('#playPauseBtn')) return;
+      navigate('player');
+    });
+
+    // --- Apple Music-style interactive sheet dismiss controller ---
     (function initPlayerSheetDismiss() {
       const ps = document.getElementById('playerScreen');
       const bar = document.getElementById('playerTopBar');
@@ -2116,7 +2005,6 @@
         const delta = y - startY;
 
         if (delta > 0) {
-          // If pulling from transcript while not at the exact top, release drag back to normal scroll
           if (!fromTopBar && tv && tv.scrollTop > 2) {
             cancel();
             return;
@@ -2124,7 +2012,6 @@
           curDeltaY = delta;
           ps.style.transform = `translateY(${delta}px)`;
 
-          // Fluid background reveal
           if (mc) {
             const h = window.innerHeight || 600;
             const progress = Math.min(1, delta / h);
@@ -2132,7 +2019,6 @@
             mc.style.opacity = `${0.65 + (0.35 * progress)}`;
           }
         } else if (fromTopBar) {
-          // Resist upward drag on top bar
           curDeltaY = 0;
           ps.style.transform = 'translateY(0)';
         }
@@ -2145,7 +2031,6 @@
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
         if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
 
-        // Snap threshold: if pulled down > 70px or 12% screen height, close completely; otherwise snap back to 0
         const threshold = Math.min(85, (window.innerHeight || 600) * 0.12);
         if (curDeltaY > threshold) {
           dismissPlayerScreen();
@@ -2172,7 +2057,6 @@
         curDeltaY = 0;
       }
 
-      // Touch events (iOS / Mobile)
       ps.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) start(e.touches[0].clientY, e.target);
       }, { passive: true });
@@ -2186,7 +2070,6 @@
       ps.addEventListener('touchend', end, { passive: true });
       ps.addEventListener('touchcancel', cancel, { passive: true });
 
-      // Mouse drag on top bar (Desktop)
       bar.addEventListener('mousedown', (e) => {
         if (!ps.classList.contains('active')) return;
         e.preventDefault();
@@ -2201,7 +2084,6 @@
         window.addEventListener('mouseup', onMouseUp);
       });
 
-      // Trackpad two-finger swipe down dismiss
       let wheelAcc = 0;
       let wheelTimer = null;
       ps.addEventListener('wheel', (e) => {
@@ -2221,36 +2103,7 @@
       if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
     })();
 
-    
-    playbackButtonsSection.addEventListener('click', (e) => {
-      if (!playbackButtonsSection.classList.contains('mini-mode')) return;
-      if (e.target.closest('#playPauseBtn')) return;
-      navigate('player');
-    });
-
     loadShows();
   </script>
-
-
-    <!-- Screen 3: Player Screen (PS) -->
-    <div id="playerScreen" class="screen">
-      <div class="player-top-sticky-bar" id="playerTopBar">
-        <div class="player-sheet-handle-wrap" id="playerSheetHandle">
-          <div class="player-sheet-handle"></div>
-        </div>
-        <div class="player-hero-header">
-          <div class="player-hero-artwork">
-            <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
-          </div>
-          <div class="player-hero-meta">
-            <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
-              <span class="player-hero-title" id="playerHeroTitle">—</span>
-            </div>
-            <div class="player-hero-show" id="playerHeroShow">—</div>
-          </div>
-        </div>
-      </div>
-      <div class="transcript-view" id="transcriptView"></div>
-    </div>
 </body>
 </html>
