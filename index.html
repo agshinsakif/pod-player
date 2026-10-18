@@ -683,6 +683,45 @@
       100% { transform: translateX(-100%); }
     }
 
+        .btn-translate-circle {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid #000;
+      background: transparent;
+      color: #000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 60;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn-translate-circle:active { transform: translateY(-50%) scale(0.92); }
+    .btn-translate-circle.active { background: rgba(0,0,0,0.1); }
+    .sentence-highlight {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 4px;
+      padding: 1px 3px;
+    }
+    .inline-translation-box {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #c4b5fd;
+      margin: 8px 0 16px;
+      padding: 8px 12px;
+      border-left: 2px solid var(--accent);
+      background: rgba(139, 92, 246, 0.08);
+      border-radius: 0 8px 8px 0;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
     #popover {
       position: fixed;
       top: max(16px, env(safe-area-inset-top));
@@ -711,6 +750,12 @@
     <div class="header-marquee-wrapper" id="headerMarqueeWrapper">
       <span class="header-marquee-text" id="headerMarqueeText">—</span>
     </div>
+    <button class="btn-translate-circle" id="btnTranslateCircle" onclick="toggleSentenceTranslation()" title="Translate sentence (Q)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1"/>
+        <path d="M22 22l-5-10-5 10M14 18h6"/>
+      </svg>
+    </button>
   </header>
 
   <main id="mainContainer">
@@ -858,6 +903,112 @@
     let activeCueIndex = -1;
 
     let wasPlayingBeforeTranslate = false;
+    let currentTranslatedSentence = null;
+
+    const FLAG_TO_LANG = {
+      '🇭🇺': 'hu', '🇩🇪': 'de', '🇪🇸': 'es', '🇫🇷': 'fr', '🇮🇹': 'it',
+      '🇷🇺': 'ru', '🇬🇧': 'en', '🇺🇸': 'en', '🇵🇹': 'pt', '🇳🇱': 'nl',
+      '🇵🇱': 'pl', '🇹🇷': 'tr', '🇯🇵': 'ja', '🇨🇳': 'zh', '🇺🇦': 'uk'
+    };
+
+    function getSourceLang() {
+      if (currentShow) {
+        if (currentShow.language) return currentShow.language;
+        if (currentShow.flag && FLAG_TO_LANG[currentShow.flag]) return FLAG_TO_LANG[currentShow.flag];
+      }
+      return 'auto';
+    }
+
+    async function fetchTranslation(text) {
+      const sl = getSourceLang();
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const json = await res.json();
+      return json[0].map(item => item[0]).join('');
+    }
+
+    function clearSentenceTranslation() {
+      currentTranslatedSentence = null;
+      document.querySelectorAll('.inline-translation-box').forEach(el => el.remove());
+      cues.forEach((c, idx) => {
+        const p = document.getElementById(`cue-${idx}`);
+        if (p) p.innerText = c.text;
+      });
+      const btn = document.getElementById('btnTranslateCircle');
+      if (btn) btn.classList.remove('active');
+    }
+
+    function getCurrentSentenceInfo() {
+      if (!cues || cues.length === 0 || activeCueIndex < 0) return null;
+      const joined = cues.map(c => c.text).join(' ');
+      const cueOffsets = [];
+      let charAcc = 0;
+      cues.forEach(c => {
+        cueOffsets.push({ start: charAcc, end: charAcc + c.text.length });
+        charAcc += c.text.length + 1;
+      });
+
+      const activeMid = (cueOffsets[activeCueIndex].start + cueOffsets[activeCueIndex].end) / 2;
+      const prevDot = joined.lastIndexOf('.', Math.max(0, activeMid - 1));
+      const nextDot = joined.indexOf('.', activeMid);
+      const sStart = prevDot === -1 ? 0 : prevDot + 1;
+      const sEnd = nextDot === -1 ? joined.length : nextDot + 1;
+      const sentenceText = joined.slice(sStart, sEnd).trim();
+      if (!sentenceText) return null;
+
+      let startCueIdx = cueOffsets.findIndex(o => sStart < o.end);
+      let endCueIdx = cueOffsets.findIndex(o => sEnd <= o.end);
+      if (startCueIdx === -1) startCueIdx = 0;
+      if (endCueIdx === -1) endCueIdx = cues.length - 1;
+
+      return { text: sentenceText, sStart, sEnd, startCueIdx, endCueIdx, cueOffsets };
+    }
+
+    async function toggleSentenceTranslation() {
+      const btn = document.getElementById('btnTranslateCircle');
+      const info = getCurrentSentenceInfo();
+      if (!info) return;
+
+      if (currentTranslatedSentence === info.text) {
+        clearSentenceTranslation();
+        return;
+      }
+
+      clearSentenceTranslation();
+      currentTranslatedSentence = info.text;
+      if (btn) btn.classList.add('active');
+
+      for (let i = info.startCueIdx; i <= info.endCueIdx; i++) {
+        const c = cues[i];
+        const off = info.cueOffsets[i];
+        const hStart = Math.max(0, info.sStart - off.start);
+        const hEnd = Math.min(c.text.length, info.sEnd - off.start);
+        const p = document.getElementById(`cue-${i}`);
+        if (p && hStart < hEnd) {
+          p.innerHTML = `${c.text.slice(0, hStart)}<span class="sentence-highlight">${c.text.slice(hStart, hEnd)}</span>${c.text.slice(hEnd)}`;
+        }
+      }
+
+      const targetCueP = document.getElementById(`cue-${info.endCueIdx}`);
+      if (!targetCueP) return;
+
+      const box = document.createElement('div');
+      box.className = 'inline-translation-box';
+      box.innerText = 'Translating sentence…';
+      targetCueP.after(box);
+
+      try {
+        const translated = await fetchTranslation(info.text);
+        if (currentTranslatedSentence === info.text) {
+          box.innerText = translated;
+        }
+      } catch (e) {
+        if (currentTranslatedSentence === info.text) box.innerText = 'Translation failed.';
+      }
+    }
+    
+    let wasPlayingBeforeTranslate = false;
     let isTranslatingOpen = false;
 
     const speedOptions = [
@@ -996,6 +1147,10 @@
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
       playerScreen.classList.remove('active');
+
+      const btnTrans = document.getElementById('btnTranslateCircle');
+      if (btnTrans) btnTrans.style.display = (screen === 'player') ? 'flex' : 'none';
+      if (screen !== 'player') clearSentenceTranslation();
 
       if (screen === 'home') {
         homeScreen.classList.add('active');
@@ -1440,6 +1595,10 @@
         e.preventDefault();
         togglePlay();
       }
+      if ((e.key === 'q' || e.key === 'Q') && playerScreen.classList.contains('active')) {
+        e.preventDefault();
+        toggleSentenceTranslation();
+      }
     });
 
     let touchStartX = 0;
@@ -1499,7 +1658,7 @@
     document.addEventListener('selectionchange', () => {
       const sel = window.getSelection();
       const txt = sel ? sel.toString().trim() : '';
-      if (!txt || txt.length < 2) return;
+      if (!txt) return;
 
       if (!isTranslatingOpen) {
         wasPlayingBeforeTranslate = !audioElement.paused;
@@ -1510,10 +1669,9 @@
       popover.style.display = 'block';
       popoverContent.innerText = 'Translating…';
 
-      fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(txt) + "&langpair=autodetect|en")
-        .then(r => r.json())
-        .then(data => {
-          if (data && data.responseData) popoverContent.innerText = data.responseData.translatedText || "No translation found.";
+      fetchTranslation(txt)
+        .then(translated => {
+          popoverContent.innerText = translated || "No translation found.";
         })
         .catch(() => {
           popoverContent.innerText = 'Translation failed.';
