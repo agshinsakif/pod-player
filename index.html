@@ -294,8 +294,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      padding: 8px 12px;
+      gap: 12px;
+      padding: 10px 16px;
       background: rgba(24, 20, 36, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -1044,7 +1044,7 @@
             <option value="alpha-asc">Title A→Z ↑</option>
             <option value="alpha-desc">Title Z→A ↓</option>
           </select>
-          <input type="text" class="ss-search-input" id="ssSearchInput" placeholder="Search..." oninput="renderEpisodeList()">
+          
         </div>
       </div>
 
@@ -1093,7 +1093,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </button>
-      <input type="text" class="home-search-pill-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
+      <input type="text" class="home-search-pill-input" id="homeSearchInput" placeholder="Search shows..." data-mode="shows" oninput="filterShows()">
     </div>
   </div>
 
@@ -1568,7 +1568,7 @@
         if (searchPill) searchPill.style.display = 'flex';
         if (dockRow) dockRow.style.display = 'flex';
       } else {
-        if (searchPill) searchPill.style.display = 'none';
+        if (searchPill) { searchPill.style.display = (screen === 'player') ? 'none' : 'flex'; syncSearchPillPlaceholder(); }
         if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
         if (dockRow) dockRow.style.display = 'flex';
       }
@@ -1594,7 +1594,7 @@
         homeScreen.classList.remove('active');
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
-        ssSearchInput.value = '';
+        if (homeSearchInputEl) { homeSearchInputEl.value = ''; collapseHomeSearch(); } syncSearchPillPlaceholder();
         renderEpisodeList();
       }
     }
@@ -1696,13 +1696,14 @@
     }
 
     function renderEpisodeList() {
-      const query = ssSearchInput.value.toLowerCase().trim();
-      const hideCompleted = hideCompletedCheck.checked;
-      const mode = sortSelect.value;
+      const searchInput = document.getElementById('homeSearchInput');
+      const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      const hideCompleted = hideCompletedCheck ? hideCompletedCheck.checked : false;
+      const mode = sortSelect ? sortSelect.value : 'date-desc';
 
       let list = [...rawEpisodes];
 
-      if (query) {
+      if (query && showScreen.classList.contains('active')) {
         list = list.filter(ep => ep.title.toLowerCase().includes(query));
       }
 
@@ -1719,19 +1720,18 @@
       episodesListView.innerHTML = '';
       let visible = 0;
 
-      list.forEach(ep => {
+      list.forEach((ep) => {
         const isDone = localStorage.getItem('done_' + ep.title) === 'true';
         if (hideCompleted && isDone) return;
         visible++;
 
+        const sequentialIndex = visible;
         const savedPos = parseFloat(localStorage.getItem('pos_' + ep.title) || '0');
         const card = document.createElement('div');
         card.className = `card ${isDone ? 'completed' : ''}`;
 
-        const displayIndex = ep.originalIndex;
-
         card.innerHTML = `
-          <div class="card-index">${displayIndex}.</div>
+          <div class="card-index">${sequentialIndex}.</div>
           <div class="card-content">
             <div class="card-title">${ep.title}</div>
             <div class="card-meta">
@@ -1743,13 +1743,13 @@
           </div>
         `;
         card.onclick = () => {
-          playEpisode(ep, displayIndex);
+          playEpisode(ep, sequentialIndex);
           navigate('player');
         };
         episodesListView.appendChild(card);
       });
 
-      ssEpisodeCount.innerText = `${rawEpisodes.length} episode${rawEpisodes.length === 1 ? '' : 's'}`;
+      ssEpisodeCount.innerText = `${visible} episode${visible === 1 ? '' : 's'}`;
       if (visible === 0) {
         episodesListView.innerHTML = '<div class="empty-state">No episodes match your criteria.</div>';
       }
@@ -1990,6 +1990,16 @@
       audioElement.playbackRate = val;
       speedBtn.innerText = label || (val + "x");
       renderSpeedMenu();
+
+      const savedSort = localStorage.getItem('episode_sort_mode');
+      if (savedSort && sortSelect) {
+        sortSelect.value = savedSort;
+      }
+      sortSelect.addEventListener('change', () => {
+        localStorage.setItem('episode_sort_mode', sortSelect.value);
+        renderEpisodeList();
+      });
+
     }
 
     function renderSpeedMenu() {
@@ -2141,6 +2151,16 @@
 
     renderSpeedMenu();
 
+      const savedSort = localStorage.getItem('episode_sort_mode');
+      if (savedSort && sortSelect) {
+        sortSelect.value = savedSort;
+      }
+      sortSelect.addEventListener('change', () => {
+        localStorage.setItem('episode_sort_mode', sortSelect.value);
+        renderEpisodeList();
+      });
+
+
     playbackButtonsSection.addEventListener('click', (e) => {
       if (!playbackButtonsSection.classList.contains('mini-mode')) return;
       if (e.target.closest('#playPauseBtn')) return;
@@ -2205,9 +2225,9 @@
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
         if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
 
-        const threshold = (window.innerHeight || window.screen.height || 600) * 0.45;
-        if (curDeltaY > threshold) {
-          dismissPlayerScreen();
+        const threshold = (window.innerHeight || document.documentElement.clientHeight || 600) * (9 / 20);
+        if (curDeltaY >= threshold) {
+          dismissPlayerScreen(previousActiveScreen);
         } else {
           ps.style.transform = 'translateY(0)';
           if (mc) {
@@ -2278,14 +2298,36 @@
     })();
 
     
-    // --- Home Search Circle Expand / Shrink Miniplayer ---
+    // --- Unified Search Pill (Home: shows, Show: episodes) ---
     const homeSearchPill = document.getElementById('homeSearchPill');
     const homeSearchPillBtn = document.getElementById('homeSearchPillBtn');
     const homeSearchInputEl = document.getElementById('homeSearchInput');
-    const homeBottomDockRow = document.getElementById('homeBottomDockRow');
+
+    function syncSearchPillPlaceholder() {
+      if (!homeSearchInputEl) return;
+      if (showScreen && showScreen.classList.contains('active')) {
+        homeSearchInputEl.placeholder = 'Search episodes...';
+      } else {
+        homeSearchInputEl.placeholder = 'Search shows...';
+      }
+    }
+
+    function handleUnifiedSearchInput() {
+      if (!homeSearchInputEl) return;
+      if (showScreen && showScreen.classList.contains('active')) {
+        renderEpisodeList();
+      } else {
+        filterShows();
+      }
+    }
+
+    if (homeSearchInputEl) {
+      homeSearchInputEl.oninput = handleUnifiedSearchInput;
+    }
 
     function expandHomeSearch() {
       if (!homeSearchPill) return;
+      syncSearchPillPlaceholder();
       homeSearchPill.classList.add('expanded');
       homeSearchInputEl.focus();
     }
