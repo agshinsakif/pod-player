@@ -1385,8 +1385,11 @@
 
     function switchScreen(screen) {
       const appHeader = document.getElementById('mainAppHeader');
+      if (screen === 'player') {
+        if (showScreen.classList.contains('active')) previousActiveScreen = 'show';
+        else previousActiveScreen = 'home';
+      }
       if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
-
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
 
