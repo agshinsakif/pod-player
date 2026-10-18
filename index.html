@@ -1302,8 +1302,14 @@
     }
 
     let isRoutingTransition = false;
-
     function navigate(screen, extraId = null) {
+      if (screen === 'player') {
+        if (showScreen.classList.contains('active')) {
+          previousActiveScreen = 'show';
+        } else if (homeScreen.classList.contains('active')) {
+          previousActiveScreen = 'home';
+        }
+      }
       let targetHash = "#/";
       if (screen === 'show') {
         const sId = extraId || (currentShow ? (currentShow.show_id || currentShow.folder) : null);
@@ -1406,8 +1412,13 @@
         playerScreen.scrollTop = 0;
         playerScreen.classList.add('active');
 
-        if (currentShow) showScreen.classList.add('active');
-        else homeScreen.classList.add('active');
+        if (previousActiveScreen === 'show' && currentShow) {
+          showScreen.classList.add('active');
+          homeScreen.classList.remove('active');
+        } else {
+          homeScreen.classList.add('active');
+          showScreen.classList.remove('active');
+        }
 
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
