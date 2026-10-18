@@ -2257,6 +2257,7 @@
       let curDeltaY = 0;
       let isDragging = false;
       let fromTopBar = false;
+      let fromHandle = false;
 
       function start(y, target) {
         if (!ps.classList.contains('active')) return;
@@ -2271,6 +2272,7 @@
           curDeltaY = 0;
           isDragging = true;
           fromTopBar = hitBar;
+          fromHandle = Boolean(target.closest('#playerSheetHandle'));
           ps.style.transition = 'none';
           if (mc) mc.style.transition = 'none';
         }
@@ -2305,9 +2307,14 @@
         isDragging = false;
 
         const vh = window.innerHeight || document.documentElement.clientHeight || 600;
-        const minSwipeDistance = vh * 0.45; // 9/20 of screen height
+        const minSwipeDistance = vh * 0.4; // 2/5 of screen height
 
-        if (curDeltaY >= minSwipeDistance) {
+                if (fromHandle && curDeltaY < 6) {
+          ps.style.removeProperty('transform');
+          ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+          if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+          dismissPlayerScreen(previousActiveScreen);
+        } else if (curDeltaY >= minSwipeDistance) {
           ps.style.removeProperty('transform');
           ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
           if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
