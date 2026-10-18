@@ -1062,6 +1062,15 @@
       justify-content: center !important;
     }
 
+
+    /* Prevent initial load layout shift / tall flash */
+    .playback-buttons-section.mini-mode .progress-bar-container,
+    .playback-buttons-section.mini-mode .volume-row,
+    .playback-buttons-section.mini-mode .btn-speed,
+    .playback-buttons-section.mini-mode .btn-seek {
+      display: none !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1146,86 +1155,6 @@
         </div>
     </div>
     <div class="transcript-view" id="transcriptView"></div>
-  </div>
-
-  
-
-  <!-- Playback Dock -->
-  
-  <div class="home-bottom-dock-row" id="homeBottomDockRow">
-    <div class="home-search-pill-container" id="homeSearchPill">
-      <button class="home-search-pill-btn" id="homeSearchPillBtn" aria-label="Search shows">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </button>
-      <input type="text" class="home-search-pill-input" id="homeSearchInput" placeholder="Search shows..." data-mode="shows" oninput="filterShows()">
-    </div>
-  </div>
-
-  <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
-    <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper">
-      <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
-    </div>
-
-    <div class="progress-bar-container">
-      <span class="time-label" id="timeCurrent">0:00</span>
-      <input type="range" class="slider" id="seekBar" min="0" max="100" value="0">
-      <span class="time-label" id="timeTotal">0:00</span>
-    </div>
-
-    <div class="controls-row">
-      <div class="speed-btn-wrapper">
-        <div class="speed-popover" id="speedPopover">
-          <div class="speed-chips" id="speedChips"></div>
-        </div>
-        <button class="btn-dock btn-speed" id="speedBtn" onclick="toggleSpeedPopover(event)">1x</button>
-      </div>
-
-      <button class="btn-dock btn-seek" onclick="seekRelative(-10)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-          <path d="M3 3v5h5"/>
-          <text x="12" y="15" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle" stroke="none">10</text>
-        </svg>
-      </button>
-
-      <button class="btn-dock btn-play-pause" id="playPauseBtn" onclick="togglePlay(event)">
-        <svg id="playIcon" width="34" height="34" fill="currentColor" viewBox="0 0 24 24">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
-        <svg id="pauseIcon" width="34" height="34" fill="currentColor" viewBox="0 0 24 24" style="display: none;">
-          <rect x="6" y="4" width="4" height="16"/>
-          <rect x="14" y="4" width="4" height="16"/>
-        </svg>
-      </button>
-
-      <button class="btn-dock btn-seek" onclick="seekRelative(10)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-          <path d="M21 3v5h-5"/>
-          <text x="12" y="15" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle" stroke="none">10</text>
-        </svg>
-      </button>
-
-      <button class="btn-dock btn-translate-dock" id="btnTranslateDock" onclick="toggleSentenceTranslation()" title="Translate sentence (Q)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1"/>
-          <path d="M22 22l-5-10-5 10M14 18h6"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="volume-row">
-      <svg class="volume-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-      </svg>
-      <input type="range" class="volume-slider" id="volumeBar" min="0" max="1" step="0.02" value="0.5">
-    </div>
-
-    <audio id="audioElement" playsinline preload="auto"></audio>
   </div>
 
   <div id="popover">
