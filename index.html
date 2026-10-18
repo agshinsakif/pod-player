@@ -992,6 +992,15 @@
       position: relative !important;
     }
 
+
+    #mainContainer {
+      position: relative;
+      transition: transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease;
+    }
+    #playerScreen {
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.55);
+    }
+
 </style>
 </head>
 <body>
@@ -1184,9 +1193,26 @@
       return 'auto';
     }
 
+        const translationCache = new Map();
+
+    async function prefetchNextSentenceTranslation() {
+      if (!isSentenceTranslateActive) return;
+      const info = getCurrentSentenceInfo();
+      if (!info || info.endCueIdx + 1 >= cues.length) return;
+      const nextCue = cues[info.endCueIdx + 1];
+      if (!nextCue || !nextCue.text) return;
+      const clean = nextCue.text.trim();
+      if (!clean || translationCache.has(clean)) return;
+      try {
+        const trans = await fetchTranslation(clean);
+        translationCache.set(clean, trans);
+      } catch (e) {}
+    }
+
     async function fetchTranslation(text) {
       const cleanText = text.trim();
       if (!cleanText) return "";
+      if (translationCache.has(cleanText)) return translationCache.get(cleanText);
       const sl = getSourceLang();
       const q = encodeURIComponent(cleanText);
 
@@ -1201,6 +1227,7 @@
             if (Array.isArray(d) && Array.isArray(d[0])) {
               const resText = d[0].map(x => x && x[0]).filter(Boolean).join('');
               if (resText && (resText.toLowerCase() !== cleanText.toLowerCase() || lang === 'auto')) {
+                translationCache.set(cleanText, resText);
                 return resText;
               }
             }
@@ -1315,6 +1342,7 @@
         if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
           box.innerText = translated;
         }
+          prefetchNextSentenceTranslation();
       } catch (e) {
         if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
           box.innerText = 'Translation failed.';
@@ -1470,6 +1498,7 @@
     window.addEventListener("hashchange", applyRoute);
 
     function dismissPlayerScreen(targetScreen) {
+      if (mainContainer) { mainContainer.style.transform = ""; mainContainer.style.opacity = ""; }
       if (!playerScreen.classList.contains('active')) {
         navigate(targetScreen || (currentShow ? 'show' : 'home'));
         return;
@@ -2119,30 +2148,45 @@
         }
       }
 
-      function moveDrag(y) {
+            function moveDrag(y) {
         if (!isDragging) return;
         const delta = y - startY;
         if (delta > 0) {
           if (fromScrollTop && tv && tv.scrollTop > 2) {
             isDragging = false;
             ps.style.transform = '';
+            if (mainContainer) { mainContainer.style.transform = ''; mainContainer.style.opacity = ''; }
             return;
           }
           curY = delta;
           ps.style.transform = `translateY(${delta}px)`;
+          if (mainContainer) {
+            const progress = Math.min(1, delta / (window.innerHeight || 600));
+            mainContainer.style.transition = 'none';
+            mainContainer.style.transform = `scale(${0.94 + 0.06 * progress})`;
+            mainContainer.style.opacity = `${0.65 + 0.35 * progress}`;
+          }
         } else if (!fromScrollTop) {
           ps.style.transform = '';
+          if (mainContainer) { mainContainer.style.transform = ''; mainContainer.style.opacity = ''; }
         }
       }
 
       function endDrag() {
         if (!isDragging) return;
         isDragging = false;
-        ps.style.transition = '';
+        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        if (mainContainer) {
+          mainContainer.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        }
         if (curY > 90) {
           dismissPlayerScreen();
         } else {
           ps.style.transform = '';
+          if (mainContainer) {
+            mainContainer.style.transform = 'scale(0.94)';
+            mainContainer.style.opacity = '0.65';
+          }
         }
       }
 
