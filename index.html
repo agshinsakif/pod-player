@@ -1944,13 +1944,10 @@
 
     function centerActiveCue(el) {
       if (!el || !transcriptView) return;
-      const tvRect = transcriptView.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      // Line height is ~31px plus padding; target exactly the 3rd line position (~68px down from top)
-      const targetOffset = tvRect.top + 68;
-      const delta = elRect.top - targetOffset;
+      // Calculate top position of the cue relative to transcript container
+      const targetScroll = el.offsetTop - 120;
       transcriptView.scrollTo({
-        top: Math.max(0, transcriptView.scrollTop + delta),
+        top: Math.max(0, targetScroll),
         behavior: 'smooth'
       });
     }
@@ -2234,8 +2231,9 @@
         if (!ps.classList.contains('active')) return;
         const isClickableHero = target.closest('#playerHeroArtwork') || target.closest('#playerHeroMeta');
         if (isClickableHero) return;
+
         const hitBar = bar && bar.contains(target);
-        const atTop = tv ? tv.scrollTop <= 2 : true;
+        const atTop = tv ? tv.scrollTop <= 0 : true;
 
         if (hitBar || atTop) {
           startY = y;
@@ -2252,7 +2250,7 @@
         const delta = y - startY;
 
         if (delta > 0) {
-          if (!fromTopBar && tv && tv.scrollTop > 2) {
+          if (!fromTopBar && tv && tv.scrollTop > 0) {
             cancel();
             return;
           }
@@ -2275,17 +2273,18 @@
         if (!isDragging) return;
         isDragging = false;
 
-        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
-        if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+        const vh = window.innerHeight || document.documentElement.clientHeight || 600;
+        const minSwipeDistance = vh * (9 / 20);
 
-        const viewHeight = window.innerHeight || document.documentElement.clientHeight || 600;
-        const requiredThreshold = viewHeight * (9 / 20);
-
-        if (curDeltaY >= requiredThreshold) {
+        if (curDeltaY >= minSwipeDistance) {
+          ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+          if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
           dismissPlayerScreen(previousActiveScreen);
         } else {
+          ps.style.transition = 'transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1)';
           ps.style.transform = 'translateY(0)';
           if (mc) {
+            mc.style.transition = 'transform 0.24s ease, opacity 0.24s ease';
             mc.style.transform = 'scale(0.94)';
             mc.style.opacity = '0.65';
           }
@@ -2296,10 +2295,10 @@
       function cancel() {
         if (!isDragging) return;
         isDragging = false;
-        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        ps.style.transition = 'transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1)';
         ps.style.transform = 'translateY(0)';
         if (mc) {
-          mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+          mc.style.transition = 'transform 0.24s ease, opacity 0.24s ease';
           mc.style.transform = 'scale(0.94)';
           mc.style.opacity = '0.65';
         }
@@ -2333,23 +2332,8 @@
         window.addEventListener('mouseup', onMouseUp);
       });
 
-      let wheelAcc = 0;
-      let wheelTimer = null;
-      ps.addEventListener('wheel', (e) => {
-        if (!ps.classList.contains('active')) return;
-        if (tv && tv.scrollTop <= 0 && e.deltaY < -20) {
-          wheelAcc += Math.abs(e.deltaY);
-          clearTimeout(wheelTimer);
-          wheelTimer = setTimeout(() => { wheelAcc = 0; }, 180);
-          if (wheelAcc > 90) {
-            wheelAcc = 0;
-            dismissPlayerScreen();
-          }
-        }
-      }, { passive: true });
-
       const handle = document.getElementById('playerSheetHandle');
-      if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
+      if (handle) handle.addEventListener('click', () => dismissPlayerScreen(previousActiveScreen));
     })();
 
     
