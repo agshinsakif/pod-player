@@ -1415,6 +1415,8 @@
     function switchScreen(screen) {
       const appHeader = document.querySelector('header');
       if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
+      const appHeader = document.querySelector('header');
+      if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
       if (screen === 'player') {
