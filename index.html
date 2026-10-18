@@ -1103,10 +1103,10 @@
         <div class="player-sheet-handle"></div>
       </div>
               <div class="player-hero-header" style="cursor: pointer;" onclick="navigateToCurrentShow()" title="Go to show">
-          <div class="player-hero-artwork">
+          <div class="player-hero-artwork" id="playerHeroArtwork" style="cursor: pointer; pointer-events: auto;">
             <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
           </div>
-          <div class="player-hero-meta">
+          <div class="player-hero-meta" id="playerHeroMeta" style="cursor: pointer; pointer-events: auto;">
             <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
               <span class="player-hero-title" id="playerHeroTitle">—</span>
             </div>
@@ -2217,6 +2217,8 @@
 
       function start(y, target) {
         if (!ps.classList.contains('active')) return;
+        const isClickableHero = target.closest('#playerHeroArtwork') || target.closest('#playerHeroMeta');
+        if (isClickableHero) return;
         const hitBar = bar && bar.contains(target);
         const atTop = tv ? tv.scrollTop <= 2 : true;
 
@@ -2393,6 +2395,19 @@
         collapseHomeSearch();
       }
     });
+
+    
+    // Navigate directly to the show screen when tapping show logo or title in player
+    function goToCurrentShowFromPlayer(e) {
+      if (e) e.stopPropagation();
+      if (!currentShow) return;
+      dismissPlayerScreen('show');
+    }
+
+    const heroArt = document.getElementById('playerHeroArtwork');
+    const heroMeta = document.getElementById('playerHeroMeta');
+    if (heroArt) heroArt.addEventListener('click', goToCurrentShowFromPlayer);
+    if (heroMeta) heroMeta.addEventListener('click', goToCurrentShowFromPlayer);
 
     loadShows();
   </script>
