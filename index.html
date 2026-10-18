@@ -875,7 +875,97 @@
       user-select: text;
       -webkit-user-select: text;
     }
-  </style>
+  
+    /* Completely hide translation button on mini-mode */
+    .playback-buttons-section.mini-mode #btnTranslateDock,
+    .playback-buttons-section.mini-mode .btn-translate-dock {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      visibility: hidden !important;
+    }
+
+
+    /* Collapsible Home Search Circle & Mini-dock Layout */
+    .home-bottom-dock-row {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 110;
+      pointer-events: none;
+    }
+
+    .home-search-pill-container {
+      pointer-events: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 54px;
+      width: 54px;
+      border-radius: 27px;
+      background: #1a1528;
+      border: 1px solid rgba(139, 92, 246, 0.45);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(139, 92, 246, 0.18);
+      overflow: hidden;
+      transition: width 0.3s cubic-bezier(0.32, 1, 0.23, 1), flex 0.3s cubic-bezier(0.32, 1, 0.23, 1);
+      flex-shrink: 0;
+    }
+
+    .home-search-pill-container.expanded {
+      flex: 1 1 auto;
+      width: auto;
+    }
+
+    .home-search-pill-btn {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .home-search-pill-input {
+      display: none;
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      padding-right: 16px;
+    }
+
+    .home-search-pill-container.expanded .home-search-pill-input {
+      display: block;
+    }
+
+    /* Keep miniplayer inside fluid container */
+    .playback-buttons-section.mini-mode {
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      transition: flex 0.3s cubic-bezier(0.32, 1, 0.23, 1), transform 0.3s ease !important;
+      pointer-events: auto !important;
+    }
+
+</style>
 </head>
 <body>
 
@@ -961,11 +1051,22 @@
     <div class="transcript-view" id="transcriptView"></div>
   </div>
 
-  <div class="home-search-wrap" id="homeSearchWrap">
-    <input type="text" class="search-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
-  </div>
+  
 
   <!-- Playback Dock -->
+  
+  <div class="home-bottom-dock-row" id="homeBottomDockRow">
+    <div class="home-search-pill-container" id="homeSearchPill">
+      <button class="home-search-pill-btn" id="homeSearchPillBtn" aria-label="Search shows">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <input type="text" class="home-search-pill-input" id="homeSearchInput" placeholder="Search shows..." oninput="filterShows()">
+    </div>
+  </div>
+
   <div class="playback-buttons-section mini-mode" id="playbackButtonsSection">
     <div class="pbs-home-title-wrapper" id="pbsHomeTitleWrapper">
       <span class="pbs-home-title" id="pbsHomeTitle">Nothing playing</span>
@@ -1391,6 +1492,25 @@
 
     function switchScreen(screen) {
       const appHeader = document.getElementById('mainAppHeader');
+
+      const dockRow = document.getElementById('homeBottomDockRow');
+      const pbs = document.getElementById('playbackButtonsSection');
+      const searchPill = document.getElementById('homeSearchPill');
+      if (screen === 'home') {
+        if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
+        if (searchPill) searchPill.style.display = 'flex';
+        if (dockRow) dockRow.style.display = 'flex';
+      } else {
+        if (searchPill) searchPill.style.display = 'none';
+        if (screen === 'player') {
+          if (dockRow) dockRow.style.display = 'none';
+          if (pbs && pbs.parentElement !== document.body) document.body.appendChild(pbs);
+        } else {
+          if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
+          if (dockRow) dockRow.style.display = 'flex';
+        }
+      }
+
       if (screen === 'player') {
         if (showScreen.classList.contains('active')) previousActiveScreen = 'show';
         else previousActiveScreen = 'home';
@@ -2049,7 +2169,7 @@
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
         if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
 
-        const threshold = (window.innerHeight || 600) * 0.4;
+        const threshold = (window.innerHeight || window.screen.height || 600) * 0.45;
         if (curDeltaY > threshold) {
           dismissPlayerScreen();
         } else {
@@ -2120,6 +2240,43 @@
       const handle = document.getElementById('playerSheetHandle');
       if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
     })();
+
+    
+    // --- Home Search Circle Expand / Shrink Miniplayer ---
+    const homeSearchPill = document.getElementById('homeSearchPill');
+    const homeSearchPillBtn = document.getElementById('homeSearchPillBtn');
+    const homeSearchInputEl = document.getElementById('homeSearchInput');
+    const homeBottomDockRow = document.getElementById('homeBottomDockRow');
+
+    function expandHomeSearch() {
+      if (!homeSearchPill) return;
+      homeSearchPill.classList.add('expanded');
+      homeSearchInputEl.focus();
+    }
+
+    function collapseHomeSearch() {
+      if (!homeSearchPill) return;
+      if (homeSearchInputEl && homeSearchInputEl.value.trim() === '') {
+        homeSearchPill.classList.remove('expanded');
+      }
+    }
+
+    if (homeSearchPillBtn) {
+      homeSearchPillBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (homeSearchPill.classList.contains('expanded') && homeSearchInputEl.value.trim() === '') {
+          collapseHomeSearch();
+        } else {
+          expandHomeSearch();
+        }
+      });
+    }
+
+    document.addEventListener('pointerdown', (e) => {
+      if (homeSearchPill && !homeSearchPill.contains(e.target)) {
+        collapseHomeSearch();
+      }
+    });
 
     loadShows();
   </script>
