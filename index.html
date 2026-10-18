@@ -890,6 +890,57 @@
       flex: 1;
     }
 
+
+    #playerScreen {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100dvh !important;
+      background: var(--bg) !important;
+      z-index: 95 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
+      pointer-events: none;
+    }
+    #playerScreen.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .player-top-sticky-bar {
+      position: relative !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      padding-top: calc(env(safe-area-inset-top, 20px) + 8px) !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      padding-bottom: 12px !important;
+      background: var(--bg) !important;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0 !important;
+      z-index: 20 !important;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #transcriptView {
+      flex: 1 1 auto !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding: 18px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+      max-width: 680px !important;
+      position: relative !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1070,24 +1121,55 @@
       '🇵🇱': 'pl', '🇹🇷': 'tr', '🇯🇵': 'ja', '🇨🇳': 'zh', '🇺🇦': 'uk'
     };
 
-    function getSourceLang() {
+        function getSourceLang() {
       if (currentShow) {
-        if (currentShow.language) return currentShow.language;
+        if (currentShow.language) return currentShow.language.slice(0, 2).toLowerCase();
         if (currentShow.flag && FLAG_TO_LANG[currentShow.flag]) return FLAG_TO_LANG[currentShow.flag];
       }
-      return 'auto';
+      return 'hu';
     }
 
     async function fetchTranslation(text) {
       const sl = getSourceLang();
-      const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + encodeURIComponent(sl) + "&tl=en&dt=t&q=" + encodeURIComponent(text);
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const data = await res.json();
-      if (Array.isArray(data) && Array.isArray(data[0])) {
-        return data[0].map(item => item[0]).join('');
-      }
-      return "Translation unavailable.";
+      const q = encodeURIComponent(text.trim());
+
+      // 1. Try Google GTX (no custom headers to avoid CORS preflight failure)
+      try {
+        const gUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl === 'auto' ? 'auto' : sl}&tl=en&dt=t&q=${q}`;
+        const r1 = await fetch(gUrl, { method: 'GET', mode: 'cors', credentials: 'omit' });
+        if (r1.ok) {
+          const d1 = await r1.json();
+          if (Array.isArray(d1) && Array.isArray(d1[0])) {
+            const resText = d1[0].map(x => x[0]).filter(Boolean).join('');
+            if (resText && resText.toLowerCase() !== text.trim().toLowerCase()) return resText;
+          }
+        }
+      } catch (e) {}
+
+      // 2. Fallback: MyMemory API with explicit source language (never 'autodetect' which fails on single words)
+      try {
+        const pair = `${sl === 'auto' ? 'hu' : sl}|en`;
+        const mUrl = `https://api.mymemory.translated.net/get?q=${q}&langpair=${encodeURIComponent(pair)}`;
+        const r2 = await fetch(mUrl);
+        if (r2.ok) {
+          const d2 = await r2.json();
+          if (d2 && d2.responseData && d2.responseData.translatedText) {
+            return d2.responseData.translatedText;
+          }
+        }
+      } catch (e) {}
+
+      // 3. Fallback: Lingva public API
+      try {
+        const lUrl = `https://lingva.ml/api/v1/${sl === 'auto' ? 'hu' : sl}/en/${q}`;
+        const r3 = await fetch(lUrl);
+        if (r3.ok) {
+          const d3 = await r3.json();
+          if (d3 && d3.translation) return d3.translation;
+        }
+      } catch (e) {}
+
+      throw new Error("All translation endpoints failed");
     }
 
     function clearSentenceTranslation(resetToggle = true) {
@@ -1329,9 +1411,13 @@
         navigate(targetScreen || (currentShow ? 'show' : 'home'));
         return;
       }
+      playerScreen.style.transition = '';
+      playerScreen.style.transform = '';
       playerScreen.classList.add('animating-dismiss');
       setTimeout(() => {
         playerScreen.classList.remove('animating-dismiss');
+        playerScreen.style.transition = '';
+        playerScreen.style.transform = '';
         navigate(targetScreen || (currentShow ? 'show' : 'home'));
       }, 260);
     }
@@ -1340,7 +1426,12 @@
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
 
+      const appHeader = document.querySelector('header');
       if (screen === 'player') {
+        if (appHeader) appHeader.style.display = 'none';
+        playerScreen.style.transform = '';
+        playerScreen.style.transition = '';
+        playerScreen.scrollTop = 0;
         playerScreen.classList.add('active');
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
@@ -1351,6 +1442,10 @@
         return;
       }
 
+      const appHeaderRestore = document.querySelector('header');
+      if (appHeaderRestore) appHeaderRestore.style.display = 'flex';
+      playerScreen.style.transform = '';
+      playerScreen.style.transition = '';
       playerScreen.classList.remove('active');
       clearSentenceTranslation();
 
@@ -1729,7 +1824,10 @@
         const current = document.getElementById(`cue-${activeCueIndex}`);
         if (current) {
           current.classList.add('active');
-          current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (transcriptView) {
+            const targetTop = current.offsetTop - transcriptView.offsetTop - (transcriptView.clientHeight / 2) + (current.clientHeight / 2);
+            transcriptView.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+          }
         }
         if (isSentenceTranslateActive) updateSentenceTranslation();
       }
