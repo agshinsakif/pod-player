@@ -918,7 +918,7 @@
       top: 0 !important;
       left: 0 !important;
       right: 0 !important;
-      padding-top: calc(env(safe-area-inset-top, 20px) + 8px) !important;
+      padding-top: max(48px, env(safe-area-inset-top, 48px)) !important;
       padding-left: 20px !important;
       padding-right: 20px !important;
       padding-bottom: 12px !important;
@@ -934,7 +934,7 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      padding:  40vh 20px calc(45vh + env(safe-area-inset-bottom, 20px)) !important;
+      padding: 20px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
       margin: 0 auto !important;
       width: 100% !important;
       max-width: 680px !important;
@@ -969,7 +969,7 @@
       top: 0 !important;
       left: 0 !important;
       right: 0 !important;
-      padding-top: calc(env(safe-area-inset-top, 20px) + 8px) !important;
+      padding-top: max(48px, env(safe-area-inset-top, 48px)) !important;
       padding-left: 20px !important;
       padding-right: 20px !important;
       padding-bottom: 12px !important;
@@ -985,7 +985,7 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      padding:  40vh 20px calc(45vh + env(safe-area-inset-bottom, 20px)) !important;
+      padding: 20px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
       margin: 0 auto !important;
       width: 100% !important;
       max-width: 680px !important;
@@ -1498,6 +1498,12 @@
     window.addEventListener("hashchange", applyRoute);
 
     function dismissPlayerScreen(targetScreen) {
+      const mc = document.getElementById('mainContainer');
+      if (mc) {
+        mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+        mc.style.transform = '';
+        mc.style.opacity = '';
+      }
       if (mainContainer) { mainContainer.style.transform = ""; mainContainer.style.opacity = ""; }
       if (!playerScreen.classList.contains('active')) {
         navigate(targetScreen || (currentShow ? 'show' : 'home'));
@@ -1518,6 +1524,12 @@
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
       if (screen === 'player') {
+        const mc = document.getElementById('mainContainer');
+        if (mc) {
+          mc.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
+          mc.style.transform = 'scale(0.94)';
+          mc.style.opacity = '0.65';
+        }
         
         playerScreen.style.transform = '';
         playerScreen.style.transition = '';
@@ -1556,6 +1568,12 @@
         ssSearchInput.value = '';
         renderEpisodeList();
       } else if (screen === 'player') {
+        const mc = document.getElementById('mainContainer');
+        if (mc) {
+          mc.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
+          mc.style.transform = 'scale(0.94)';
+          mc.style.opacity = '0.65';
+        }
         playerScreen.classList.add('active');
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
@@ -1842,44 +1860,12 @@
       if (!el || !transcriptView) return;
       const tvRect = transcriptView.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      const dock = document.getElementById('playbackButtonsSection');
-      const dockHeight = (dock && !dock.classList.contains('mini-mode')) ? dock.offsetHeight : 0;
-      const visibleHeight = tvRect.height - dockHeight;
-      const desiredCenterY = tvRect.top + (visibleHeight / 2);
-      const elCenterY = elRect.top + (elRect.height / 2);
-      const delta = elCenterY - desiredCenterY;
+      const desiredY = tvRect.top + 60; // Keep line near the top instead of middle
+      const delta = elRect.top - desiredY;
       transcriptView.scrollTo({
         top: Math.max(0, transcriptView.scrollTop + delta),
         behavior: 'smooth'
       });
-    }
-
-    function renderTranscript() {
-      transcriptView.innerHTML = '';
-      cues.forEach((cue, i) => {
-        const p = document.createElement('p');
-        p.className = 'cue';
-        p.id = `cue-${i}`;
-        p.innerText = cue.text;
-        p.onclick = () => {
-          const sel = window.getSelection().toString().trim();
-          if (sel.length > 0) return;
-          audioElement.currentTime = cue.start;
-          audioElement.play().catch(() => {});
-        };
-        transcriptView.appendChild(p);
-      });
-    }
-
-    function togglePlay(e) {
-      if (e) e.stopPropagation();
-      closeSpeedPopover();
-      if (!audioElement.src) return;
-      if (audioElement.paused) {
-        audioElement.play().catch(() => {});
-      } else {
-        audioElement.pause();
-      }
     }
 
     function seekRelative(sec) {
@@ -1897,6 +1883,17 @@
       playIcon.style.display = 'block';
       pauseIcon.style.display = 'none';
     });
+
+    
+    let fastTrackInterval;
+    audioElement.addEventListener('play', () => {
+      clearInterval(fastTrackInterval);
+      fastTrackInterval = setInterval(() => {
+        const ct = audioElement.currentTime;
+        
+      }, 50);
+    });
+    audioElement.addEventListener('pause', () => clearInterval(fastTrackInterval));
 
     audioElement.addEventListener('timeupdate', () => {
       const cur = audioElement.currentTime;
