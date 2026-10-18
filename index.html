@@ -757,23 +757,33 @@
       -webkit-user-select: text;
     }
   
-    /* Player Screen iOS Modal Sheet styling */
+    
+    /* Main container background depth transition */
+    #mainContainer {
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.3s ease;
+      will-change: transform, opacity;
+    }
+
+    /* Player Screen iOS Modal Sheet */
     #playerScreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg);
-      z-index: 95;
-      padding: 0;
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100dvh !important;
+      background: var(--bg) !important;
+      z-index: 95 !important;
+      padding: 0 !important;
+      margin: 0 !important;
       display: flex !important;
-      flex-direction: column;
-      overflow: hidden;
+      flex-direction: column !important;
+      overflow: hidden !important;
       transform: translateY(100%);
       opacity: 0;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.55);
       transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
       pointer-events: none;
+      will-change: transform;
     }
     #playerScreen.active {
       transform: translateY(0);
@@ -786,15 +796,32 @@
       transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease !important;
     }
 
+    .player-top-sticky-bar {
+      position: relative !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      padding-top: calc(env(safe-area-inset-top, 20px) + 6px) !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      padding-bottom: 10px !important;
+      background: var(--bg) !important;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0 !important;
+      z-index: 20 !important;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
     .player-sheet-handle-wrap {
       display: flex;
       justify-content: center;
-      padding: 10px 0 16px;
+      padding: 4px 0 10px;
       touch-action: none;
       cursor: grab;
     }
     .player-sheet-handle {
-      width: 44px;
+      width: 42px;
       height: 5px;
       border-radius: 3px;
       background: rgba(255, 255, 255, 0.38);
@@ -804,12 +831,11 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 22px;
       padding: 0 4px;
     }
     .player-hero-artwork {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       border-radius: 12px;
       overflow: hidden;
       flex-shrink: 0;
@@ -834,7 +860,7 @@
       -webkit-mask-image: linear-gradient(to right, transparent, black 4px, black calc(100% - 14px), transparent);
     }
     .player-hero-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text);
       display: inline-block;
@@ -849,156 +875,16 @@
       text-overflow: ellipsis;
     }
 
-    /* Translate Toggle placed on bottom-right playback dock */
-    .btn-dock.btn-translate-dock {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 1.5px solid #ffffff;
-      background: rgba(255, 255, 255, 0.06);
-      color: #ffffff;
-      transition: background 0.2s, box-shadow 0.2s, transform 0.12s;
-    }
-    .btn-dock.btn-translate-dock:active {
-      transform: scale(0.92);
-    }
-    .btn-dock.btn-translate-dock.active {
-      background: #4c1d95;
-      border-color: #ffffff;
-      box-shadow: 0 0 12px rgba(76, 29, 149, 0.7);
-    }
-
-    .player-top-sticky-bar {
-      user-select: none;
-      -webkit-user-select: none;
-      padding-top: max(12px, env(safe-area-inset-top));
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 12px;
-      background: var(--bg);
-      flex-shrink: 0;
-      z-index: 10;
-    }
-    .transcript-view {
-      display: block;
-      max-width: 680px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 10px 20px calc(180px + env(safe-area-inset-bottom));
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      flex: 1;
-    }
-
-
-    #playerScreen {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100dvh !important;
-      background: var(--bg) !important;
-      z-index: 95 !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      overflow: hidden !important;
-      transform: translateY(100%);
-      opacity: 0;
-      transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
-      pointer-events: none;
-    }
-    #playerScreen.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .player-top-sticky-bar {
-      position: relative !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      padding-top: max(48px, env(safe-area-inset-top, 48px)) !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      padding-bottom: 12px !important;
-      background: var(--bg) !important;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0 !important;
-      z-index: 20 !important;
-      user-select: none;
-      -webkit-user-select: none;
-    }
     #transcriptView {
       flex: 1 1 auto !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch !important;
-      padding: 20px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
+      padding: 16px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
       margin: 0 auto !important;
       width: 100% !important;
       max-width: 680px !important;
       position: relative !important;
-    }
-
-
-    #playerScreen {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100dvh !important;
-      background: var(--bg) !important;
-      z-index: 95 !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      overflow: hidden !important;
-      transform: translateY(100%);
-      opacity: 0;
-      transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
-      pointer-events: none;
-    }
-    #playerScreen.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .player-top-sticky-bar {
-      position: relative !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      padding-top: max(48px, env(safe-area-inset-top, 48px)) !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      padding-bottom: 12px !important;
-      background: var(--bg) !important;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0 !important;
-      z-index: 20 !important;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    #transcriptView {
-      flex: 1 1 auto !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-      -webkit-overflow-scrolling: touch !important;
-      padding: 20px 20px calc(190px + env(safe-area-inset-bottom, 20px)) !important;
-      margin: 0 auto !important;
-      width: 100% !important;
-      max-width: 680px !important;
-      position: relative !important;
-    }
-
-
-    #mainContainer {
-      position: relative;
-      transition: transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease;
-    }
-    #playerScreen {
-      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.55);
     }
 
 </style>
@@ -1903,15 +1789,36 @@
     });
 
     
-    let fastTrackInterval;
+        let fastTrackInterval = null;
     audioElement.addEventListener('play', () => {
-      clearInterval(fastTrackInterval);
+      if (fastTrackInterval) clearInterval(fastTrackInterval);
       fastTrackInterval = setInterval(() => {
-        const ct = audioElement.currentTime;
-        
-      }, 50);
+        const cur = audioElement.currentTime;
+        let idx = -1;
+        for (let i = cues.length - 1; i >= 0; i--) {
+          if (cur >= cues[i].start) {
+            idx = i;
+            break;
+          }
+        }
+        if (idx !== -1 && idx !== activeCueIndex) {
+          if (activeCueIndex !== -1) {
+            const old = document.getElementById(`cue-${activeCueIndex}`);
+            if (old) old.classList.remove('active');
+          }
+          activeCueIndex = idx;
+          const current = document.getElementById(`cue-${activeCueIndex}`);
+          if (current) {
+            current.classList.add('active');
+            centerActiveCue(current);
+          }
+          if (isSentenceTranslateActive) updateSentenceTranslation();
+        }
+      }, 60);
     });
-    audioElement.addEventListener('pause', () => clearInterval(fastTrackInterval));
+    audioElement.addEventListener('pause', () => {
+      if (fastTrackInterval) clearInterval(fastTrackInterval);
+    });
 
     audioElement.addEventListener('timeupdate', () => {
       const cur = audioElement.currentTime;
@@ -2140,93 +2047,116 @@
 
     renderSpeedMenu();
     
-            // --- Dismiss gesture handler for mobile touches and desktop mouse/trackpad ---
+                // --- Apple Music-style interactive sheet dismiss controller ---
     (function initPlayerSheetDismiss() {
       const ps = document.getElementById('playerScreen');
       const bar = document.getElementById('playerTopBar');
       const tv = document.getElementById('transcriptView');
+      const mc = document.getElementById('mainContainer');
 
       let startY = 0;
-      let curY = 0;
+      let curDeltaY = 0;
       let isDragging = false;
-      let fromScrollTop = false;
+      let fromTopBar = false;
 
-      function startDrag(y, target) {
-        const isFromTopBar = bar && bar.contains(target);
-        const isAtTop = tv ? tv.scrollTop <= 2 : true;
-        if (isFromTopBar || isAtTop) {
+      function start(y, target) {
+        if (!ps.classList.contains('active')) return;
+        const hitBar = bar && bar.contains(target);
+        const atTop = tv ? tv.scrollTop <= 2 : true;
+
+        if (hitBar || atTop) {
           startY = y;
-          curY = 0;
+          curDeltaY = 0;
           isDragging = true;
-          fromScrollTop = !isFromTopBar;
+          fromTopBar = hitBar;
           ps.style.transition = 'none';
+          if (mc) mc.style.transition = 'none';
         }
       }
 
-            function moveDrag(y) {
+      function move(y) {
         if (!isDragging) return;
         const delta = y - startY;
+
         if (delta > 0) {
-          if (fromScrollTop && tv && tv.scrollTop > 2) {
-            isDragging = false;
-            ps.style.transform = '';
-            if (mainContainer) { mainContainer.style.transform = ''; mainContainer.style.opacity = ''; }
+          // If pulling from transcript while not at the exact top, release drag back to normal scroll
+          if (!fromTopBar && tv && tv.scrollTop > 2) {
+            cancel();
             return;
           }
-          curY = delta;
+          curDeltaY = delta;
           ps.style.transform = `translateY(${delta}px)`;
-          if (mainContainer) {
-            const progress = Math.min(1, delta / (window.innerHeight || 600));
-            mainContainer.style.transition = 'none';
-            mainContainer.style.transform = `scale(${0.94 + 0.06 * progress})`;
-            mainContainer.style.opacity = `${0.65 + 0.35 * progress}`;
+
+          // Fluid background reveal
+          if (mc) {
+            const h = window.innerHeight || 600;
+            const progress = Math.min(1, delta / h);
+            mc.style.transform = `scale(${0.94 + (0.06 * progress)})`;
+            mc.style.opacity = `${0.65 + (0.35 * progress)}`;
           }
-        } else if (!fromScrollTop) {
-          ps.style.transform = '';
-          if (mainContainer) { mainContainer.style.transform = ''; mainContainer.style.opacity = ''; }
+        } else if (fromTopBar) {
+          // Resist upward drag on top bar
+          curDeltaY = 0;
+          ps.style.transform = 'translateY(0)';
         }
       }
 
-      function endDrag() {
+      function end() {
+        if (!isDragging) return;
+        isDragging = false;
+
+        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+
+        // Snap threshold: if pulled down > 70px or 12% screen height, close completely; otherwise snap back to 0
+        const threshold = Math.min(85, (window.innerHeight || 600) * 0.12);
+        if (curDeltaY > threshold) {
+          dismissPlayerScreen();
+        } else {
+          ps.style.transform = 'translateY(0)';
+          if (mc) {
+            mc.style.transform = 'scale(0.94)';
+            mc.style.opacity = '0.65';
+          }
+        }
+        curDeltaY = 0;
+      }
+
+      function cancel() {
         if (!isDragging) return;
         isDragging = false;
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
-        if (mainContainer) {
-          mainContainer.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        ps.style.transform = 'translateY(0)';
+        if (mc) {
+          mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
+          mc.style.transform = 'scale(0.94)';
+          mc.style.opacity = '0.65';
         }
-        if (curY > 90) {
-          dismissPlayerScreen();
-        } else {
-          ps.style.transform = '';
-          if (mainContainer) {
-            mainContainer.style.transform = 'scale(0.94)';
-            mainContainer.style.opacity = '0.65';
-          }
-        }
+        curDeltaY = 0;
       }
 
-      // Touch handlers (iOS/Android)
+      // Touch events (iOS / Mobile)
       ps.addEventListener('touchstart', (e) => {
-        if (!ps.classList.contains('active')) return;
-        startDrag(e.touches[0].clientY, e.target);
+        if (e.touches.length === 1) start(e.touches[0].clientY, e.target);
       }, { passive: true });
 
       ps.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         if (e.touches[0].clientY > startY) e.preventDefault();
-        moveDrag(e.touches[0].clientY);
+        move(e.touches[0].clientY);
       }, { passive: false });
 
-      ps.addEventListener('touchend', endDrag, { passive: true });
+      ps.addEventListener('touchend', end, { passive: true });
+      ps.addEventListener('touchcancel', cancel, { passive: true });
 
-      // Mouse drag on top bar (Desktop web)
+      // Mouse drag on top bar (Desktop)
       bar.addEventListener('mousedown', (e) => {
         if (!ps.classList.contains('active')) return;
         e.preventDefault();
-        startDrag(e.clientY, e.target);
-        const onMouseMove = (ev) => moveDrag(ev.clientY);
+        start(e.clientY, e.target);
+        const onMouseMove = (ev) => move(ev.clientY);
         const onMouseUp = () => {
-          endDrag();
+          end();
           window.removeEventListener('mousemove', onMouseMove);
           window.removeEventListener('mouseup', onMouseUp);
         };
@@ -2234,17 +2164,17 @@
         window.addEventListener('mouseup', onMouseUp);
       });
 
-      // Desktop trackpad two-finger swipe down at the top of transcript
-      let wheelAccumulator = 0;
-      let wheelResetTimer = null;
+      // Trackpad two-finger swipe down dismiss
+      let wheelAcc = 0;
+      let wheelTimer = null;
       ps.addEventListener('wheel', (e) => {
         if (!ps.classList.contains('active')) return;
-        if (tv && tv.scrollTop <= 0 && e.deltaY < -25) {
-          wheelAccumulator += Math.abs(e.deltaY);
-          clearTimeout(wheelResetTimer);
-          wheelResetTimer = setTimeout(() => { wheelAccumulator = 0; }, 200);
-          if (wheelAccumulator > 120) {
-            wheelAccumulator = 0;
+        if (tv && tv.scrollTop <= 0 && e.deltaY < -20) {
+          wheelAcc += Math.abs(e.deltaY);
+          clearTimeout(wheelTimer);
+          wheelTimer = setTimeout(() => { wheelAcc = 0; }, 180);
+          if (wheelAcc > 90) {
+            wheelAcc = 0;
             dismissPlayerScreen();
           }
         }
