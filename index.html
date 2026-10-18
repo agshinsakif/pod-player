@@ -965,6 +965,36 @@
       pointer-events: auto !important;
     }
 
+
+    /* Full mode reset when player screen is active */
+    .playback-buttons-section:not(.mini-mode) {
+      position: fixed !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      border-radius: 0 !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 14px 20px calc(18px + env(safe-area-inset-bottom)) !important;
+      background: var(--card-bg) !important;
+      border-top: 1px solid var(--border) !important;
+      z-index: 100 !important;
+      box-shadow: none !important;
+      pointer-events: auto !important;
+    }
+
+    .playback-buttons-section:not(.mini-mode) .progress-bar-container,
+    .playback-buttons-section:not(.mini-mode) .controls-row,
+    .playback-buttons-section:not(.mini-mode) .volume-row {
+      display: flex !important;
+    }
+
+    .playback-buttons-section:not(.mini-mode) .pbs-home-title-wrapper {
+      display: none !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1490,47 +1520,24 @@
       }, 260);
     }
 
-    function switchScreen(screen) {
+        function switchScreen(screen) {
       const appHeader = document.getElementById('mainAppHeader');
+      if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
 
       const dockRow = document.getElementById('homeBottomDockRow');
       const pbs = document.getElementById('playbackButtonsSection');
       const searchPill = document.getElementById('homeSearchPill');
-      if (screen === 'home') {
-        if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
-        if (searchPill) searchPill.style.display = 'flex';
-        if (dockRow) dockRow.style.display = 'flex';
-      } else {
-        if (searchPill) searchPill.style.display = 'none';
-        if (screen === 'player') {
-          if (dockRow) dockRow.style.display = 'none';
-          if (pbs && pbs.parentElement !== document.body) document.body.appendChild(pbs);
-        } else {
-          if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
-          if (dockRow) dockRow.style.display = 'flex';
-        }
-      }
 
       if (screen === 'player') {
-        if (showScreen.classList.contains('active')) previousActiveScreen = 'show';
-        else previousActiveScreen = 'home';
-      }
-      if (appHeader) appHeader.style.display = (screen === 'home') ? 'flex' : 'none';
-      homeScreen.classList.remove('active');
-      showScreen.classList.remove('active');
+        if (dockRow) dockRow.style.display = 'none';
+        if (pbs && pbs.parentElement !== document.body) document.body.appendChild(pbs);
+        pbs.classList.remove('mini-mode');
 
-      if (screen === 'player') {
-        if (homeScreen.classList.contains('active')) previousActiveScreen = 'home';
-        else if (showScreen.classList.contains('active')) previousActiveScreen = 'show';
         if (mainContainer) {
           mainContainer.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
           mainContainer.style.transform = 'scale(0.94)';
           mainContainer.style.opacity = '0.65';
         }
-        playerScreen.style.transform = '';
-        playerScreen.style.transition = '';
-        playerScreen.scrollTop = 0;
-        playerScreen.classList.add('active');
 
         if (previousActiveScreen === 'show' && currentShow) {
           showScreen.classList.add('active');
@@ -1540,16 +1547,30 @@
           showScreen.classList.remove('active');
         }
 
-        homeSearchWrap.style.display = 'none';
+        playerScreen.style.transform = '';
+        playerScreen.style.transition = '';
+        playerScreen.scrollTop = 0;
+        playerScreen.classList.add('active');
+
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
-        playbackButtonsSection.classList.remove('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
         updatePlayerHeroUI();
         setTimeout(() => {
           if (activeCueIndex >= 0) centerActiveCue(document.getElementById(`cue-${activeCueIndex}`));
         }, 120);
         return;
+      }
+
+      if (pbs) pbs.classList.add('mini-mode');
+      if (screen === 'home') {
+        if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
+        if (searchPill) searchPill.style.display = 'flex';
+        if (dockRow) dockRow.style.display = 'flex';
+      } else {
+        if (searchPill) searchPill.style.display = 'none';
+        if (dockRow && pbs && pbs.parentElement !== dockRow) dockRow.appendChild(pbs);
+        if (dockRow) dockRow.style.display = 'flex';
       }
 
       playerScreen.classList.remove('active');
@@ -1563,18 +1584,16 @@
 
       if (screen === 'home') {
         homeScreen.classList.add('active');
-        homeSearchWrap.style.display = 'flex';
+        showScreen.classList.remove('active');
         headerBrandTitle.style.display = 'block';
         headerBrandTitle.innerText = "Genius Podcast";
         headerMarqueeWrapper.style.display = 'none';
-        playbackButtonsSection.classList.add('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
       } else if (screen === 'show') {
         showScreen.classList.add('active');
-        homeSearchWrap.style.display = 'none';
+        homeScreen.classList.remove('active');
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
-        playbackButtonsSection.classList.add('mini-mode');
         ssSearchInput.value = '';
         renderEpisodeList();
       }
@@ -1639,11 +1658,28 @@
       }
 
       try {
-        const playlistUrl = "playlist.json?nocache=" + Date.now();
-        const res = await fetch(playlistUrl);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const allEpisodes = await res.json();
-        const fetchedList = allEpisodes.filter(ep => ep.show_id === showId || ep.folder === showId);
+        let allEpisodes = [];
+        // Try root playlist first, fallback to R2 show-specific playlist
+        try {
+          const res = await fetch("playlist.json?nocache=" + Date.now());
+          if (res.ok) {
+            const data = await res.json();
+            allEpisodes = Array.isArray(data) ? data : (data.episodes || []);
+          }
+        } catch (e) {}
+
+        if (!allEpisodes.length) {
+          try {
+            const r2Url = safeUrl(`${R2_BASE}/${showId}/playlist.json?nocache=` + Date.now());
+            const res2 = await fetch(r2Url);
+            if (res2.ok) {
+              const data2 = await res2.json();
+              allEpisodes = Array.isArray(data2) ? data2 : (data2.episodes || []);
+            }
+          } catch (e) {}
+        }
+
+        const fetchedList = allEpisodes.filter(ep => !ep.show_id && !ep.folder ? true : (ep.show_id === showId || ep.folder === showId));
 
         fetchedList.sort((a, b) => (b.raw_date || b.upload_date || "").localeCompare(a.raw_date || a.upload_date || ""));
 
