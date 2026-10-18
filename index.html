@@ -683,26 +683,40 @@
       100% { transform: translateX(-100%); }
     }
 
-        .btn-translate-circle {
-      position: absolute;
-      right: 16px;
+        .transcript-view {
+      display: block;
+      max-width: 680px;
+      margin: 0 auto;
+      padding-right: 56px;
+    }
+
+    .btn-translate-circle {
+      position: fixed;
+      right: 18px;
       top: 50%;
       transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border: 1.5px solid #000;
-      background: transparent;
-      color: #000;
+      border: 1.5px solid #ffffff;
+      background: #4c1d95;
+      color: #ffffff;
       display: none;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 60;
-      transition: transform 0.15s, opacity 0.15s;
+      z-index: 120;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      transition: background 0.2s, transform 0.15s, border-color 0.2s;
     }
-    .btn-translate-circle:active { transform: translateY(-50%) scale(0.92); }
-    .btn-translate-circle.active { background: rgba(0,0,0,0.1); }
+    .btn-translate-circle:active {
+      transform: translateY(-50%) scale(0.92);
+    }
+    .btn-translate-circle.active {
+      background: #a855f7;
+      border-color: #ffffff;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.55);
+    }
     .sentence-highlight {
       background: rgba(255, 255, 255, 0.18);
       border-radius: 4px;
@@ -904,6 +918,7 @@
 
     let wasPlayingBeforeTranslate = false;
     let currentTranslatedSentence = null;
+    let isSentenceTranslateActive = false;
 
     const FLAG_TO_LANG = {
       '🇭🇺': 'hu', '🇩🇪': 'de', '🇪🇸': 'es', '🇫🇷': 'fr', '🇮🇹': 'it',
@@ -928,15 +943,18 @@
       return json[0].map(item => item[0]).join('');
     }
 
-    function clearSentenceTranslation() {
+    function clearSentenceTranslation(resetToggle = true) {
       currentTranslatedSentence = null;
+      if (resetToggle) {
+        isSentenceTranslateActive = false;
+        const btn = document.getElementById('btnTranslateCircle');
+        if (btn) btn.classList.remove('active');
+      }
       document.querySelectorAll('.inline-translation-box').forEach(el => el.remove());
       cues.forEach((c, idx) => {
         const p = document.getElementById(`cue-${idx}`);
         if (p) p.innerText = c.text;
       });
-      const btn = document.getElementById('btnTranslateCircle');
-      if (btn) btn.classList.remove('active');
     }
 
     function getCurrentSentenceInfo() {
@@ -965,19 +983,14 @@
       return { text: sentenceText, sStart, sEnd, startCueIdx, endCueIdx, cueOffsets };
     }
 
-    async function toggleSentenceTranslation() {
-      const btn = document.getElementById('btnTranslateCircle');
+    async function updateSentenceTranslation(force = false) {
+      if (!isSentenceTranslateActive) return;
       const info = getCurrentSentenceInfo();
       if (!info) return;
+      if (!force && currentTranslatedSentence === info.text) return;
 
-      if (currentTranslatedSentence === info.text) {
-        clearSentenceTranslation();
-        return;
-      }
-
-      clearSentenceTranslation();
+      clearSentenceTranslation(false);
       currentTranslatedSentence = info.text;
-      if (btn) btn.classList.add('active');
 
       for (let i = info.startCueIdx; i <= info.endCueIdx; i++) {
         const c = cues[i];
@@ -1000,11 +1013,23 @@
 
       try {
         const translated = await fetchTranslation(info.text);
-        if (currentTranslatedSentence === info.text) {
+        if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
           box.innerText = translated;
         }
       } catch (e) {
-        if (currentTranslatedSentence === info.text) box.innerText = 'Translation failed.';
+        if (isSentenceTranslateActive && currentTranslatedSentence === info.text) box.innerText = 'Translation failed.';
+      }
+    }
+
+    function toggleSentenceTranslation() {
+      const btn = document.getElementById('btnTranslateCircle');
+      isSentenceTranslateActive = !isSentenceTranslateActive;
+      if (btn) btn.classList.toggle('active', isSentenceTranslateActive);
+
+      if (isSentenceTranslateActive) {
+        updateSentenceTranslation(true);
+      } else {
+        clearSentenceTranslation(true);
       }
     }
     
