@@ -796,6 +796,7 @@
       display: inline-block !important;
     }
 
+    .playback-buttons-section.mini-mode #btnTranslateDock,
     .playback-buttons-section.mini-mode .btn-translate-dock,
     .playback-buttons-section.mini-mode .progress-bar-container,
     .playback-buttons-section.mini-mode .controls-row .speed-btn-wrapper,
@@ -1046,6 +1047,7 @@
     let wasPlayingBeforeTranslate = false;
     let currentTranslatedSentence = null;
     let isSentenceTranslateActive = false;
+    let previousActiveScreen = 'home';
 
     const FLAG_TO_LANG = {
       '🇭🇺': 'hu', '🇩🇪': 'de', '🇪🇸': 'es', '🇫🇷': 'fr', '🇮🇹': 'it',
@@ -1367,7 +1369,7 @@
         mainContainer.style.opacity = '';
       }
       if (!playerScreen.classList.contains('active')) {
-        navigate(targetScreen || (currentShow ? 'show' : 'home'));
+        navigate(targetScreen || previousActiveScreen);
         return;
       }
       playerScreen.style.transition = '';
@@ -1377,7 +1379,7 @@
         playerScreen.classList.remove('animating-dismiss');
         playerScreen.style.transition = '';
         playerScreen.style.transform = '';
-        navigate(targetScreen || (currentShow ? 'show' : 'home'));
+        navigate(targetScreen || previousActiveScreen);
       }, 260);
     }
 
@@ -1389,6 +1391,8 @@
       showScreen.classList.remove('active');
 
       if (screen === 'player') {
+        if (homeScreen.classList.contains('active')) previousActiveScreen = 'home';
+        else if (showScreen.classList.contains('active')) previousActiveScreen = 'show';
         if (mainContainer) {
           mainContainer.style.transition = 'transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.32s ease';
           mainContainer.style.transform = 'scale(0.94)';
@@ -2031,7 +2035,7 @@
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
         if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
 
-        const threshold = Math.min(85, (window.innerHeight || 600) * 0.12);
+        const threshold = (window.innerHeight || 600) * 0.4;
         if (curDeltaY > threshold) {
           dismissPlayerScreen();
         } else {
