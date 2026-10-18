@@ -869,6 +869,8 @@
     }
 
     .player-top-sticky-bar {
+      user-select: none;
+      -webkit-user-select: none;
       padding-top: max(12px, env(safe-area-inset-top));
       padding-left: 20px;
       padding-right: 20px;
@@ -1078,11 +1080,14 @@
 
     async function fetchTranslation(text) {
       const sl = getSourceLang();
-      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+      const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + encodeURIComponent(sl) + "&tl=en&dt=t&q=" + encodeURIComponent(text);
       const res = await fetch(url);
       if (!res.ok) throw new Error("HTTP " + res.status);
-      const json = await res.json();
-      return json[0].map(item => item[0]).join('');
+      const data = await res.json();
+      if (Array.isArray(data) && Array.isArray(data[0])) {
+        return data[0].map(item => item[0]).join('');
+      }
+      return "Translation unavailable.";
     }
 
     function clearSentenceTranslation(resetToggle = true) {
@@ -1131,9 +1136,16 @@
       if (!info) return;
       if (!force && currentTranslatedSentence === info.text) return;
 
-      clearSentenceTranslation(false);
       currentTranslatedSentence = info.text;
 
+      // Reset cues text and existing inline translation boxes
+      document.querySelectorAll('.inline-translation-box').forEach(el => el.remove());
+      cues.forEach((c, idx) => {
+        const p = document.getElementById(`cue-${idx}`);
+        if (p) p.innerText = c.text;
+      });
+
+      // Highlight the active sentence within current cues
       for (let i = info.startCueIdx; i <= info.endCueIdx; i++) {
         const c = cues[i];
         const off = info.cueOffsets[i];
@@ -1159,7 +1171,9 @@
           box.innerText = translated;
         }
       } catch (e) {
-        if (isSentenceTranslateActive && currentTranslatedSentence === info.text) box.innerText = 'Translation failed.';
+        if (isSentenceTranslateActive && currentTranslatedSentence === info.text) {
+          box.innerText = 'Translation failed.';
+        }
       }
     }
 
@@ -1717,6 +1731,9 @@
           current.classList.add('active');
           current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+        if (isSentenceTranslateActive) updateSentenceTranslation();
+      });
+        }
       }
     });
 
@@ -1909,24 +1926,22 @@
 
     renderSpeedMenu();
     
-        // --- Apple Music-style interactive pull down to dismiss ---
+            // --- Dismiss gesture handler for mobile touches and desktop mouse/trackpad ---
     (function initPlayerSheetDismiss() {
       const ps = document.getElementById('playerScreen');
       const bar = document.getElementById('playerTopBar');
       const tv = document.getElementById('transcriptView');
+
       let startY = 0;
       let curY = 0;
       let isDragging = false;
       let fromScrollTop = false;
 
-      function onTouchStart(e) {
-        if (!ps.classList.contains('active')) return;
-        const touch = e.touches[0];
-        const isFromTopBar = bar && bar.contains(e.target);
+      function startDrag(y, target) {
+        const isFromTopBar = bar && bar.contains(target);
         const isAtTop = tv ? tv.scrollTop <= 2 : true;
-
         if (isFromTopBar || isAtTop) {
-          startY = touch.clientY;
+          startY = y;
           curY = 0;
           isDragging = true;
           fromScrollTop = !isFromTopBar;
@@ -1934,16 +1949,15 @@
         }
       }
 
-      function onTouchMove(e) {
+      function moveDrag(y) {
         if (!isDragging) return;
-        const delta = e.touches[0].clientY - startY;
+        const delta = y - startY;
         if (delta > 0) {
           if (fromScrollTop && tv && tv.scrollTop > 2) {
             isDragging = false;
             ps.style.transform = '';
             return;
           }
-          e.preventDefault();
           curY = delta;
           ps.style.transform = `translateY(${delta}px)`;
         } else if (!fromScrollTop) {
@@ -1951,20 +1965,62 @@
         }
       }
 
-      function onTouchEnd() {
+      function endDrag() {
         if (!isDragging) return;
         isDragging = false;
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
-        if (curY > 100) {
+        if (curY > 90) {
           dismissPlayerScreen();
         } else {
           ps.style.transform = 'translateY(0)';
         }
       }
 
-      ps.addEventListener('touchstart', onTouchStart, { passive: true });
-      ps.addEventListener('touchmove', onTouchMove, { passive: false });
-      ps.addEventListener('touchend', onTouchEnd, { passive: true });
+      // Touch handlers (iOS/Android)
+      ps.addEventListener('touchstart', (e) => {
+        if (!ps.classList.contains('active')) return;
+        startDrag(e.touches[0].clientY, e.target);
+      }, { passive: true });
+
+      ps.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        if (e.touches[0].clientY > startY) e.preventDefault();
+        moveDrag(e.touches[0].clientY);
+      }, { passive: false });
+
+      ps.addEventListener('touchend', endDrag, { passive: true });
+
+      // Mouse drag on top bar (Desktop web)
+      bar.addEventListener('mousedown', (e) => {
+        if (!ps.classList.contains('active')) return;
+        e.preventDefault();
+        startDrag(e.clientY, e.target);
+        const onMouseMove = (ev) => moveDrag(ev.clientY);
+        const onMouseUp = () => {
+          endDrag();
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
+        };
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      });
+
+      // Desktop trackpad two-finger swipe down at the top of transcript
+      let wheelAccumulator = 0;
+      let wheelResetTimer = null;
+      ps.addEventListener('wheel', (e) => {
+        if (!ps.classList.contains('active')) return;
+        if (tv && tv.scrollTop <= 0 && e.deltaY < -25) {
+          wheelAccumulator += Math.abs(e.deltaY);
+          clearTimeout(wheelResetTimer);
+          wheelResetTimer = setTimeout(() => { wheelAccumulator = 0; }, 200);
+          if (wheelAccumulator > 120) {
+            wheelAccumulator = 0;
+            dismissPlayerScreen();
+          }
+        }
+      }, { passive: true });
+
       const handle = document.getElementById('playerSheetHandle');
       if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
     })();
