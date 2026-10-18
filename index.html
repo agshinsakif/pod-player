@@ -1031,6 +1031,37 @@
       display: none !important;
     }
 
+
+    /* Strict 54x54 perfect circle when search bar is expanded */
+    .home-bottom-dock-row:has(.home-search-pill-container.expanded) .playback-buttons-section.mini-mode,
+    .home-bottom-dock-row.search-active .playback-buttons-section.mini-mode {
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
+      height: 54px !important;
+      min-height: 54px !important;
+      max-height: 54px !important;
+      aspect-ratio: 1 / 1 !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+    }
+
+    .home-bottom-dock-row:has(.home-search-pill-container.expanded) .playback-buttons-section.mini-mode .controls-row,
+    .home-bottom-dock-row.search-active .playback-buttons-section.mini-mode .controls-row {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
 </style>
 </head>
 <body>
@@ -2233,7 +2264,7 @@
         if (isClickableHero) return;
 
         const hitBar = bar && bar.contains(target);
-        const atTop = tv ? tv.scrollTop <= 0 : true;
+        const atTop = tv ? tv.scrollTop <= 2 : true;
 
         if (hitBar || atTop) {
           startY = y;
@@ -2250,12 +2281,12 @@
         const delta = y - startY;
 
         if (delta > 0) {
-          if (!fromTopBar && tv && tv.scrollTop > 0) {
+          if (!fromTopBar && tv && tv.scrollTop > 2) {
             cancel();
             return;
           }
           curDeltaY = delta;
-          ps.style.transform = `translateY(${delta}px)`;
+          ps.style.setProperty('transform', `translateY(${delta}px)`, 'important');
 
           if (mc) {
             const h = window.innerHeight || 600;
@@ -2265,7 +2296,7 @@
           }
         } else if (fromTopBar) {
           curDeltaY = 0;
-          ps.style.transform = 'translateY(0)';
+          ps.style.setProperty('transform', 'translateY(0px)', 'important');
         }
       }
 
@@ -2274,20 +2305,26 @@
         isDragging = false;
 
         const vh = window.innerHeight || document.documentElement.clientHeight || 600;
-        const minSwipeDistance = vh * (9 / 20);
+        const minSwipeDistance = vh * 0.45; // 9/20 of screen height
 
         if (curDeltaY >= minSwipeDistance) {
+          ps.style.removeProperty('transform');
           ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
           if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
           dismissPlayerScreen(previousActiveScreen);
         } else {
-          ps.style.transition = 'transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1)';
-          ps.style.transform = 'translateY(0)';
+          ps.style.transition = 'transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1)';
+          ps.style.setProperty('transform', 'translateY(0px)', 'important');
           if (mc) {
-            mc.style.transition = 'transform 0.24s ease, opacity 0.24s ease';
+            mc.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
             mc.style.transform = 'scale(0.94)';
             mc.style.opacity = '0.65';
           }
+          setTimeout(() => {
+            if (ps.classList.contains('active') && !isDragging) {
+              ps.style.removeProperty('transform');
+            }
+          }, 260);
         }
         curDeltaY = 0;
       }
@@ -2295,13 +2332,18 @@
       function cancel() {
         if (!isDragging) return;
         isDragging = false;
-        ps.style.transition = 'transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1)';
-        ps.style.transform = 'translateY(0)';
+        ps.style.transition = 'transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1)';
+        ps.style.setProperty('transform', 'translateY(0px)', 'important');
         if (mc) {
-          mc.style.transition = 'transform 0.24s ease, opacity 0.24s ease';
+          mc.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
           mc.style.transform = 'scale(0.94)';
           mc.style.opacity = '0.65';
         }
+        setTimeout(() => {
+          if (ps.classList.contains('active') && !isDragging) {
+            ps.style.removeProperty('transform');
+          }
+        }, 260);
         curDeltaY = 0;
       }
 
@@ -2320,6 +2362,8 @@
 
       bar.addEventListener('mousedown', (e) => {
         if (!ps.classList.contains('active')) return;
+        const isClickableHero = e.target.closest('#playerHeroArtwork') || e.target.closest('#playerHeroMeta');
+        if (isClickableHero) return;
         e.preventDefault();
         start(e.clientY, e.target);
         const onMouseMove = (ev) => move(ev.clientY);
@@ -2331,9 +2375,6 @@
         window.addEventListener('mousemove', onMouseMove);
         window.addEventListener('mouseup', onMouseUp);
       });
-
-      const handle = document.getElementById('playerSheetHandle');
-      if (handle) handle.addEventListener('click', () => dismissPlayerScreen(previousActiveScreen));
     })();
 
     
