@@ -855,7 +855,7 @@
       height: 46px;
       border-radius: 50%;
       border: 1.5px solid #ffffff;
-      background: #4c1d95;
+      background: rgba(255, 255, 255, 0.06);
       color: #ffffff;
       transition: background 0.2s, box-shadow 0.2s, transform 0.12s;
     }
@@ -863,9 +863,9 @@
       transform: scale(0.92);
     }
     .btn-dock.btn-translate-dock.active {
-      background: #a855f7;
+      background: #4c1d95;
       border-color: #ffffff;
-      box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
+      box-shadow: 0 0 12px rgba(76, 29, 149, 0.7);
     }
 
     .player-top-sticky-bar {
@@ -1174,49 +1174,61 @@
 
             function getSourceLang() {
       if (currentShow) {
+        if (currentShow.lang) return currentShow.lang.slice(0, 2).toLowerCase();
         if (currentShow.language) return currentShow.language.slice(0, 2).toLowerCase();
-        if (currentShow.flag && FLAG_TO_LANG[currentShow.flag]) return FLAG_TO_LANG[currentShow.flag];
+        if (currentShow.flag) {
+          const f = currentShow.flag.trim();
+          if (FLAG_TO_LANG[f]) return FLAG_TO_LANG[f];
+        }
       }
-      return 'hu';
+      return 'auto';
     }
 
     async function fetchTranslation(text) {
+      const cleanText = text.trim();
+      if (!cleanText) return "";
       const sl = getSourceLang();
-      const q = encodeURIComponent(text.trim());
+      const q = encodeURIComponent(cleanText);
 
-      // 1. Try Google GTX (no custom headers to avoid CORS preflight failure)
-      try {
-        const gUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl === 'auto' ? 'auto' : sl}&tl=en&dt=t&q=${q}`;
-        const r1 = await fetch(gUrl, { method: 'GET', mode: 'cors', credentials: 'omit' });
-        if (r1.ok) {
-          const d1 = await r1.json();
-          if (Array.isArray(d1) && Array.isArray(d1[0])) {
-            const resText = d1[0].map(x => x[0]).filter(Boolean).join('');
-            if (resText && resText.toLowerCase() !== text.trim().toLowerCase()) return resText;
+      // Try Google GTX with detected/mapped show language first, then with 'auto' if unchanged
+      const langsToTry = sl === 'auto' ? ['auto'] : [sl, 'auto'];
+      for (const lang of langsToTry) {
+        try {
+          const gUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${lang}&tl=en&dt=t&q=${q}`;
+          const r = await fetch(gUrl);
+          if (r.ok) {
+            const d = await r.json();
+            if (Array.isArray(d) && Array.isArray(d[0])) {
+              const resText = d[0].map(x => x && x[0]).filter(Boolean).join('');
+              if (resText && (resText.toLowerCase() !== cleanText.toLowerCase() || lang === 'auto')) {
+                return resText;
+              }
+            }
           }
-        }
-      } catch (e) {}
+        } catch (e) {}
+      }
 
-      // 2. Fallback: MyMemory API with explicit source language (never 'autodetect' which fails on single words)
+      // Fallback: Google Dictionary / client=dict-chrome-ex endpoint
       try {
-        const pair = `${sl === 'auto' ? 'hu' : sl}|en`;
-        const mUrl = `https://api.mymemory.translated.net/get?q=${q}&langpair=${encodeURIComponent(pair)}`;
-        const r2 = await fetch(mUrl);
+        const dUrl = `https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=${sl}&tl=en&q=${q}`;
+        const r2 = await fetch(dUrl);
         if (r2.ok) {
           const d2 = await r2.json();
-          if (d2 && d2.responseData && d2.responseData.translatedText) {
-            return d2.responseData.translatedText;
+          if (Array.isArray(d2) && d2[0]) {
+            return Array.isArray(d2[0]) ? d2[0][0] : d2[0];
           }
         }
       } catch (e) {}
 
-      // 3. Fallback: Lingva public API
+      // Fallback: MyMemory
       try {
-        const lUrl = `https://lingva.ml/api/v1/${sl === 'auto' ? 'hu' : sl}/en/${q}`;
-        const r3 = await fetch(lUrl);
+        const pair = `${sl === 'auto' ? 'fr' : sl}|en`;
+        const r3 = await fetch(`https://api.mymemory.translated.net/get?q=${q}&langpair=${encodeURIComponent(pair)}`);
         if (r3.ok) {
           const d3 = await r3.json();
-          if (d3 && d3.translation) return d3.translation;
+          if (d3 && d3.responseData && d3.responseData.translatedText) {
+            return d3.responseData.translatedText;
+          }
         }
       } catch (e) {}
 
@@ -1479,7 +1491,7 @@
 
       const appHeader = document.querySelector('header');
       if (screen === 'player') {
-        if (appHeader) appHeader.style.display = 'none';
+        
         playerScreen.style.transform = '';
         playerScreen.style.transition = '';
         playerScreen.scrollTop = 0;
@@ -1494,11 +1506,11 @@
       }
 
       const appHeaderRestore = document.querySelector('header');
-      if (appHeaderRestore) appHeaderRestore.style.display = 'flex';
+      
       playerScreen.style.transform = '';
       playerScreen.style.transition = '';
       const appHeaderRestore = document.querySelector('header');
-      if (appHeaderRestore) appHeaderRestore.style.display = 'flex';
+      
       playerScreen.style.transform = '';
       playerScreen.style.transition = '';
       playerScreen.classList.remove('active');
@@ -2112,18 +2124,18 @@
           curY = delta;
           ps.style.transform = `translateY(${delta}px)`;
         } else if (!fromScrollTop) {
-          ps.style.transform = 'translateY(0)';
+          ps.style.transform = '';
         }
       }
 
       function endDrag() {
         if (!isDragging) return;
         isDragging = false;
-        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        ps.style.transition = '';
         if (curY > 90) {
           dismissPlayerScreen();
         } else {
-          ps.style.transform = 'translateY(0)';
+          ps.style.transform = '';
         }
       }
 
