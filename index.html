@@ -755,7 +755,118 @@
       user-select: text;
       -webkit-user-select: text;
     }
-  </style>
+  
+    /* Player Screen iOS Modal Sheet styling */
+    #playerScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 95;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: max(20px, env(safe-area-inset-top)) 20px calc(150px + env(safe-area-inset-bottom));
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
+      display: block !important;
+      pointer-events: none;
+    }
+    #playerScreen.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #playerScreen.animating-dismiss {
+      transform: translateY(100%) !important;
+      opacity: 0.8 !important;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease !important;
+    }
+
+    .player-sheet-handle-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 16px;
+      touch-action: none;
+      cursor: grab;
+    }
+    .player-sheet-handle {
+      width: 44px;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.38);
+    }
+
+    .player-hero-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding: 0 4px;
+    }
+    .player-hero-artwork {
+      width: 58px;
+      height: 58px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+      background: #1f1b2e;
+    }
+    .player-hero-artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .player-hero-meta {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .player-hero-title-wrap {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 4px, black calc(100% - 14px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 4px, black calc(100% - 14px), transparent);
+    }
+    .player-hero-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .player-hero-show {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Translate Toggle placed on bottom-right playback dock */
+    .btn-dock.btn-translate-dock {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1.5px solid #ffffff;
+      background: #4c1d95;
+      color: #ffffff;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.12s;
+    }
+    .btn-dock.btn-translate-dock:active {
+      transform: scale(0.92);
+    }
+    .btn-dock.btn-translate-dock.active {
+      background: #a855f7;
+      border-color: #ffffff;
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
+    }
+</style>
 </head>
 <body>
 
@@ -764,12 +875,7 @@
     <div class="header-marquee-wrapper" id="headerMarqueeWrapper">
       <span class="header-marquee-text" id="headerMarqueeText">—</span>
     </div>
-    <button class="btn-translate-circle" id="btnTranslateCircle" onclick="toggleSentenceTranslation()" title="Translate sentence (Q)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1"/>
-        <path d="M22 22l-5-10-5 10M14 18h6"/>
-      </svg>
-    </button>
+    
   </header>
 
   <main id="mainContainer">
@@ -827,6 +933,20 @@
 
     <!-- Screen 3: Player Screen (PS) -->
     <div id="playerScreen" class="screen">
+      <div class="player-sheet-handle-wrap" id="playerSheetHandle">
+        <div class="player-sheet-handle"></div>
+      </div>
+      <div class="player-hero-header">
+        <div class="player-hero-artwork">
+          <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
+        </div>
+        <div class="player-hero-meta">
+          <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
+            <span class="player-hero-title" id="playerHeroTitle">—</span>
+          </div>
+          <div class="player-hero-show" id="playerHeroShow">—</div>
+        </div>
+      </div>
       <div class="transcript-view" id="transcriptView"></div>
     </div>
   </main>
@@ -881,12 +1001,10 @@
         </svg>
       </button>
 
-      <button class="btn-dock btn-show" onclick="navigateToCurrentShow()" title="Go to show">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="7" height="7"></rect>
-          <rect x="14" y="3" width="7" height="7"></rect>
-          <rect x="14" y="14" width="7" height="7"></rect>
-          <rect x="3" y="14" width="7" height="7"></rect>
+      <button class="btn-dock btn-translate-dock" id="btnTranslateDock" onclick="toggleSentenceTranslation()" title="Translate sentence (Q)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1"/>
+          <path d="M22 22l-5-10-5 10M14 18h6"/>
         </svg>
       </button>
     </div>
@@ -947,7 +1065,7 @@
       currentTranslatedSentence = null;
       if (resetToggle) {
         isSentenceTranslateActive = false;
-        const btn = document.getElementById('btnTranslateCircle');
+        const btn = document.getElementById('btnTranslateDock');
         if (btn) btn.classList.remove('active');
       }
       document.querySelectorAll('.inline-translation-box').forEach(el => el.remove());
@@ -1022,9 +1140,9 @@
     }
 
     function toggleSentenceTranslation() {
-      const btn = document.getElementById('btnTranslateCircle');
+      const btn = document.getElementById('btnTranslateDock');
       isSentenceTranslateActive = !isSentenceTranslateActive;
-      if (btn) btn.classList.toggle('active', isSentenceTranslateActive);
+      if (btn) if (btn) btn.classList.toggle('active', isSentenceTranslateActive);
 
       if (isSentenceTranslateActive) {
         updateSentenceTranslation(true);
@@ -1168,14 +1286,35 @@
     window.addEventListener("popstate", applyRoute);
     window.addEventListener("hashchange", applyRoute);
 
+    function dismissPlayerScreen(targetScreen) {
+      if (!playerScreen.classList.contains('active')) {
+        navigate(targetScreen || (currentShow ? 'show' : 'home'));
+        return;
+      }
+      playerScreen.classList.add('animating-dismiss');
+      setTimeout(() => {
+        playerScreen.classList.remove('animating-dismiss');
+        navigate(targetScreen || (currentShow ? 'show' : 'home'));
+      }, 260);
+    }
+
     function switchScreen(screen) {
       homeScreen.classList.remove('active');
       showScreen.classList.remove('active');
-      playerScreen.classList.remove('active');
 
-      const btnTrans = document.getElementById('btnTranslateCircle');
-      if (btnTrans) btnTrans.style.display = (screen === 'player') ? 'flex' : 'none';
-      if (screen !== 'player') clearSentenceTranslation();
+      if (screen === 'player') {
+        playerScreen.classList.add('active');
+        homeSearchWrap.style.display = 'none';
+        headerBrandTitle.style.display = 'none';
+        headerMarqueeWrapper.style.display = 'none';
+        playbackButtonsSection.classList.remove('mini-mode');
+        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+        updateMarquees();
+        return;
+      }
+
+      playerScreen.classList.remove('active');
+      clearSentenceTranslation();
 
       if (screen === 'home') {
         homeScreen.classList.add('active');
@@ -1662,6 +1801,12 @@
           if (headerMarqueeWrapper.style.display === "block" && headerMarqueeText.scrollWidth > headerMarqueeWrapper.clientWidth) {
             headerMarqueeText.classList.add("marquee-active");
           }
+          const pht = document.getElementById('playerHeroTitle');
+          const phtWrap = document.getElementById('playerHeroTitleWrap');
+          if (pht && phtWrap) {
+            pht.classList.remove('marquee-active');
+            if (pht.scrollWidth > phtWrap.clientWidth) pht.classList.add('marquee-active');
+          }
           if (pbsHomeTitle.scrollWidth > pbsHomeTitleWrapper.clientWidth) {
             pbsHomeTitle.classList.add("marquee-active");
           }
@@ -1719,6 +1864,65 @@
     });
 
     renderSpeedMenu();
+    
+    // --- Apple Music-style interactive pull down to dismiss ---
+    (function initPlayerSheetDismiss() {
+      const ps = document.getElementById('playerScreen');
+      const handle = document.getElementById('playerSheetHandle');
+      let startY = 0;
+      let curY = 0;
+      let isDragging = false;
+      let fromScrollTop = false;
+
+      function onTouchStart(e) {
+        if (!ps.classList.contains('active')) return;
+        const touch = e.touches[0];
+        const isFromHandle = handle && handle.contains(e.target);
+        const isAtTop = ps.scrollTop <= 2;
+
+        if (isFromHandle || isAtTop) {
+          startY = touch.clientY;
+          curY = 0;
+          isDragging = true;
+          fromScrollTop = !isFromHandle;
+          ps.style.transition = 'none';
+        }
+      }
+
+      function onTouchMove(e) {
+        if (!isDragging) return;
+        const delta = e.touches[0].clientY - startY;
+        if (delta > 0) {
+          if (fromScrollTop && ps.scrollTop > 2) {
+            isDragging = false;
+            ps.style.transform = '';
+            return;
+          }
+          e.preventDefault();
+          curY = delta;
+          ps.style.transform = `translateY(${delta}px)`;
+        } else if (!fromScrollTop) {
+          ps.style.transform = 'translateY(0)';
+        }
+      }
+
+      function onTouchEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
+        if (curY > 120) {
+          dismissPlayerScreen();
+        } else {
+          ps.style.transform = 'translateY(0)';
+        }
+      }
+
+      ps.addEventListener('touchstart', onTouchStart, { passive: true });
+      ps.addEventListener('touchmove', onTouchMove, { passive: false });
+      ps.addEventListener('touchend', onTouchEnd, { passive: true });
+      if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
+    })();
+
     loadShows();
   </script>
 </body>
