@@ -1328,10 +1328,24 @@
       });
 
       const activeMid = (cueOffsets[activeCueIndex].start + cueOffsets[activeCueIndex].end) / 2;
-      const prevDot = joined.lastIndexOf('.', Math.max(0, activeMid - 1));
-      const nextDot = joined.indexOf('.', activeMid);
-      const sStart = prevDot === -1 ? 0 : prevDot + 1;
-      const sEnd = nextDot === -1 ? joined.length : nextDot + 1;
+      const delims = ['.', '?', '!', ';'];
+
+      let sStart = 0;
+      for (let i = Math.floor(activeMid) - 1; i >= 0; i--) {
+        if (delims.includes(joined[i])) {
+          sStart = i + 1;
+          break;
+        }
+      }
+
+      let sEnd = joined.length;
+      for (let i = Math.floor(activeMid); i < joined.length; i++) {
+        if (delims.includes(joined[i])) {
+          sEnd = i + 1;
+          break;
+        }
+      }
+
       const sentenceText = joined.slice(sStart, sEnd).trim();
       if (!sentenceText) return null;
 
@@ -1932,8 +1946,9 @@
       if (!el || !transcriptView) return;
       const tvRect = transcriptView.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      const targetOffsetFromTop = tvRect.top + 85;
-      const delta = elRect.top - targetOffsetFromTop;
+      // Line height is ~31px plus padding; target exactly the 3rd line position (~68px down from top)
+      const targetOffset = tvRect.top + 68;
+      const delta = elRect.top - targetOffset;
       transcriptView.scrollTo({
         top: Math.max(0, transcriptView.scrollTop + delta),
         behavior: 'smooth'
@@ -2263,8 +2278,10 @@
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
         if (mc) mc.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.28s ease';
 
-        const threshold = (window.innerHeight || document.documentElement.clientHeight || 600) * (9 / 20);
-        if (curDeltaY >= threshold) {
+        const viewHeight = window.innerHeight || document.documentElement.clientHeight || 600;
+        const requiredThreshold = viewHeight * (9 / 20);
+
+        if (curDeltaY >= requiredThreshold) {
           dismissPlayerScreen(previousActiveScreen);
         } else {
           ps.style.transform = 'translateY(0)';
