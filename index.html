@@ -1535,6 +1535,7 @@
         playerScreen.style.transition = '';
         playerScreen.scrollTop = 0;
         playerScreen.classList.add('active');
+        if (currentShow) showScreen.classList.add('active'); else homeScreen.classList.add('active');
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'none';
@@ -1575,6 +1576,7 @@
           mc.style.opacity = '0.65';
         }
         playerScreen.classList.add('active');
+        if (currentShow) showScreen.classList.add('active'); else homeScreen.classList.add('active');
         homeSearchWrap.style.display = 'none';
         headerBrandTitle.style.display = 'none';
         headerMarqueeWrapper.style.display = 'block';
@@ -1854,6 +1856,22 @@
       } catch (err) {
         transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
       }
+    }
+
+        function renderTranscript() {
+      if (!transcriptView) return;
+      transcriptView.innerHTML = '';
+      cues.forEach((cue, index) => {
+        const p = document.createElement('p');
+        p.className = 'cue';
+        p.id = `cue-${index}`;
+        p.innerText = cue.text;
+        p.addEventListener('click', () => {
+          audioElement.currentTime = cue.start;
+          if (audioElement.paused) togglePlay();
+        });
+        transcriptView.appendChild(p);
+      });
     }
 
     function centerActiveCue(el) {
