@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Genius Podcasts</title>
+  <title>Genius Podcast</title>
 
   <!-- iOS PWA Setup -->
   <link rel="apple-touch-icon" sizes="180x180" href="./web-logo.png?v=1">
   <link rel="icon" type="image/png" href="./web-logo.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Genius Podcasts">
+  <meta name="apple-mobile-web-app-title" content="Genius Podcast">
 
   <style>
     :root {
@@ -449,7 +449,7 @@
     .cue {
       font-size: 19px;
       line-height: 1.65;
-      color: var(--text-muted);
+      color: rgba(244, 239, 255, 0.72);
       margin-bottom: 24px;
       cursor: pointer;
       user-select: text;
@@ -458,7 +458,8 @@
     }
 
     .cue.active {
-      color: var(--text);
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
       font-weight: 700;
     }
 
@@ -898,7 +899,7 @@
 <body>
 
   <header>
-    <span class="brand-title" id="headerBrandTitle">Genius Podcasts</span>
+    <span class="brand-title" id="headerBrandTitle">Genius Podcast</span>
     <div class="header-marquee-wrapper" id="headerMarqueeWrapper">
       <span class="header-marquee-text" id="headerMarqueeText">—</span>
     </div>
@@ -1452,7 +1453,7 @@
         homeScreen.classList.add('active');
         homeSearchWrap.style.display = 'flex';
         headerBrandTitle.style.display = 'block';
-        headerBrandTitle.innerText = "Genius Podcasts";
+        headerBrandTitle.innerText = "Genius Podcast";
         headerMarqueeWrapper.style.display = 'none';
         playbackButtonsSection.classList.add('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
@@ -1774,8 +1775,9 @@
       if (!el || !transcriptView) return;
       const tvRect = transcriptView.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      const desiredY = tvRect.top + 60; // Keep line near the top instead of middle
-      const delta = elRect.top - desiredY;
+      // Target slot: offset approx 2 lines down (~85px) so this active cue sits comfortably as the 3rd line
+      const targetOffsetFromTop = tvRect.top + 85;
+      const delta = elRect.top - targetOffsetFromTop;
       transcriptView.scrollTo({
         top: Math.max(0, transcriptView.scrollTop + delta),
         behavior: 'smooth'
