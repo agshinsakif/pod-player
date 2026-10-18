@@ -648,6 +648,7 @@
     .playback-buttons-section.mini-mode .controls-row .speed-btn-wrapper,
     .playback-buttons-section.mini-mode .controls-row .btn-seek,
     .playback-buttons-section.mini-mode .controls-row .btn-show,
+    .playback-buttons-section.mini-mode .controls-row .btn-translate-dock,
     .playback-buttons-section.mini-mode .volume-row {
       display: none !important;
     }
@@ -765,13 +766,13 @@
       bottom: 0;
       background: var(--bg);
       z-index: 95;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: max(20px, env(safe-area-inset-top)) 20px calc(150px + env(safe-area-inset-bottom));
+      padding: 0;
+      display: flex !important;
+      flex-direction: column;
+      overflow: hidden;
       transform: translateY(100%);
       opacity: 0;
       transition: transform 0.32s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.22s ease;
-      display: block !important;
       pointer-events: none;
     }
     #playerScreen.active {
@@ -866,6 +867,27 @@
       border-color: #ffffff;
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
     }
+
+    .player-top-sticky-bar {
+      padding-top: max(12px, env(safe-area-inset-top));
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 12px;
+      background: var(--bg);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .transcript-view {
+      display: block;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 10px 20px calc(180px + env(safe-area-inset-bottom));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+    }
+
 </style>
 </head>
 <body>
@@ -933,18 +955,20 @@
 
     <!-- Screen 3: Player Screen (PS) -->
     <div id="playerScreen" class="screen">
-      <div class="player-sheet-handle-wrap" id="playerSheetHandle">
-        <div class="player-sheet-handle"></div>
-      </div>
-      <div class="player-hero-header">
-        <div class="player-hero-artwork">
-          <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
+      <div class="player-top-sticky-bar" id="playerTopBar">
+        <div class="player-sheet-handle-wrap" id="playerSheetHandle">
+          <div class="player-sheet-handle"></div>
         </div>
-        <div class="player-hero-meta">
-          <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
-            <span class="player-hero-title" id="playerHeroTitle">—</span>
+        <div class="player-hero-header">
+          <div class="player-hero-artwork">
+            <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
           </div>
-          <div class="player-hero-show" id="playerHeroShow">—</div>
+          <div class="player-hero-meta">
+            <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
+              <span class="player-hero-title" id="playerHeroTitle">—</span>
+            </div>
+            <div class="player-hero-show" id="playerHeroShow">—</div>
+          </div>
         </div>
       </div>
       <div class="transcript-view" id="transcriptView"></div>
@@ -1309,7 +1333,7 @@
         headerMarqueeWrapper.style.display = 'none';
         playbackButtonsSection.classList.remove('mini-mode');
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
-        updateMarquees();
+        updatePlayerHeroUI();
         return;
       }
 
@@ -1498,6 +1522,7 @@
       const titleWithIndex = displayIndex ? `${displayIndex}. ${ep.title}` : ep.title;
       pbsHomeTitle.innerText = titleWithIndex;
       headerMarqueeText.innerText = titleWithIndex;
+      updatePlayerHeroUI();
 
       audioElement.src = safeUrl(ep.audio);
       audioElement.load();
@@ -1793,6 +1818,25 @@
       }
     }, { passive: true });
 
+    
+    function updatePlayerHeroUI() {
+      const pht = document.getElementById('playerHeroTitle');
+      const phs = document.getElementById('playerHeroShow');
+      const php = document.getElementById('playerHeroPoster');
+      if (currentEpisode && pht) {
+        pht.innerText = currentEpisode.displayIndex ? `${currentEpisode.displayIndex}. ${currentEpisode.title}` : currentEpisode.title;
+      }
+      if (currentShow) {
+        if (phs) phs.innerText = currentShow.name || '';
+        if (php) {
+          const sId = currentShow.show_id || currentShow.folder;
+          php.src = safeUrl(`${R2_BASE}/logos/${sId}.png`);
+          php.onerror = () => { php.src = './web-logo.png'; };
+        }
+      }
+      updateMarquees();
+    }
+
     function updateMarquees() {
       headerMarqueeText.classList.remove("marquee-active");
       pbsHomeTitle.classList.remove("marquee-active");
@@ -1865,10 +1909,11 @@
 
     renderSpeedMenu();
     
-    // --- Apple Music-style interactive pull down to dismiss ---
+        // --- Apple Music-style interactive pull down to dismiss ---
     (function initPlayerSheetDismiss() {
       const ps = document.getElementById('playerScreen');
-      const handle = document.getElementById('playerSheetHandle');
+      const bar = document.getElementById('playerTopBar');
+      const tv = document.getElementById('transcriptView');
       let startY = 0;
       let curY = 0;
       let isDragging = false;
@@ -1877,14 +1922,14 @@
       function onTouchStart(e) {
         if (!ps.classList.contains('active')) return;
         const touch = e.touches[0];
-        const isFromHandle = handle && handle.contains(e.target);
-        const isAtTop = ps.scrollTop <= 2;
+        const isFromTopBar = bar && bar.contains(e.target);
+        const isAtTop = tv ? tv.scrollTop <= 2 : true;
 
-        if (isFromHandle || isAtTop) {
+        if (isFromTopBar || isAtTop) {
           startY = touch.clientY;
           curY = 0;
           isDragging = true;
-          fromScrollTop = !isFromHandle;
+          fromScrollTop = !isFromTopBar;
           ps.style.transition = 'none';
         }
       }
@@ -1893,7 +1938,7 @@
         if (!isDragging) return;
         const delta = e.touches[0].clientY - startY;
         if (delta > 0) {
-          if (fromScrollTop && ps.scrollTop > 2) {
+          if (fromScrollTop && tv && tv.scrollTop > 2) {
             isDragging = false;
             ps.style.transform = '';
             return;
@@ -1910,7 +1955,7 @@
         if (!isDragging) return;
         isDragging = false;
         ps.style.transition = 'transform 0.28s cubic-bezier(0.32, 1, 0.23, 1), opacity 0.2s ease';
-        if (curY > 120) {
+        if (curY > 100) {
           dismissPlayerScreen();
         } else {
           ps.style.transform = 'translateY(0)';
@@ -1920,6 +1965,7 @@
       ps.addEventListener('touchstart', onTouchStart, { passive: true });
       ps.addEventListener('touchmove', onTouchMove, { passive: false });
       ps.addEventListener('touchend', onTouchEnd, { passive: true });
+      const handle = document.getElementById('playerSheetHandle');
       if (handle) handle.addEventListener('click', () => dismissPlayerScreen());
     })();
 
