@@ -995,6 +995,42 @@
       display: none !important;
     }
 
+
+    /* When search is expanded, push input to take full available row */
+    .home-bottom-dock-row:has(.home-search-pill-container.expanded) .playback-buttons-section.mini-mode {
+      flex: 0 0 auto !important;
+      min-width: 54px !important;
+      width: 54px !important;
+      height: 54px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+    }
+
+    .home-bottom-dock-row:has(.home-search-pill-container.expanded) .playback-buttons-section.mini-mode .pbs-home-title-wrapper {
+      display: none !important;
+    }
+
+    .home-bottom-dock-row:has(.home-search-pill-container.expanded) .playback-buttons-section.mini-mode .controls-row {
+      margin: 0 !important;
+    }
+
+
+    .home-bottom-dock-row.search-active .playback-buttons-section.mini-mode {
+      flex: 0 0 auto !important;
+      min-width: 54px !important;
+      width: 54px !important;
+      height: 54px !important;
+      padding: 0 !important;
+      border-radius: 50% !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+    }
+    .home-bottom-dock-row.search-active .playback-buttons-section.mini-mode .pbs-home-title-wrapper {
+      display: none !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1036,7 +1072,7 @@
         <div class="ss-controls-bar">
           <label class="toggle-label">
             <input type="checkbox" id="hideCompletedCheck" onchange="renderEpisodeList()">
-            Hide Done
+            Hide Completed
           </label>
           <select class="sort-select" id="sortSelect" onchange="renderEpisodeList()">
             <option value="date-desc" selected>Date ↓ (Newest)</option>
@@ -1066,17 +1102,17 @@
       <div class="player-sheet-handle-wrap" id="playerSheetHandle">
         <div class="player-sheet-handle"></div>
       </div>
-      <div class="player-hero-header">
-        <div class="player-hero-artwork">
-          <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
-        </div>
-        <div class="player-hero-meta">
-          <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
-            <span class="player-hero-title" id="playerHeroTitle">—</span>
+              <div class="player-hero-header" style="cursor: pointer;" onclick="navigateToCurrentShow()" title="Go to show">
+          <div class="player-hero-artwork">
+            <img id="playerHeroPoster" src="./web-logo.png" alt="Show logo">
           </div>
-          <div class="player-hero-show" id="playerHeroShow">—</div>
+          <div class="player-hero-meta">
+            <div class="player-hero-title-wrap" id="playerHeroTitleWrap">
+              <span class="player-hero-title" id="playerHeroTitle">—</span>
+            </div>
+            <div class="player-hero-show" id="playerHeroShow">—</div>
+          </div>
         </div>
-      </div>
     </div>
     <div class="transcript-view" id="transcriptView"></div>
   </div>
@@ -2329,6 +2365,7 @@
       if (!homeSearchPill) return;
       syncSearchPillPlaceholder();
       homeSearchPill.classList.add('expanded');
+      if (homeBottomDockRow) homeBottomDockRow.classList.add('search-active');
       homeSearchInputEl.focus();
     }
 
@@ -2336,6 +2373,7 @@
       if (!homeSearchPill) return;
       if (homeSearchInputEl && homeSearchInputEl.value.trim() === '') {
         homeSearchPill.classList.remove('expanded');
+        if (homeBottomDockRow) homeBottomDockRow.classList.remove('search-active');
       }
     }
 
