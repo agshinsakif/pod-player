@@ -2966,5 +2966,15 @@
     "upload_date": "2023-08-27",
     "raw_date": "20230827",
     "format": "M4A"
+  },
+  {
+    "show_id": "000006",
+    "title": "Hungarian Podcast for Beginners： [A1⧸A2] Évszakok (SUB)",
+    "url": "https://www.youtube.com/watch?v=CuQ7CjcUnsQ",
+    "audio": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners： [A1⧸A2] Évszakok (SUB).m4a",
+    "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners： [A1⧸A2] Évszakok (SUB).hu-orig.vtt",
+    "upload_date": "2025-09-19",
+    "raw_date": "20250919",
+    "format": "M4A"
   }
 ]
