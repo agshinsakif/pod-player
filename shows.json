@@ -28,5 +28,11 @@
     "name": "Learn German With Falk",
     "lang": "de",
     "flag": "🇩🇪"
+  },
+  "000006": {
+    "show_id": "000006",
+    "name": "Hungarian With Dori",
+    "lang": "hu",
+    "flag": "🇭🇺"
   }
 }
