@@ -7,7 +7,8 @@
     "vtt": null,
     "upload_date": "2023-03-06",
     "raw_date": "20230306",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 444
   },
   {
     "show_id": "000001",
@@ -17,7 +18,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az időjárásról!.en.vtt",
     "upload_date": "2023-03-06",
     "raw_date": "20230306",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 207
   },
   {
     "show_id": "000001",
@@ -27,7 +29,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a zenéről!.en.vtt",
     "upload_date": "2023-04-03",
     "raw_date": "20230403",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 255
   },
   {
     "show_id": "000001",
@@ -37,7 +40,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az okos világról!.en.vtt",
     "upload_date": "2023-05-01",
     "raw_date": "20230501",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 277
   },
   {
     "show_id": "000001",
@@ -47,7 +51,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a magyarokról!.en.vtt",
     "upload_date": "2023-06-04",
     "raw_date": "20230604",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 292
   },
   {
     "show_id": "000001",
@@ -57,7 +62,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyárról!.en.vtt",
     "upload_date": "2023-07-04",
     "raw_date": "20230704",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 300
   },
   {
     "show_id": "000001",
@@ -67,7 +73,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Akarsz beszélgetni a nyárról？.hu.vtt",
     "upload_date": "2023-07-27",
     "raw_date": "20230727",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1231
   },
   {
     "show_id": "000001",
@@ -77,7 +84,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass érdekes sztorikat!.en.vtt",
     "upload_date": "2023-08-03",
     "raw_date": "20230803",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 341
   },
   {
     "show_id": "000001",
@@ -87,7 +95,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az iskoláról és a tanulásról!.hu.vtt",
     "upload_date": "2023-09-04",
     "raw_date": "20230904",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 317
   },
   {
     "show_id": "000001",
@@ -97,7 +106,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nehéz nyelv a magyar？.hu.vtt",
     "upload_date": "2023-09-20",
     "raw_date": "20230920",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 235
   },
   {
     "show_id": "000001",
@@ -107,7 +117,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a jövőről!.hu.vtt",
     "upload_date": "2023-10-04",
     "raw_date": "20231004",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 299
   },
   {
     "show_id": "000001",
@@ -117,7 +128,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Mit hoz a jövő？.hu.vtt",
     "upload_date": "2023-10-25",
     "raw_date": "20231025",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 128
   },
   {
     "show_id": "000001",
@@ -127,7 +139,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a filmekről!.hu.vtt",
     "upload_date": "2023-11-05",
     "raw_date": "20231105",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 268
   },
   {
     "show_id": "000001",
@@ -137,7 +150,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Lépj a következő szintre! ⧸ Go to the next level in Hungarian!.hu.vtt",
     "upload_date": "2023-12-01",
     "raw_date": "20231201",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 701
   },
   {
     "show_id": "000001",
@@ -147,7 +161,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a karácsonyról!.hu.vtt",
     "upload_date": "2023-12-05",
     "raw_date": "20231205",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 258
   },
   {
     "show_id": "000001",
@@ -157,7 +172,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Karácsonyi ételek.hu.vtt",
     "upload_date": "2023-12-14",
     "raw_date": "20231214",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 333
   },
   {
     "show_id": "000001",
@@ -167,7 +183,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar karácsony ⧸ Hungarian Christmas.hu.vtt",
     "upload_date": "2023-12-23",
     "raw_date": "20231223",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1443
   },
   {
     "show_id": "000001",
@@ -177,7 +194,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/2023 és 2024 az Easy Hungariannél.hu.vtt",
     "upload_date": "2023-12-29",
     "raw_date": "20231229",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 527
   },
   {
     "show_id": "000001",
@@ -187,7 +205,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Új év, új élet？.hu.vtt",
     "upload_date": "2024-01-04",
     "raw_date": "20240104",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 357
   },
   {
     "show_id": "000001",
@@ -197,7 +216,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért nem szeretem a januárt？.hu.vtt",
     "upload_date": "2024-01-21",
     "raw_date": "20240121",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 169
   },
   {
     "show_id": "000001",
@@ -207,7 +227,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Új év ⧸ New Year.hu.vtt",
     "upload_date": "2024-01-25",
     "raw_date": "20240125",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 225
   },
   {
     "show_id": "000001",
@@ -217,7 +238,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a karneválokról!.hu.vtt",
     "upload_date": "2024-02-01",
     "raw_date": "20240201",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 439
   },
   {
     "show_id": "000001",
@@ -227,7 +249,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Karneválok Brazíliától Németországig.hu.vtt",
     "upload_date": "2024-02-15",
     "raw_date": "20240215",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 403
   },
   {
     "show_id": "000001",
@@ -237,7 +260,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hercegnő sapka nélkül ⧸ Princess without a hat.hu.vtt",
     "upload_date": "2024-02-22",
     "raw_date": "20240222",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 470
   },
   {
     "show_id": "000001",
@@ -247,7 +271,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Farsang Magyarországon ⧸ Carnival season in Hungary.hu.vtt",
     "upload_date": "2024-03-01",
     "raw_date": "20240301",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 923
   },
   {
     "show_id": "000001",
@@ -257,7 +282,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a sportról és a mozgásról!.hu.vtt",
     "upload_date": "2024-03-04",
     "raw_date": "20240304",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 397
   },
   {
     "show_id": "000001",
@@ -267,7 +293,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Beszélj a napodról!.hu.vtt",
     "upload_date": "2024-03-11",
     "raw_date": "20240311",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 526
   },
   {
     "show_id": "000001",
@@ -277,7 +304,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Futás télen-nyáron ⧸ Running all year long.hu.vtt",
     "upload_date": "2024-03-21",
     "raw_date": "20240321",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 506
   },
   {
     "show_id": "000001",
@@ -287,7 +315,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Jön a születésnapom! ⧸ My birthday is coming!.hu.vtt",
     "upload_date": "2024-03-25",
     "raw_date": "20240325",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 116
   },
   {
     "show_id": "000001",
@@ -297,7 +326,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Top 5 difficulties in language learning and how to solve them ⧸ 5 probléma a nyelvtanulásban.hu.vtt",
     "upload_date": "2024-03-28",
     "raw_date": "20240328",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 333
   },
   {
     "show_id": "000001",
@@ -307,7 +337,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a nyelvtanulásról!.hu.vtt",
     "upload_date": "2024-04-07",
     "raw_date": "20240407",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 349
   },
   {
     "show_id": "000001",
@@ -317,7 +348,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a nyelvtanulás(？).hu.vtt",
     "upload_date": "2024-04-15",
     "raw_date": "20240415",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 510
   },
   {
     "show_id": "000001",
@@ -327,7 +359,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtanulás Magyarországon.hu.vtt",
     "upload_date": "2024-04-26",
     "raw_date": "20240426",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 379
   },
   {
     "show_id": "000001",
@@ -337,7 +370,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Belgian polyglot speaks.hu.vtt",
     "upload_date": "2024-05-03",
     "raw_date": "20240503",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1963
   },
   {
     "show_id": "000001",
@@ -347,7 +381,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian májusban az OTTHONRÓL.hu.vtt",
     "upload_date": "2024-05-08",
     "raw_date": "20240508",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 401
   },
   {
     "show_id": "000001",
@@ -357,7 +392,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Város vagy falu？.hu.vtt",
     "upload_date": "2024-05-28",
     "raw_date": "20240528",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 593
   },
   {
     "show_id": "000001",
@@ -367,7 +403,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júniusban.hu.vtt",
     "upload_date": "2024-06-03",
     "raw_date": "20240603",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 400
   },
   {
     "show_id": "000001",
@@ -377,7 +414,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulsz magyarul？.hu.vtt",
     "upload_date": "2024-06-06",
     "raw_date": "20240606",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 271
   },
   {
     "show_id": "000001",
@@ -387,7 +425,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hungarian verb 'talál'.hu.vtt",
     "upload_date": "2024-06-12",
     "raw_date": "20240612",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 153
   },
   {
     "show_id": "000001",
@@ -397,7 +436,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/De miért szeretek biciklizni？.hu.vtt",
     "upload_date": "2024-06-18",
     "raw_date": "20240618",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 581
   },
   {
     "show_id": "000001",
@@ -407,7 +447,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Okostelefon és teleportálás.hu.vtt",
     "upload_date": "2024-06-26",
     "raw_date": "20240626",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 678
   },
   {
     "show_id": "000001",
@@ -417,7 +458,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian júliusban.hu.vtt",
     "upload_date": "2024-07-04",
     "raw_date": "20240704",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 307
   },
   {
     "show_id": "000001",
@@ -427,7 +469,8 @@
     "vtt": null,
     "upload_date": "2024-07-15",
     "raw_date": "20240715",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 95
   },
   {
     "show_id": "000001",
@@ -437,7 +480,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar filmek és karakterek.hu.vtt",
     "upload_date": "2024-07-25",
     "raw_date": "20240725",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 469
   },
   {
     "show_id": "000001",
@@ -447,7 +491,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian augusztusban.hu.vtt",
     "upload_date": "2024-08-01",
     "raw_date": "20240801",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 507
   },
   {
     "show_id": "000001",
@@ -457,7 +502,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Imádom az olimpiát!.hu.vtt",
     "upload_date": "2024-08-18",
     "raw_date": "20240818",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 741
   },
   {
     "show_id": "000001",
@@ -467,7 +513,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Fesztiválok, koncertek, konferenciák.hu.vtt",
     "upload_date": "2024-08-30",
     "raw_date": "20240830",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 209
   },
   {
     "show_id": "000001",
@@ -477,7 +524,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Easy Hungarian szeptemberben.hu.vtt",
     "upload_date": "2024-09-03",
     "raw_date": "20240903",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 463
   },
   {
     "show_id": "000001",
@@ -487,7 +535,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Új év, új élet szeptemberben.hu.vtt",
     "upload_date": "2024-09-06",
     "raw_date": "20240906",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 153
   },
   {
     "show_id": "000001",
@@ -497,7 +546,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Prioritásokról és a nyugodt  életről.hu.vtt",
     "upload_date": "2024-09-10",
     "raw_date": "20240910",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 766
   },
   {
     "show_id": "000001",
@@ -507,7 +557,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanulj magyarul egyedül a 'complete' kurzusokon.hu.vtt",
     "upload_date": "2024-09-13",
     "raw_date": "20240913",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 443
   },
   {
     "show_id": "000001",
@@ -517,7 +568,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/TOP 5 Hungarian phrases how to talk about social media.hu.vtt",
     "upload_date": "2024-09-17",
     "raw_date": "20240917",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 239
   },
   {
     "show_id": "000001",
@@ -527,7 +579,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanulsz magyarul？.hu.vtt",
     "upload_date": "2024-09-26",
     "raw_date": "20240926",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1542
   },
   {
     "show_id": "000001",
@@ -537,7 +590,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/What is Hungarian like？.en.vtt",
     "upload_date": "2024-09-28",
     "raw_date": "20240928",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 246
   },
   {
     "show_id": "000001",
@@ -547,7 +601,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Read about grapes, wine, and pumpkin in Easy Hungarian Magazine.hu.vtt",
     "upload_date": "2024-10-03",
     "raw_date": "20241003",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 426
   },
   {
     "show_id": "000001",
@@ -557,7 +612,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Vörösbor vagy fehérbor？.hu.vtt",
     "upload_date": "2024-10-10",
     "raw_date": "20241010",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 715
   },
   {
     "show_id": "000001",
@@ -567,7 +623,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hány nyelvet beszél egy poliglott？.en.vtt",
     "upload_date": "2024-10-16",
     "raw_date": "20241016",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 427
   },
   {
     "show_id": "000001",
@@ -577,7 +634,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Milyen nyelveket tanulnak a poliglottok？.en.vtt",
     "upload_date": "2024-10-18",
     "raw_date": "20241018",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 466
   },
   {
     "show_id": "000001",
@@ -587,7 +645,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért tanulnak az emberek magyarul？.en.vtt",
     "upload_date": "2024-10-22",
     "raw_date": "20241022",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 508
   },
   {
     "show_id": "000001",
@@ -597,7 +656,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Máltán is magyarul beszélnek ：).hu.vtt",
     "upload_date": "2024-10-31",
     "raw_date": "20241031",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 310
   },
   {
     "show_id": "000001",
@@ -607,7 +667,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Read about city transport in Easy Hungarian Magazine.en.vtt",
     "upload_date": "2024-11-01",
     "raw_date": "20241101",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 395
   },
   {
     "show_id": "000001",
@@ -617,7 +678,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kezdődik a konferencia!.hu.vtt",
     "upload_date": "2024-11-06",
     "raw_date": "20241106",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 297
   },
   {
     "show_id": "000001",
@@ -627,7 +689,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Polyglot Konferencia, Valletta, day 1.hu.vtt",
     "upload_date": "2024-11-07",
     "raw_date": "20241107",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 588
   },
   {
     "show_id": "000001",
@@ -637,7 +700,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Polyglot Konferencia, 2. nap.hu.vtt",
     "upload_date": "2024-11-08",
     "raw_date": "20241108",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 339
   },
   {
     "show_id": "000001",
@@ -647,7 +711,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elektromos autók és a 15 perces város.en.vtt",
     "upload_date": "2024-11-09",
     "raw_date": "20241109",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 674
   },
   {
     "show_id": "000001",
@@ -657,7 +722,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Milyenek a magyarok？.hu.vtt",
     "upload_date": "2024-12-02",
     "raw_date": "20241202",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 334
   },
   {
     "show_id": "000001",
@@ -667,7 +733,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Read about families in Easy Hungarian Magazine.hu.vtt",
     "upload_date": "2024-12-03",
     "raw_date": "20241203",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 516
   },
   {
     "show_id": "000001",
@@ -677,7 +744,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyartanulás karácsonykor is？.en.vtt",
     "upload_date": "2024-12-09",
     "raw_date": "20241209",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 339
   },
   {
     "show_id": "000001",
@@ -687,7 +755,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kis család, nagy család.hu.vtt",
     "upload_date": "2024-12-16",
     "raw_date": "20241216",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 611
   },
   {
     "show_id": "000001",
@@ -697,7 +766,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian every day.hu.vtt",
     "upload_date": "2024-12-19",
     "raw_date": "20241219",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 328
   },
   {
     "show_id": "000001",
@@ -707,7 +777,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Eufória 2024-ben és tervek 2025-ben.en.vtt",
     "upload_date": "2024-12-28",
     "raw_date": "20241228",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1071
   },
   {
     "show_id": "000001",
@@ -717,7 +788,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Nyelvtanulás tökéletesen 2025-ben.hu.vtt",
     "upload_date": "2025-01-04",
     "raw_date": "20250104",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 484
   },
   {
     "show_id": "000001",
@@ -727,7 +799,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelveket？.en.vtt",
     "upload_date": "2025-01-15",
     "raw_date": "20250115",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 938
   },
   {
     "show_id": "000001",
@@ -737,7 +810,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/5 fontos szó a nyelvtanulásról.hu.vtt",
     "upload_date": "2025-01-20",
     "raw_date": "20250120",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 272
   },
   {
     "show_id": "000001",
@@ -747,7 +821,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvassunk magyarul!.en.vtt",
     "upload_date": "2025-01-27",
     "raw_date": "20250127",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 433
   },
   {
     "show_id": "000001",
@@ -757,7 +832,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass és beszélj!.en.vtt",
     "upload_date": "2025-02-01",
     "raw_date": "20250201",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 443
   },
   {
     "show_id": "000001",
@@ -767,7 +843,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass híres és sikeres magyarokról!.en.vtt",
     "upload_date": "2025-02-04",
     "raw_date": "20250204",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 537
   },
   {
     "show_id": "000001",
@@ -777,7 +854,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk magyarul.hu.vtt",
     "upload_date": "2025-02-12",
     "raw_date": "20250212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 238
   },
   {
     "show_id": "000001",
@@ -787,7 +865,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar nyelv és a Nobel-díjak.en.vtt",
     "upload_date": "2025-02-25",
     "raw_date": "20250225",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 687
   },
   {
     "show_id": "000001",
@@ -797,7 +876,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a tavaszról és a kertről!.hu.vtt",
     "upload_date": "2025-03-02",
     "raw_date": "20250302",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 352
   },
   {
     "show_id": "000001",
@@ -807,7 +887,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar emberek mindenhol ott vannak!.hu.vtt",
     "upload_date": "2025-03-19",
     "raw_date": "20250319",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 368
   },
   {
     "show_id": "000001",
@@ -817,7 +898,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Tavaszi időjárás és a török tulipánok.en.vtt",
     "upload_date": "2025-03-26",
     "raw_date": "20250326",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 772
   },
   {
     "show_id": "000001",
@@ -827,7 +909,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Játék, játék, játék.hu.vtt",
     "upload_date": "2025-04-03",
     "raw_date": "20250403",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 422
   },
   {
     "show_id": "000001",
@@ -837,7 +920,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Játék az egész világ.hu.vtt",
     "upload_date": "2025-04-10",
     "raw_date": "20250410",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 343
   },
   {
     "show_id": "000001",
@@ -847,7 +931,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar gyerekjátékok régen.en.vtt",
     "upload_date": "2025-04-24",
     "raw_date": "20250424",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 670
   },
   {
     "show_id": "000001",
@@ -857,7 +942,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kultúra és művészet.en.vtt",
     "upload_date": "2025-05-03",
     "raw_date": "20250503",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 354
   },
   {
     "show_id": "000001",
@@ -867,7 +953,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Mindennapi művészet.hu.vtt",
     "upload_date": "2025-05-08",
     "raw_date": "20250508",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 346
   },
   {
     "show_id": "000001",
@@ -877,7 +964,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Amikor 6 órát vártam Monet-ra.en.vtt",
     "upload_date": "2025-05-30",
     "raw_date": "20250530",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 502
   },
   {
     "show_id": "000001",
@@ -887,7 +975,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A Föld lapos!(？).hu.vtt",
     "upload_date": "2025-06-04",
     "raw_date": "20250604",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 395
   },
   {
     "show_id": "000001",
@@ -897,7 +986,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa elméletek.hu.vtt",
     "upload_date": "2025-06-10",
     "raw_date": "20250610",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000001",
@@ -907,7 +997,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Elvis él!(？).hu.vtt",
     "upload_date": "2025-06-26",
     "raw_date": "20250626",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 838
   },
   {
     "show_id": "000001",
@@ -917,7 +1008,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyar városok, szóló utazás, nyár.hu.vtt",
     "upload_date": "2025-07-01",
     "raw_date": "20250701",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 382
   },
   {
     "show_id": "000001",
@@ -927,7 +1019,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Romantikus magyar városok.hu.vtt",
     "upload_date": "2025-07-08",
     "raw_date": "20250708",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000001",
@@ -937,7 +1030,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A 4 legjobb hely Magyarországon.en.vtt",
     "upload_date": "2025-07-25",
     "raw_date": "20250725",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 739
   },
   {
     "show_id": "000001",
@@ -947,7 +1041,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Vegánok, svédasztal és magyar ételek.hu.vtt",
     "upload_date": "2025-08-02",
     "raw_date": "20250802",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 397
   },
   {
     "show_id": "000001",
@@ -957,7 +1052,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hússal vagy hús nélkül？.hu.vtt",
     "upload_date": "2025-08-07",
     "raw_date": "20250807",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 290
   },
   {
     "show_id": "000001",
@@ -967,7 +1063,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Furcsa magyar ételek.hu.vtt",
     "upload_date": "2025-08-28",
     "raw_date": "20250828",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 687
   },
   {
     "show_id": "000001",
@@ -977,7 +1074,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A mesterséges intelligenciáról.hu.vtt",
     "upload_date": "2025-09-02",
     "raw_date": "20250902",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 359
   },
   {
     "show_id": "000001",
@@ -987,7 +1085,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A ChatGPT az ideális tanár.hu.vtt",
     "upload_date": "2025-09-04",
     "raw_date": "20250904",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 266
   },
   {
     "show_id": "000001",
@@ -997,7 +1096,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Tanulj magyarul a ChatGPT-vel!.en.vtt",
     "upload_date": "2025-09-25",
     "raw_date": "20250925",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 751
   },
   {
     "show_id": "000001",
@@ -1007,7 +1107,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Környezetvédelemről magyarul.hu.vtt",
     "upload_date": "2025-10-02",
     "raw_date": "20251002",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 341
   },
   {
     "show_id": "000001",
@@ -1017,7 +1118,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Ez most környezetbarát vagy nem？.en.vtt",
     "upload_date": "2025-10-29",
     "raw_date": "20251029",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 826
   },
   {
     "show_id": "000001",
@@ -1027,7 +1129,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Könyvekről, olvasásról magyarul.hu.vtt",
     "upload_date": "2025-11-08",
     "raw_date": "20251108",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 491
   },
   {
     "show_id": "000001",
@@ -1037,7 +1140,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Óz, a nagy varázsló és a kedvenc magyar íróim.hu.vtt",
     "upload_date": "2025-11-27",
     "raw_date": "20251127",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 879
   },
   {
     "show_id": "000001",
@@ -1047,7 +1151,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a télről és a hidegről!.hu.vtt",
     "upload_date": "2025-12-03",
     "raw_date": "20251203",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 300
   },
   {
     "show_id": "000001",
@@ -1057,7 +1162,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért nem jönnek a szavak beszéd közben？.hu.vtt",
     "upload_date": "2025-12-12",
     "raw_date": "20251212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 951
   },
   {
     "show_id": "000001",
@@ -1067,7 +1173,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Miért jó a tél？.hu.vtt",
     "upload_date": "2025-12-23",
     "raw_date": "20251223",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 578
   },
   {
     "show_id": "000001",
@@ -1077,7 +1184,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/2025 az Easy Hungariannél és tervek 2026-ban.hu.vtt",
     "upload_date": "2025-12-29",
     "raw_date": "20251229",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1045
   },
   {
     "show_id": "000001",
@@ -1087,7 +1195,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a januári tervekről!.hu.vtt",
     "upload_date": "2026-01-02",
     "raw_date": "20260102",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 504
   },
   {
     "show_id": "000001",
@@ -1097,7 +1206,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Leülsz magyarul tanulni, de semmi sem történik？ Itt a megoldás! 🎯.hu.vtt",
     "upload_date": "2026-01-19",
     "raw_date": "20260119",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 256
   },
   {
     "show_id": "000001",
@@ -1107,7 +1217,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Így tanulj magyarul.hu.vtt",
     "upload_date": "2026-01-21",
     "raw_date": "20260121",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 646
   },
   {
     "show_id": "000001",
@@ -1117,7 +1228,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan éljünk 100 évig.hu.vtt",
     "upload_date": "2026-01-29",
     "raw_date": "20260129",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 717
   },
   {
     "show_id": "000001",
@@ -1127,7 +1239,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a C-vitaminról, gyógyszerekről!.hu.vtt",
     "upload_date": "2026-02-02",
     "raw_date": "20260202",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 489
   },
   {
     "show_id": "000001",
@@ -1137,7 +1250,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Beszélj magyarul a betegségekről, gyógyszerekről!.hu.vtt",
     "upload_date": "2026-02-13",
     "raw_date": "20260213",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 320
   },
   {
     "show_id": "000001",
@@ -1147,7 +1261,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Gyógyszerek a '80-as években.hu.vtt",
     "upload_date": "2026-02-24",
     "raw_date": "20260224",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 888
   },
   {
     "show_id": "000001",
@@ -1157,7 +1272,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a magyar nyelvről!.hu.vtt",
     "upload_date": "2026-03-02",
     "raw_date": "20260302",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 429
   },
   {
     "show_id": "000001",
@@ -1167,7 +1283,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hallgatás vs. nyelvtani táblázatok.hu.vtt",
     "upload_date": "2026-03-03",
     "raw_date": "20260303",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 323
   },
   {
     "show_id": "000001",
@@ -1177,7 +1294,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Csak 5 perc olvasás naponta.hu.vtt",
     "upload_date": "2026-03-08",
     "raw_date": "20260308",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 273
   },
   {
     "show_id": "000001",
@@ -1187,7 +1305,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legnehezebb nyelv a világon! Vagy nem？.hu.vtt",
     "upload_date": "2026-03-26",
     "raw_date": "20260326",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 798
   },
   {
     "show_id": "000001",
@@ -1197,7 +1316,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a viccekről és a humorról!.hu.vtt",
     "upload_date": "2026-04-04",
     "raw_date": "20260404",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 396
   },
   {
     "show_id": "000001",
@@ -1207,7 +1327,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to say 'punchline' in Hungarian.hu.vtt",
     "upload_date": "2026-04-27",
     "raw_date": "20260427",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 107
   },
   {
     "show_id": "000001",
@@ -1217,7 +1338,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Régi magyar viccekről, humorról és életfilozófiáról.hu.vtt",
     "upload_date": "2026-04-29",
     "raw_date": "20260429",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 743
   },
   {
     "show_id": "000001",
@@ -1227,7 +1349,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a kutyákról és a macskákról!.hu.vtt",
     "upload_date": "2026-05-04",
     "raw_date": "20260504",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 366
   },
   {
     "show_id": "000001",
@@ -1237,7 +1360,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Hogyan tanuljunk nyelvtant.hu.vtt",
     "upload_date": "2026-05-08",
     "raw_date": "20260508",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 374
   },
   {
     "show_id": "000001",
@@ -1247,7 +1371,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Kutyák Magyarországon a '80-as években.hu.vtt",
     "upload_date": "2026-05-29",
     "raw_date": "20260529",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 633
   },
   {
     "show_id": "000001",
@@ -1257,7 +1382,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass furcsa dolgokról!.hu.vtt",
     "upload_date": "2026-06-04",
     "raw_date": "20260604",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 399
   },
   {
     "show_id": "000001",
@@ -1267,7 +1393,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyar a legjobb nyelv a világon!.hu.vtt",
     "upload_date": "2026-06-19",
     "raw_date": "20260619",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 285
   },
   {
     "show_id": "000001",
@@ -1277,7 +1404,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Balkezesként Magyarországon.hu.vtt",
     "upload_date": "2026-06-28",
     "raw_date": "20260628",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 619
   },
   {
     "show_id": "000001",
@@ -1287,7 +1415,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az utazásról!.hu.vtt",
     "upload_date": "2026-07-05",
     "raw_date": "20260705",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 564
   },
   {
     "show_id": "000001",
@@ -1297,7 +1426,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A tökéletes nyaralás.hu.vtt",
     "upload_date": "2026-07-24",
     "raw_date": "20260724",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 513
   },
   {
     "show_id": "000001",
@@ -1307,7 +1437,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a pihenésről és az alvásról!.hu.vtt",
     "upload_date": "2026-08-05",
     "raw_date": "20260805",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 536
   },
   {
     "show_id": "000001",
@@ -1317,7 +1448,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/A magyarok és a szieszta.hu.vtt",
     "upload_date": "2026-08-27",
     "raw_date": "20260827",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 774
   },
   {
     "show_id": "000001",
@@ -1327,7 +1459,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to get back to Hungarian after summer.hu.vtt",
     "upload_date": "2026-08-29",
     "raw_date": "20260829",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 576
   },
   {
     "show_id": "000001",
@@ -1337,7 +1470,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass az őszi újrakezdésről!.hu.vtt",
     "upload_date": "2026-09-01",
     "raw_date": "20260901",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 441
   },
   {
     "show_id": "000001",
@@ -1347,7 +1481,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to Learn Hungarian Vocabulary in Context.hu.vtt",
     "upload_date": "2026-09-08",
     "raw_date": "20260908",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 406
   },
   {
     "show_id": "000001",
@@ -1357,7 +1492,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Magyarország nyáron és ősszel.hu.vtt",
     "upload_date": "2026-09-22",
     "raw_date": "20260922",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 564
   },
   {
     "show_id": "000001",
@@ -1367,7 +1503,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/How to learn Hungarian on your own.hu.vtt",
     "upload_date": "2026-09-23",
     "raw_date": "20260923",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 666
   },
   {
     "show_id": "000001",
@@ -1377,7 +1514,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000001/Olvass a könnyű és nehéz nyelvekről!.hu.vtt",
     "upload_date": "2026-10-05",
     "raw_date": "20261005",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 424
   },
   {
     "show_id": "000002",
@@ -1387,7 +1525,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E001 - Bemutatkozás - Mesélek magamról egy kicsit (A2-B1).vtt",
     "upload_date": "2021-01-20",
     "raw_date": "20210120",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 484
   },
   {
     "show_id": "000002",
@@ -1407,7 +1546,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E003 - Frazeologizmusok 1. - Amelyik kutya ugat, az nem harap (B2).vtt",
     "upload_date": "2021-02-08",
     "raw_date": "20210208",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 723
   },
   {
     "show_id": "000002",
@@ -1417,7 +1557,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E004 - Egy magánvállalkozó tanár napjai (B1-B2).vtt",
     "upload_date": "2021-02-22",
     "raw_date": "20210222",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 809
   },
   {
     "show_id": "000002",
@@ -1427,7 +1568,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E005 - Budapest, te csodás! (A2-B1).vtt",
     "upload_date": "2021-03-14",
     "raw_date": "20210314",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 699
   },
   {
     "show_id": "000002",
@@ -1437,7 +1579,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E006 - Nosztalgiázzunk a tamagocsiról! A 9-es évek gyermekkora. (B2).vtt",
     "upload_date": "2021-03-29",
     "raw_date": "20210329",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 762
   },
   {
     "show_id": "000002",
@@ -1457,7 +1600,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E008 - Digitális detoxot mindenkinek! (B1-B2).vtt",
     "upload_date": "2021-04-25",
     "raw_date": "20210425",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 750
   },
   {
     "show_id": "000002",
@@ -1467,7 +1611,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E009 - Szórakozás - film, zene, könyv, koncert, kirándulás (A2-B1).vtt",
     "upload_date": "2021-05-10",
     "raw_date": "20210510",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 784
   },
   {
     "show_id": "000002",
@@ -1477,7 +1622,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E010 - Idegesítő dolgok (B1-B2).vtt",
     "upload_date": "2021-05-24",
     "raw_date": "20210524",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 534
   },
   {
     "show_id": "000002",
@@ -1487,7 +1633,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E011 - Közlekedés Budapesten (A2-B1).vtt",
     "upload_date": "2021-05-31",
     "raw_date": "20210531",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 542
   },
   {
     "show_id": "000002",
@@ -1497,7 +1644,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E012 - Beszélgessünk a nyelvtanulásról! (B1-B2).vtt",
     "upload_date": "2021-06-12",
     "raw_date": "20210612",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1203
   },
   {
     "show_id": "000002",
@@ -1507,7 +1655,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E013 - Frazeologizmusok 2 - Ételek (B1-B2).vtt",
     "upload_date": "2021-06-22",
     "raw_date": "20210622",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1012
   },
   {
     "show_id": "000002",
@@ -1517,7 +1666,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E014 - Ma van a szülinapom! (B1-B2).vtt",
     "upload_date": "2021-06-28",
     "raw_date": "20210628",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 799
   },
   {
     "show_id": "000002",
@@ -1537,7 +1687,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E016 - 5 furcsa magyar szokás (B1-B2).vtt",
     "upload_date": "2021-07-11",
     "raw_date": "20210711",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 717
   },
   {
     "show_id": "000002",
@@ -1547,7 +1698,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E017 - A magyar egészségügyről és családtámogatásról dióhéjban (B2).vtt",
     "upload_date": "2021-07-18",
     "raw_date": "20210718",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1128
   },
   {
     "show_id": "000002",
@@ -1567,7 +1719,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E019 - Különbségek Amerika és Magyarország között 1 (B1-B2).vtt",
     "upload_date": "2021-08-08",
     "raw_date": "20210808",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 909
   },
   {
     "show_id": "000002",
@@ -1577,7 +1730,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E020 - Különbségek Amerika és Magyarország között 2 (B1-B2).vtt",
     "upload_date": "2021-08-22",
     "raw_date": "20210822",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 788
   },
   {
     "show_id": "000002",
@@ -1587,7 +1741,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E021 - Online vs. valóság (A2-B1).vtt",
     "upload_date": "2021-09-12",
     "raw_date": "20210912",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 637
   },
   {
     "show_id": "000002",
@@ -1607,7 +1762,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E023 - Mindennapi apróságok (A2-B1).vtt",
     "upload_date": "2021-10-04",
     "raw_date": "20211004",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 681
   },
   {
     "show_id": "000002",
@@ -1617,7 +1773,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E024 - Utazásaim - Japán (B1-B2).vtt",
     "upload_date": "2021-10-12",
     "raw_date": "20211012",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 776
   },
   {
     "show_id": "000002",
@@ -1637,7 +1794,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E026 - Magyar sorozatok (B1-B2).vtt",
     "upload_date": "2021-11-24",
     "raw_date": "20211124",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 798
   },
   {
     "show_id": "000002",
@@ -1657,7 +1815,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E028 - Új kezdet, új év - 2022 (B1-B2).vtt",
     "upload_date": "2022-01-11",
     "raw_date": "20220111",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 595
   },
   {
     "show_id": "000002",
@@ -1677,7 +1836,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E030 - Hobbi (A2-B1).vtt",
     "upload_date": "2022-01-25",
     "raw_date": "20220125",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 491
   },
   {
     "show_id": "000002",
@@ -1687,7 +1847,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E031 -  szólista (B1-B2).vtt",
     "upload_date": "2022-02-01",
     "raw_date": "20220201",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 511
   },
   {
     "show_id": "000002",
@@ -1697,7 +1858,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E032 - Szólista (B2).vtt",
     "upload_date": "2022-02-23",
     "raw_date": "20220223",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 988
   },
   {
     "show_id": "000002",
@@ -1707,7 +1869,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E033 - 5 sikeres ember reggeli rutinja (A2).vtt",
     "upload_date": "2022-03-22",
     "raw_date": "20220322",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 374
   },
   {
     "show_id": "000002",
@@ -1717,7 +1880,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E034 - Home office (A2-B1).vtt",
     "upload_date": "2022-03-25",
     "raw_date": "20220325",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 505
   },
   {
     "show_id": "000002",
@@ -1727,7 +1891,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E035 - Köszönések (B1-B2).vtt",
     "upload_date": "2022-04-01",
     "raw_date": "20220401",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 622
   },
   {
     "show_id": "000002",
@@ -1737,7 +1902,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E036 - A kedvenc magyar íróm - Márai Sándor (B2).vtt",
     "upload_date": "2022-04-09",
     "raw_date": "20220409",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 992
   },
   {
     "show_id": "000002",
@@ -1747,7 +1913,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E037 - A kedvenc helyeim Budapesten (A2).vtt",
     "upload_date": "2022-04-30",
     "raw_date": "20220430",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 592
   },
   {
     "show_id": "000002",
@@ -1757,7 +1924,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E038 - Két magyar mint idegen nyelv tanár mesél (B1-B2).vtt",
     "upload_date": "2022-05-12",
     "raw_date": "20220512",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 2047
   },
   {
     "show_id": "000002",
@@ -1777,7 +1945,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E040 - Beszélgetés egy language coach-csal (B1-B2).vtt",
     "upload_date": "2022-06-16",
     "raw_date": "20220616",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 2468
   },
   {
     "show_id": "000002",
@@ -1797,7 +1966,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E042 - A Duolingóról és a HiNative-ről (B1-B2).vtt",
     "upload_date": "2022-06-25",
     "raw_date": "20220625",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 719
   },
   {
     "show_id": "000002",
@@ -1807,7 +1977,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E043 - Problémák a magyar közoktatással (B2).vtt",
     "upload_date": "2022-07-18",
     "raw_date": "20220718",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1007
   },
   {
     "show_id": "000002",
@@ -1817,7 +1988,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E044 - A heti rutinom (A2).vtt",
     "upload_date": "2022-07-26",
     "raw_date": "20220726",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 579
   },
   {
     "show_id": "000002",
@@ -1837,7 +2009,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E046 - Személyiségtípusok - INFJ (B2).vtt",
     "upload_date": "2022-08-12",
     "raw_date": "20220812",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1072
   },
   {
     "show_id": "000002",
@@ -1847,7 +2020,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E047 - A közösségi médiáról (B1-B2).vtt",
     "upload_date": "2022-08-20",
     "raw_date": "20220820",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1016
   },
   {
     "show_id": "000002",
@@ -1877,7 +2051,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E050 - Élet kutyákkal (B1-B2).vtt",
     "upload_date": "2022-09-17",
     "raw_date": "20220917",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1420
   },
   {
     "show_id": "000002",
@@ -1887,7 +2062,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E051 - Pszichológia 1. - Idézetek Feldmár András pszichoterapeutától (B2).vtt",
     "upload_date": "2022-09-24",
     "raw_date": "20220924",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1619
   },
   {
     "show_id": "000002",
@@ -1937,7 +2113,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E056 - Egy hétig újra Budapesten (A2-B1).vtt",
     "upload_date": "2022-11-19",
     "raw_date": "20221119",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 867
   },
   {
     "show_id": "000002",
@@ -1947,7 +2124,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E057 - Én és a lengyeltanulás (B1-B2).vtt",
     "upload_date": "2022-11-26",
     "raw_date": "20221126",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1201
   },
   {
     "show_id": "000002",
@@ -1957,7 +2135,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E058 - A karácsonyi ajándékozás és a fogyasztói társadalom (B2).vtt",
     "upload_date": "2022-12-10",
     "raw_date": "20221210",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 745
   },
   {
     "show_id": "000002",
@@ -1967,7 +2146,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E059 - Rossz tapasztalatok anyanyelviekkel (A2-B1).vtt",
     "upload_date": "2022-12-17",
     "raw_date": "20221217",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 911
   },
   {
     "show_id": "000002",
@@ -1977,7 +2157,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E060 - Karácsonyi filmek (B1-B2).vtt",
     "upload_date": "2022-12-24",
     "raw_date": "20221224",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 790
   },
   {
     "show_id": "000002",
@@ -1987,7 +2168,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E061 - Mexikói nyaralás - Playa Del Carmen (B1-B2).vtt",
     "upload_date": "2023-01-13",
     "raw_date": "20230113",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 732
   },
   {
     "show_id": "000002",
@@ -1997,7 +2179,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E062 - A házasság intézményéről és magyar esküvői szokásokról (B2).vtt",
     "upload_date": "2023-01-31",
     "raw_date": "20230131",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 922
   },
   {
     "show_id": "000002",
@@ -2027,7 +2210,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E065 - Jó tanárok és rossz tanárok (B2).vtt",
     "upload_date": "2023-03-22",
     "raw_date": "20230322",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1316
   },
   {
     "show_id": "000002",
@@ -2037,7 +2221,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E066 - Húsvéti szokások (A2-B1).vtt",
     "upload_date": "2023-04-08",
     "raw_date": "20230408",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 682
   },
   {
     "show_id": "000002",
@@ -2047,7 +2232,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E067 - A Montessori módszerről (B1-B2).vtt",
     "upload_date": "2023-04-28",
     "raw_date": "20230428",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1154
   },
   {
     "show_id": "000002",
@@ -2057,7 +2243,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E068 - Takarítás (B2).vtt",
     "upload_date": "2023-05-16",
     "raw_date": "20230516",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 751
   },
   {
     "show_id": "000002",
@@ -2067,7 +2254,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E069 - Spórolási tippek (A2-B1).vtt",
     "upload_date": "2023-05-29",
     "raw_date": "20230529",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 558
   },
   {
     "show_id": "000002",
@@ -2087,7 +2275,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E071 - Floridai nyaralás - Universal Studios (B1-B2).vtt",
     "upload_date": "2023-06-30",
     "raw_date": "20230630",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 731
   },
   {
     "show_id": "000002",
@@ -2117,7 +2306,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E074 - Jóbarátok - család és kapcsolatok (A2-B1).vtt",
     "upload_date": "2023-07-22",
     "raw_date": "20230722",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 863
   },
   {
     "show_id": "000002",
@@ -2147,7 +2337,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E077 - Az Alföldről - Plain Hungarian Csillával (B1-B2).vtt",
     "upload_date": "2023-08-10",
     "raw_date": "20230810",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1293
   },
   {
     "show_id": "000002",
@@ -2157,7 +2348,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E078 - Atomi szokások (B1-B2).vtt",
     "upload_date": "2023-08-17",
     "raw_date": "20230817",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 835
   },
   {
     "show_id": "000002",
@@ -2167,7 +2359,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E079 - Kedvenc gyerekkori emlékeim (A2-B1).vtt",
     "upload_date": "2023-08-24",
     "raw_date": "20230824",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 707
   },
   {
     "show_id": "000002",
@@ -2177,7 +2370,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E080 - Önbizalomról és kitartásról Tilly Anna coach-csal (B1-B2).vtt",
     "upload_date": "2023-09-07",
     "raw_date": "20230907",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1870
   },
   {
     "show_id": "000002",
@@ -2187,7 +2381,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E081 - Infláció Magyarországon (B2).vtt",
     "upload_date": "2023-09-16",
     "raw_date": "20230916",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1513
   },
   {
     "show_id": "000002",
@@ -2207,7 +2402,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E085 - Öt idegesítő dolog, amit anyanyelviek csinálnak (B1-B2).vtt",
     "upload_date": "2023-10-15",
     "raw_date": "20231015",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 625
   },
   {
     "show_id": "000002",
@@ -2217,7 +2413,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E086 - Nyelvtanulás egy új érdekes módszerrel (A2-B1).vtt",
     "upload_date": "2023-11-06",
     "raw_date": "20231106",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 728
   },
   {
     "show_id": "000002",
@@ -2227,7 +2424,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E090 - Két nap Londonban (A2-B1).vtt",
     "upload_date": "2023-12-05",
     "raw_date": "20231205",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 762
   },
   {
     "show_id": "000002",
@@ -2237,7 +2435,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E097 - Sztereotípiák a franciákról - Interjú egy franciatanárral 1. rész (B2).vtt",
     "upload_date": "2024-02-10",
     "raw_date": "20240210",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1417
   },
   {
     "show_id": "000002",
@@ -2247,7 +2446,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E099 - A magyarok és a pénz (A2-B1).vtt",
     "upload_date": "2024-02-24",
     "raw_date": "20240224",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 621
   },
   {
     "show_id": "000002",
@@ -2267,7 +2467,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E102 - Vendégségben Magyarországon (A2-B1).vtt",
     "upload_date": "2024-03-16",
     "raw_date": "20240316",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 458
   },
   {
     "show_id": "000002",
@@ -2277,7 +2478,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E103 - Magyar Húsvét - gondolatok a locsolkodásról (B2).vtt",
     "upload_date": "2024-03-24",
     "raw_date": "20240324",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 502
   },
   {
     "show_id": "000002",
@@ -2287,7 +2489,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E104 - Magyarországról Kínába (B1-B2).vtt",
     "upload_date": "2024-04-20",
     "raw_date": "20240420",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 786
   },
   {
     "show_id": "000002",
@@ -2297,7 +2500,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E110 - Lomb Kató titka (A2-B1).vtt",
     "upload_date": "2024-06-01",
     "raw_date": "20240601",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 478
   },
   {
     "show_id": "000002",
@@ -2327,7 +2531,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E116 - Iskolakezdés Magyarországon (B2).vtt",
     "upload_date": "2024-09-08",
     "raw_date": "20240908",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1448
   },
   {
     "show_id": "000002",
@@ -2377,7 +2582,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E125 - Top 3 kultúrsokk magyarként Argentínában - Interjú Teoval 1. rész (B2).vtt",
     "upload_date": "2024-11-21",
     "raw_date": "20241121",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1347
   },
   {
     "show_id": "000002",
@@ -2387,7 +2593,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E130 - A napi rutinom (A2-B1).vtt",
     "upload_date": "2025-02-13",
     "raw_date": "20250213",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 451
   },
   {
     "show_id": "000002",
@@ -2397,7 +2604,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E134 - Beszélgetés a kutyáinkról Csillával (Plain Hungarian) (B2).vtt",
     "upload_date": "2025-03-18",
     "raw_date": "20250318",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 1770
   },
   {
     "show_id": "000002",
@@ -2407,7 +2615,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E135 - 7 tipp, hogy hogy tanulj magyarul a ChatGPT-vel (B1-B2).vtt",
     "upload_date": "2025-03-29",
     "raw_date": "20250329",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 529
   },
   {
     "show_id": "000002",
@@ -2437,7 +2646,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E144 - Három kedvenc magyar filmemről (B1-B2).vtt",
     "upload_date": "2025-05-28",
     "raw_date": "20250528",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 515
   },
   {
     "show_id": "000002",
@@ -2447,7 +2657,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E147 - 5 dolog, amit a legjobban, és amit a legkevésbé szeretek Magyarországon (B1-B2).vtt",
     "upload_date": "2025-06-18",
     "raw_date": "20250618",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 667
   },
   {
     "show_id": "000002",
@@ -2457,7 +2668,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000002/E148 - Kolumbiából Magyarországra | Victoria inspiráló története (B1-B2).vtt",
     "upload_date": "2025-06-25",
     "raw_date": "20250625",
-    "format": "MP3"
+    "format": "MP3",
+    "duration": 2102
   },
   {
     "show_id": "000003",
@@ -2466,7 +2678,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000003/E199 Et si on se rencontrait ？.fr.vtt",
     "upload_date": "2026-08-31",
     "raw_date": "20260831",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1766
   },
   {
     "show_id": "000004",
@@ -2475,7 +2688,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000004/Ep12   Les avantages et inconvénients de vivre à Bordeaux.fr.vtt",
     "upload_date": "2024-11-01",
     "raw_date": "20241101",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 1314
   },
   {
     "show_id": "000005",
@@ -2485,7 +2699,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 4 Mein Tag (A1-B1).de.vtt",
     "upload_date": "2022-12-06",
     "raw_date": "20221206",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 548
   },
   {
     "show_id": "000005",
@@ -2495,7 +2710,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 5 Sport (A1-B1).de.vtt",
     "upload_date": "2022-12-07",
     "raw_date": "20221207",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 475
   },
   {
     "show_id": "000005",
@@ -2505,7 +2721,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 6 Weihnachten (A1-B1).de.vtt",
     "upload_date": "2022-12-08",
     "raw_date": "20221208",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 546
   },
   {
     "show_id": "000005",
@@ -2515,7 +2732,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 1 sich vorstellen.de.vtt",
     "upload_date": "2022-12-12",
     "raw_date": "20221212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 293
   },
   {
     "show_id": "000005",
@@ -2525,7 +2743,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 2 die Wohnung.de.vtt",
     "upload_date": "2022-12-12",
     "raw_date": "20221212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 568
   },
   {
     "show_id": "000005",
@@ -2535,7 +2754,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 3 die Jahreszeiten.de.vtt",
     "upload_date": "2022-12-12",
     "raw_date": "20221212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 628
   },
   {
     "show_id": "000005",
@@ -2545,7 +2765,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 7 die Schule (A1-B1).de.vtt",
     "upload_date": "2022-12-12",
     "raw_date": "20221212",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 618
   },
   {
     "show_id": "000005",
@@ -2555,7 +2776,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 9 der Supermarkt (A1-B1).de.vtt",
     "upload_date": "2022-12-18",
     "raw_date": "20221218",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 642
   },
   {
     "show_id": "000005",
@@ -2565,7 +2787,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 10 der Verkehr (A1-B1).de.vtt",
     "upload_date": "2022-12-20",
     "raw_date": "20221220",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 540
   },
   {
     "show_id": "000005",
@@ -2575,7 +2798,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 31 Nachtleben in Berlin(A1-B1).de.vtt",
     "upload_date": "2023-02-05",
     "raw_date": "20230205",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 431
   },
   {
     "show_id": "000005",
@@ -2585,7 +2809,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 32 Flohmarkt (A1-B1).de.vtt",
     "upload_date": "2023-02-08",
     "raw_date": "20230208",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 423
   },
   {
     "show_id": "000005",
@@ -2595,7 +2820,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 35.de.vtt",
     "upload_date": "2023-02-08",
     "raw_date": "20230208",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 422
   },
   {
     "show_id": "000005",
@@ -2605,7 +2831,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 33 Oktoberfest (A1-B1).de.vtt",
     "upload_date": "2023-02-15",
     "raw_date": "20230215",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 395
   },
   {
     "show_id": "000005",
@@ -2615,7 +2842,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 34 Geld (A1-B1).de.vtt",
     "upload_date": "2023-02-21",
     "raw_date": "20230221",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 388
   },
   {
     "show_id": "000005",
@@ -2625,7 +2853,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 36 Führerschein (A1-B1).de.vtt",
     "upload_date": "2023-03-05",
     "raw_date": "20230305",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 477
   },
   {
     "show_id": "000005",
@@ -2635,7 +2864,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 37 Musik (A1-B1).de.vtt",
     "upload_date": "2023-03-09",
     "raw_date": "20230309",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 431
   },
   {
     "show_id": "000005",
@@ -2645,7 +2875,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 38 Gesellschaftsspiele(A1-B1).de.vtt",
     "upload_date": "2023-03-13",
     "raw_date": "20230313",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 416
   },
   {
     "show_id": "000005",
@@ -2655,7 +2886,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 39 Vergnügungspark (A1-B1).de.vtt",
     "upload_date": "2023-03-18",
     "raw_date": "20230318",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 416
   },
   {
     "show_id": "000005",
@@ -2665,7 +2897,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 40 schlafen (A1-B1).de.vtt",
     "upload_date": "2023-03-23",
     "raw_date": "20230323",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 473
   },
   {
     "show_id": "000005",
@@ -2675,7 +2908,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 41 regnerische Tage (A1-B1).de.vtt",
     "upload_date": "2023-03-28",
     "raw_date": "20230328",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 431
   },
   {
     "show_id": "000005",
@@ -2685,7 +2919,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 42 Fahrradfahren (A1-B1).de.vtt",
     "upload_date": "2023-04-02",
     "raw_date": "20230402",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 396
   },
   {
     "show_id": "000005",
@@ -2695,7 +2930,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 43 Fitnessstudios(A1-B1).de.vtt",
     "upload_date": "2023-04-08",
     "raw_date": "20230408",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 425
   },
   {
     "show_id": "000005",
@@ -2705,7 +2941,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 44 Erkältung (A1-B1).de.vtt",
     "upload_date": "2023-04-14",
     "raw_date": "20230414",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 372
   },
   {
     "show_id": "000005",
@@ -2715,7 +2952,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 45 Museum (A1-B1).de.vtt",
     "upload_date": "2023-04-19",
     "raw_date": "20230419",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 380
   },
   {
     "show_id": "000005",
@@ -2725,7 +2963,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 46 Spielzeug (A1-B1).de.vtt",
     "upload_date": "2023-04-25",
     "raw_date": "20230425",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 389
   },
   {
     "show_id": "000005",
@@ -2735,7 +2974,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 47 Köln (A1-B1).de.vtt",
     "upload_date": "2023-04-29",
     "raw_date": "20230429",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 381
   },
   {
     "show_id": "000005",
@@ -2745,7 +2985,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 48 die Berliner Mauer (A1-B1).de.vtt",
     "upload_date": "2023-05-05",
     "raw_date": "20230505",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 355
   },
   {
     "show_id": "000005",
@@ -2755,7 +2996,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 49 Detektive (A1-B1).de.vtt",
     "upload_date": "2023-05-10",
     "raw_date": "20230510",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 445
   },
   {
     "show_id": "000005",
@@ -2765,7 +3007,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 50 Yoga (A1-B1).de.vtt",
     "upload_date": "2023-05-15",
     "raw_date": "20230515",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 461
   },
   {
     "show_id": "000005",
@@ -2775,7 +3018,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 51 Recycling in Deutschland (A1-B1).de.vtt",
     "upload_date": "2023-05-20",
     "raw_date": "20230520",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 495
   },
   {
     "show_id": "000005",
@@ -2785,7 +3029,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 52 umziehen (A1-B1).de.vtt",
     "upload_date": "2023-05-24",
     "raw_date": "20230524",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 473
   },
   {
     "show_id": "000005",
@@ -2795,7 +3040,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 53 Studium in Deutschland (A1-B1).de.vtt",
     "upload_date": "2023-05-30",
     "raw_date": "20230530",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 524
   },
   {
     "show_id": "000005",
@@ -2805,7 +3051,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 54 Sommerferien (A1-B1).de.vtt",
     "upload_date": "2023-06-05",
     "raw_date": "20230605",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 419
   },
   {
     "show_id": "000005",
@@ -2815,7 +3062,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 55 Camping (A1-B1).de.vtt",
     "upload_date": "2023-06-09",
     "raw_date": "20230609",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 406
   },
   {
     "show_id": "000005",
@@ -2835,7 +3083,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 57 Youtube (A1-B1).de.vtt",
     "upload_date": "2023-06-20",
     "raw_date": "20230620",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 420
   },
   {
     "show_id": "000005",
@@ -2845,7 +3094,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 58 Süßigkeiten in Deutschland (A1-B1).de.vtt",
     "upload_date": "2023-06-26",
     "raw_date": "20230626",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 483
   },
   {
     "show_id": "000005",
@@ -2875,7 +3125,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 61 Freibäder (A1-B1).de.vtt",
     "upload_date": "2023-07-10",
     "raw_date": "20230710",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 452
   },
   {
     "show_id": "000005",
@@ -2885,7 +3136,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 62 Spielplätze (A1-B1).de.vtt",
     "upload_date": "2023-07-18",
     "raw_date": "20230718",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 447
   },
   {
     "show_id": "000005",
@@ -2895,7 +3147,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 63 Adidas (A1-B1).de.vtt",
     "upload_date": "2023-07-23",
     "raw_date": "20230723",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 441
   },
   {
     "show_id": "000005",
@@ -2905,7 +3158,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 64 Auswandern (A1-B1).de.vtt",
     "upload_date": "2023-07-26",
     "raw_date": "20230726",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 445
   },
   {
     "show_id": "000005",
@@ -2915,7 +3169,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 65 Konzert (A1-B1).de.vtt",
     "upload_date": "2023-08-02",
     "raw_date": "20230802",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 467
   },
   {
     "show_id": "000005",
@@ -2925,7 +3180,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 66 Sportvereine (A1-B1).de.vtt",
     "upload_date": "2023-08-06",
     "raw_date": "20230806",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 445
   },
   {
     "show_id": "000005",
@@ -2935,7 +3191,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 67 Volkswagen (A1-B1).de.vtt",
     "upload_date": "2023-08-11",
     "raw_date": "20230811",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 442
   },
   {
     "show_id": "000005",
@@ -2945,7 +3202,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 68 Solarenergie (A1-B1).de.vtt",
     "upload_date": "2023-08-19",
     "raw_date": "20230819",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 464
   },
   {
     "show_id": "000005",
@@ -2955,7 +3213,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 69 Kino (A1-B1).de.vtt",
     "upload_date": "2023-08-23",
     "raw_date": "20230823",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 562
   },
   {
     "show_id": "000005",
@@ -2965,7 +3224,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000005/Slow German Podcast for Beginners ⧸ Episode 70 Albert Einstein (A1-B1).de.vtt",
     "upload_date": "2023-08-27",
     "raw_date": "20230827",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 548
   },
   {
     "show_id": "000006",
@@ -2975,7 +3235,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Hobbi (SUB).vtt",
     "upload_date": "2025-02-07",
     "raw_date": "20250207",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 204
   },
   {
     "show_id": "000006",
@@ -2985,7 +3246,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Évszakok (SUB).vtt",
     "upload_date": "2025-02-14",
     "raw_date": "20250214",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 194
   },
   {
     "show_id": "000006",
@@ -2995,7 +3257,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Ételek (SUB).vtt",
     "upload_date": "2025-02-21",
     "raw_date": "20250221",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 222
   },
   {
     "show_id": "000006",
@@ -3005,7 +3268,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Nyelvtanulás (SUB).vtt",
     "upload_date": "2025-02-28",
     "raw_date": "20250228",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 216
   },
   {
     "show_id": "000006",
@@ -3015,7 +3279,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Bevásárlás (SUB).vtt",
     "upload_date": "2025-03-07",
     "raw_date": "20250307",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 224
   },
   {
     "show_id": "000006",
@@ -3025,7 +3290,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Újévi tervek (SUB).vtt",
     "upload_date": "2025-03-14",
     "raw_date": "20250314",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 206
   },
   {
     "show_id": "000006",
@@ -3035,7 +3301,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Munka (SUB).vtt",
     "upload_date": "2025-03-21",
     "raw_date": "20250321",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 222
   },
   {
     "show_id": "000006",
@@ -3045,7 +3312,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Barátok (SUB).vtt",
     "upload_date": "2025-03-28",
     "raw_date": "20250328",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 229
   },
   {
     "show_id": "000006",
@@ -3055,7 +3323,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Zene (SUB).vtt",
     "upload_date": "2025-04-04",
     "raw_date": "20250404",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 207
   },
   {
     "show_id": "000006",
@@ -3065,7 +3334,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Iskola (SUB).vtt",
     "upload_date": "2025-04-11",
     "raw_date": "20250411",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 227
   },
   {
     "show_id": "000006",
@@ -3085,7 +3355,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Podcast for Hungarian Learners - Sport (SUB).vtt",
     "upload_date": "2025-04-25",
     "raw_date": "20250425",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 215
   },
   {
     "show_id": "000006",
@@ -3095,7 +3366,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Filmek (SUB).vtt",
     "upload_date": "2025-05-02",
     "raw_date": "20250502",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 222
   },
   {
     "show_id": "000006",
@@ -3105,7 +3377,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Ház, lakás (SUB).vtt",
     "upload_date": "2025-05-09",
     "raw_date": "20250509",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 228
   },
   {
     "show_id": "000006",
@@ -3115,7 +3388,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Születésnap, névnap (SUB).vtt",
     "upload_date": "2025-05-16",
     "raw_date": "20250516",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 229
   },
   {
     "show_id": "000006",
@@ -3125,7 +3399,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Egészség (SUB).vtt",
     "upload_date": "2025-05-23",
     "raw_date": "20250523",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 200
   },
   {
     "show_id": "000006",
@@ -3135,7 +3410,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Egészséges életmód (SUB).vtt",
     "upload_date": "2025-05-30",
     "raw_date": "20250530",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000006",
@@ -3145,7 +3421,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Könyvek (SUB).vtt",
     "upload_date": "2025-06-06",
     "raw_date": "20250606",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000006",
@@ -3155,7 +3432,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Állatok (SUB).vtt",
     "upload_date": "2025-06-13",
     "raw_date": "20250613",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 197
   },
   {
     "show_id": "000006",
@@ -3165,7 +3443,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Takarítás (SUB).vtt",
     "upload_date": "2025-06-20",
     "raw_date": "20250620",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 223
   },
   {
     "show_id": "000006",
@@ -3175,7 +3454,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Internet (SUB).vtt",
     "upload_date": "2025-06-27",
     "raw_date": "20250627",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 223
   },
   {
     "show_id": "000006",
@@ -3185,7 +3465,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Vásárlás (SUB).vtt",
     "upload_date": "2025-07-04",
     "raw_date": "20250704",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 208
   },
   {
     "show_id": "000006",
@@ -3195,7 +3476,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Személyiség (SUB).vtt",
     "upload_date": "2025-07-11",
     "raw_date": "20250711",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 210
   },
   {
     "show_id": "000006",
@@ -3205,7 +3487,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Pénz (SUB).vtt",
     "upload_date": "2025-07-18",
     "raw_date": "20250718",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 207
   },
   {
     "show_id": "000006",
@@ -3215,7 +3498,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Nyaralás (SUB).vtt",
     "upload_date": "2025-07-25",
     "raw_date": "20250725",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 208
   },
   {
     "show_id": "000006",
@@ -3225,7 +3509,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Hobbi (SUB).vtt",
     "upload_date": "2025-09-05",
     "raw_date": "20250905",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 152
   },
   {
     "show_id": "000006",
@@ -3235,7 +3520,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] A nyaram (SUB).vtt",
     "upload_date": "2025-09-12",
     "raw_date": "20250912",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 224
   },
   {
     "show_id": "000006",
@@ -3245,7 +3531,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Évszakok (SUB).vtt",
     "upload_date": "2025-09-19",
     "raw_date": "20250919",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 158
   },
   {
     "show_id": "000006",
@@ -3255,7 +3542,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Alvás (SUB).vtt",
     "upload_date": "2025-09-26",
     "raw_date": "20250926",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 226
   },
   {
     "show_id": "000006",
@@ -3265,7 +3553,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Ételek (SUB).vtt",
     "upload_date": "2025-10-03",
     "raw_date": "20251003",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 144
   },
   {
     "show_id": "000006",
@@ -3275,7 +3564,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Ősz (SUB).vtt",
     "upload_date": "2025-10-24",
     "raw_date": "20251024",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 209
   },
   {
     "show_id": "000006",
@@ -3285,7 +3575,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Nyelvtanulás (SUB).vtt",
     "upload_date": "2025-10-31",
     "raw_date": "20251031",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 138
   },
   {
     "show_id": "000006",
@@ -3295,7 +3586,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] A városom (SUB).vtt",
     "upload_date": "2025-11-16",
     "raw_date": "20251116",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000006",
@@ -3305,7 +3597,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Család (SUB).vtt",
     "upload_date": "2025-11-21",
     "raw_date": "20251121",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 164
   },
   {
     "show_id": "000006",
@@ -3315,7 +3608,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Karácsony (SUB).vtt",
     "upload_date": "2025-12-20",
     "raw_date": "20251220",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 230
   },
   {
     "show_id": "000006",
@@ -3325,7 +3619,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Újév (SUB).vtt",
     "upload_date": "2026-01-10",
     "raw_date": "20260110",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 163
   },
   {
     "show_id": "000006",
@@ -3335,7 +3630,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Hírek (SUB).vtt",
     "upload_date": "2026-01-16",
     "raw_date": "20260116",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 223
   },
   {
     "show_id": "000006",
@@ -3345,7 +3641,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Barátok (SUB).vtt",
     "upload_date": "2026-02-06",
     "raw_date": "20260206",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 161
   },
   {
     "show_id": "000006",
@@ -3355,7 +3652,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Mobiltelefon (SUB).vtt",
     "upload_date": "2026-02-13",
     "raw_date": "20260213",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 227
   },
   {
     "show_id": "000006",
@@ -3365,7 +3663,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Egészség (SUB).vtt",
     "upload_date": "2026-02-27",
     "raw_date": "20260227",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 136
   },
   {
     "show_id": "000006",
@@ -3375,7 +3674,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Közlekedés (SUB).vtt",
     "upload_date": "2026-03-07",
     "raw_date": "20260307",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 224
   },
   {
     "show_id": "000006",
@@ -3385,7 +3685,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Utazás (SUB).vtt",
     "upload_date": "2026-03-13",
     "raw_date": "20260313",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 147
   },
   {
     "show_id": "000006",
@@ -3395,7 +3696,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Természet (SUB).vtt",
     "upload_date": "2026-03-20",
     "raw_date": "20260320",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 217
   },
   {
     "show_id": "000006",
@@ -3405,7 +3707,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Húsvét (SUB).vtt",
     "upload_date": "2026-04-05",
     "raw_date": "20260405",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 218
   },
   {
     "show_id": "000006",
@@ -3415,7 +3718,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Munka (SUB).vtt",
     "upload_date": "2026-04-11",
     "raw_date": "20260411",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 157
   },
   {
     "show_id": "000006",
@@ -3425,7 +3729,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (B1+) - Környezetvédelem – Environmental Protection - Podcast & Listening Practice.vtt",
     "upload_date": "2026-04-19",
     "raw_date": "20260419",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 207
   },
   {
     "show_id": "000006",
@@ -3435,7 +3740,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Learn Hungarian (A1 - A2) - Collection episode - Everyday Life - 7 min Listening Practice.vtt",
     "upload_date": "2026-04-24",
     "raw_date": "20260424",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 442
   },
   {
     "show_id": "000006",
@@ -3445,7 +3751,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (A1–A2) - A hétvégém – My weekend - Podcast & Listening Practice.vtt",
     "upload_date": "2026-05-08",
     "raw_date": "20260508",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 159
   },
   {
     "show_id": "000006",
@@ -3455,7 +3762,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (B1) - Kedvencek – Favorites - Podcast & Listening Practice.vtt",
     "upload_date": "2026-05-15",
     "raw_date": "20260515",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 184
   },
   {
     "show_id": "000006",
@@ -3465,7 +3773,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (A1 - A2) - Tantárgyak – School Subjects - Podcast & Listening Practice.vtt",
     "upload_date": "2026-05-24",
     "raw_date": "20260524",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 155
   },
   {
     "show_id": "000006",
@@ -3475,7 +3784,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (B1) - Moving – Költözés - Podcast & Listening Practice.vtt",
     "upload_date": "2026-05-29",
     "raw_date": "20260529",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 178
   },
   {
     "show_id": "000006",
@@ -3485,7 +3795,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (A1–A2) - Sport - Podcast & Listening Practice.vtt",
     "upload_date": "2026-06-05",
     "raw_date": "20260605",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 135
   },
   {
     "show_id": "000006",
@@ -3495,7 +3806,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (B1) - AI - Podcast & Listening Practice.vtt",
     "upload_date": "2026-06-12",
     "raw_date": "20260612",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 195
   },
   {
     "show_id": "000006",
@@ -3505,7 +3817,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (B1) - Interview with Patrik - Podcast & Listening Practice.vtt",
     "upload_date": "2026-06-26",
     "raw_date": "20260626",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 240
   },
   {
     "show_id": "000006",
@@ -3515,7 +3828,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Ep16 - Új dolgok - New things (SUB).vtt",
     "upload_date": "2026-07-03",
     "raw_date": "20260703",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 147
   },
   {
     "show_id": "000006",
@@ -3525,7 +3839,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Szokások - Habits (SUB).vtt",
     "upload_date": "2026-07-10",
     "raw_date": "20260710",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 195
   },
   {
     "show_id": "000006",
@@ -3535,7 +3850,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/👉 Learn Hungarian (A1–A2) - A nyaram – My summer - Podcast & Listening Practice.vtt",
     "upload_date": "2026-07-17",
     "raw_date": "20260717",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 155
   },
   {
     "show_id": "000006",
@@ -3545,7 +3861,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] A legjobb nyaram - My best summer holiday (SUB).vtt",
     "upload_date": "2026-07-24",
     "raw_date": "20260724",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 217
   },
   {
     "show_id": "000006",
@@ -3555,7 +3872,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Filmek - Sorozatok (SUB).vtt",
     "upload_date": "2026-07-31",
     "raw_date": "20260731",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 152
   },
   {
     "show_id": "000006",
@@ -3565,7 +3883,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Változások - Changes (SUB).vtt",
     "upload_date": "2026-09-04",
     "raw_date": "20260904",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 190
   },
   {
     "show_id": "000006",
@@ -3575,7 +3894,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Az orvosnál - At the doctor (SUB).vtt",
     "upload_date": "2026-09-11",
     "raw_date": "20260911",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 146
   },
   {
     "show_id": "000006",
@@ -3585,7 +3905,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] I asked for an appointment - Időpontot kértem (SUB).vtt",
     "upload_date": "2026-09-25",
     "raw_date": "20260925",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 195
   },
   {
     "show_id": "000006",
@@ -3595,7 +3916,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Albérletet keresek - I'm looking for a rental apartment (SUB).vtt",
     "upload_date": "2026-10-02",
     "raw_date": "20261002",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 219
   },
   {
     "show_id": "000006",
@@ -3605,7 +3927,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Elmegyek bevásárolni - I'm going shopping (SUB).vtt",
     "upload_date": "2026-10-09",
     "raw_date": "20261009",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 158
   },
   {
     "show_id": "000006",
@@ -3615,7 +3938,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [B1] Vélemény - Opinion (SUB).vtt",
     "upload_date": "2026-10-16",
     "raw_date": "20261016",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 247
   },
   {
     "show_id": "000006",
@@ -3625,7 +3949,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Hungarian Podcast for Beginners - [A1 - A2] Lekéstem a vonatot - I missed my train (SUB).vtt",
     "upload_date": "2026-10-23",
     "raw_date": "20261023",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 160
   },
   {
     "show_id": "000006",
@@ -3635,7 +3960,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000006/Learn Hungarian (B1) - Stressz – Stress - Podcast & Listening Practice.vtt",
     "upload_date": "2026-10-30",
     "raw_date": "20261030",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 251
   },
   {
     "show_id": "000007",
@@ -3645,7 +3971,8 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000007/Le kell állítani a készpénzes palackvisszaváltást!.vtt",
     "upload_date": "2026-09-02",
     "raw_date": "20260902",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 68
   },
   {
     "show_id": "000007",
@@ -3655,6 +3982,7 @@
     "vtt": "https://pub-4749f414275141eea47a778cb1cb7288.r2.dev/episodes/000007/Nem hagyjuk ennyiben： el fogjuk bontani az Örs vezér terén hagyott maradék pavilonokat!.vtt",
     "upload_date": "2026-09-11",
     "raw_date": "20260911",
-    "format": "M4A"
+    "format": "M4A",
+    "duration": 77
   }
 ]
