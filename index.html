@@ -992,6 +992,12 @@
     </div>
   </header>
 
+  <button class="btn-scroll-top" id="ssScrollTopBtn" onclick="scrollToTopSS()" title="Return to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+
   <main id="mainContainer">
     <!-- Screen 1: Home Screen (HS) -->
     <div id="homeScreen" class="screen active">
@@ -1033,12 +1039,7 @@
         </div>
       </div>
 
-      <button class="btn-scroll-top" id="ssScrollTopBtn" onclick="scrollToTopSS()" title="Return to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M18 15l-6-6-6 6"/>
-        </svg>
-      </button>
-
+      
       <div class="list-view" id="episodesListView">
         <div class="empty-state">Loading episodes…</div>
       </div>
@@ -1727,7 +1728,7 @@
             <div class="card-title">${ep.title}</div>
             <div class="card-meta">
               ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
-              ${ep.duration ? `<span>⏱ ${formatTime(ep.duration)}</span>` : ''}
+              ${ep.duration ? `<span>⏱ ${isNaN(ep.duration) ? ep.duration : formatTime(ep.duration)}</span>` : ''}
               ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
               ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
               ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
@@ -1841,38 +1842,31 @@
       return list;
     }
 
-    async function loadTranscript(vttUrl) {
-    cues = [];
-    activeCueIndex = -1;
-    transcriptView.innerHTML = "";
-
-    if (!vttUrl || typeof vttUrl !== "string" || !vttUrl.trim()) {
-      transcriptView.innerHTML = "<div class=\"empty-state\">No transcript available for this track.</div>";
+    async function loadTranscript(vttVal) {
+  cues = [];
+  activeCueIndex = -1;
+  transcriptView.innerHTML = "";
+  if (!vttVal) {
+    transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
+    return;
+  }
+  try {
+    let vttUrl = vttVal === true ? (currentEpisode.audio.replace(/\.[^/.]+$/, "") + ".vtt") : String(vttVal);
+    let fullUrl = vttUrl.startsWith("http") ? vttUrl : `${R2_BASE}/${currentShow ? (currentShow.show_id || currentShow.folder) + "/" : ""}${vttUrl.replace(/^\//, "")}`;
+    const res = await fetch(safeUrl(fullUrl));
+    if (res.status === 404) {
+      transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
       return;
     }
-
-    try {
-      let fullUrl = vttUrl.startsWith("http") ? vttUrl : `${R2_BASE}/${vttUrl.replace(/^\//, "")}`;
-      const parsedUrl = new URL(fullUrl);
-      parsedUrl.searchParams.set("nocache", Date.now().toString());
-
-      const res = await fetch(parsedUrl.toString());
-      if (res.status === 404) {
-        transcriptView.innerHTML = "<div class=\"empty-state\">No transcript available for this track.</div>";
-        return;
-      }
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const text = await res.text();
-      cues = parseVtt(text);
-      if (cues.length > 0) {
-        renderTranscript();
-      } else {
-        transcriptView.innerHTML = "<div class=\"empty-state\">Transcript contains no text cues.</div>";
-      }
-    } catch (err) {
-      transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
-    }
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const text = await res.text();
+    cues = parseVtt(text);
+    if (cues.length > 0) renderTranscript();
+    else transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text cues.</div>';
+  } catch (err) {
+    transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
   }
+}
 
   function renderTranscript() {
       if (!transcriptView) return;
