@@ -1,0 +1,828 @@
+#!/usr/bin/env python3
+import sys
+import traceback
+
+def _crash_hook(t, v, tb):
+    print("=== CRASH DETECTED ===")
+    traceback.print_exception(t, v, tb)
+
+sys.excepthook = _crash_hook
+
+import csv
+import glob
+import json
+import os
+import pathlib
+import re
+import shutil
+import subprocess
+import tempfile
+
+def safe_filename(title):
+    value = str(title or "").strip()
+    value = re.sub(r'[<>:"/\\|?*\x00-\x1f]', " - ", value)
+    value = re.sub(r"\s+", " ", value).strip(" .")
+    return value or "untitled"
+
+def rclone_check_vtt(show_id, title):
+    safe_title = safe_filename(title)
+    remote_dir = f"r2:pod-player/episodes/{show_id}/"
+    res = subprocess.run(
+        ["rclone", "lsf", "--s3-no-check-bucket", remote_dir],
+        capture_output=True,
+        text=True,
+    )
+    if res.returncode != 0:
+        return False
+    return any(
+        name.startswith(safe_title) and name.lower().endswith(".vtt")
+        for name in res.stdout.splitlines()
+    )
+
+ORIGINAL_CWD = os.getcwd()
+WORKDIR = os.path.expanduser("~/Documents/code/pod-player")
+RCLONE_REM = "r2:pod-player"
+BASE_R2 = "https://pub-73737337.r2.dev"
+
+def update_ytdlp():
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "--upgrade", "yt-dlp", "--quiet"],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception:
+        pass
+
+def lang_to_flag(lang):
+    if not lang:
+        return "🌐"
+    code = lang.lower().split("-")[0].strip()
+    override = {"en": "GB", "ja": "JP", "ko": "KR", "zh": "CN", "da": "DK", "el": "GR", "cs": "CZ", "sv": "SE", "uk": "UA"}
+    cc = override.get(code, code).upper()
+    if len(cc) == 2 and cc.isalpha():
+        return chr(0x1F1E6 + ord(cc[0]) - 65) + chr(0x1F1E6 + ord(cc[1]) - 65)
+    return "🌐"
+
+def validate_vtt_language(vtt_path, expected_lang):
+    if not os.path.exists(vtt_path):
+        return False
+    if expected_lang in ("en", "gb", "us"):
+        return True
+    try:
+        with open(vtt_path, "r", encoding="utf-8", errors="ignore") as f:
+            raw_text = f.read()
+
+        clean_lines = []
+        for line in raw_text.splitlines():
+            line = line.strip()
+            if not line or line.startswith("WEBVTT") or line.startswith("Kind:") or line.startswith("Language:") or "-->" in line:
+                continue
+            clean_lines.append(re.sub(r"<[^>]+>", "", line))
+
+        text = " ".join(clean_lines).lower()
+        words = re.findall(r"\b[a-zA-Záéíóöőúüűàâæçèéêëîïôœùûüÿäöüß]+\b", text)
+
+        if not words:
+            print(f"--> [Sub Check] FAIL: '{os.path.basename(vtt_path)}' has no readable text cues.")
+            return False
+
+        stopwords = {
+            "hu": {"a", "az", "hogy", "nem", "es", "és", "van", "egy", "meg", "is", "de", "azt", "ha"},
+            "fr": {"le", "la", "les", "que", "pas", "avec", "dans", "une", "pour", "est", "des", "du"},
+            "de": {"das", "der", "die", "und", "nicht", "mit", "einen", "auch", "dem", "sich", "ein"}
+        }
+        en_words = {"the", "and", "that", "have", "for", "not", "with", "you", "this", "but", "are", "from"}
+
+        target_words = stopwords.get(expected_lang, set())
+        target_count = sum(1 for w in words if w in target_words)
+        en_count = sum(1 for w in words if w in en_words)
+        total_matched = target_count + en_count
+
+        if total_matched == 0:
+            return False
+
+        target_ratio = target_count / total_matched
+        if target_ratio < 0.80:
+            return False
+
+        return True
+    except Exception as e:
+        return False
+
+def clean_vtt_content(vtt_path):
+    if not os.path.exists(vtt_path):
+        return
+    try:
+        with open(vtt_path, "r", encoding="utf-8", errors="ignore") as f:
+            raw_content = f.read()
+
+        blocks = raw_content.split("\n\n")
+        cleaned_blocks = []
+        last_clean_text = ""
+
+        for block in blocks:
+            lines = [l.strip() for l in block.splitlines() if l.strip()]
+            if not lines:
+                continue
+
+            if lines[0].startswith("WEBVTT") or lines[0].startswith("Kind:") or lines[0].startswith("Language:"):
+                cleaned_blocks.append("\n".join(lines))
+                continue
+
+            timestamp_idx = -1
+            for idx, line in enumerate(lines):
+                if "-->" in line:
+                    timestamp_idx = idx
+                    break
+
+            if timestamp_idx != -1:
+                ts_line = lines[timestamp_idx]
+                ts_match = re.search(r"(\d{2}:\d{2}:\d{2}\.\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2}\.\d{3})", ts_line)
+                if ts_match:
+                    start_str, end_str = ts_match.group(1), ts_match.group(2)
+                    def to_ms(s):
+                        h, m, sec = s.split(":")
+                        sec, ms = sec.split(".")
+                        return int(h)*3600000 + int(m)*60000 + int(sec)*1000 + int(ms)
+                    
+                    if (to_ms(end_str) - to_ms(start_str)) <= 50:
+                        continue
+
+                timestamp_line = re.sub(r"\s+align:\S+|\s+position:\S+", "", ts_line)
+                text_lines = lines[timestamp_idx + 1:]
+                
+                clean_lines = []
+                for l in text_lines:
+                    t = re.sub(r"<[^>]+>", "", l)
+                    t = re.sub(r"\[.*?\]|\(.*?\)", "", t).strip()
+                    if t:
+                        clean_lines.append(t)
+
+                full_text = " ".join(clean_lines).strip()
+                if not full_text:
+                    continue
+
+                if last_clean_text and full_text.startswith(last_clean_text):
+                    full_text = full_text[len(last_clean_text):].strip(" ,.-")
+                
+                if full_text and full_text != last_clean_text:
+                    cleaned_blocks.append(f"{timestamp_line}\n{full_text}")
+                    last_clean_text = full_text
+
+        with open(vtt_path, "w", encoding="utf-8") as f:
+            f.write("\n\n".join(cleaned_blocks) + "\n")
+    except Exception as e:
+        print(f"--> [Warning] Could not clean VTT file: {e}")
+
+def sanitize_title(title):
+    tier1 = r'[—–‒―−:|/｜]'
+    tier2 = r'\s+[-~_#•·;,]'
+    pattern = rf'(?:{tier1}|\s*{tier2})'
+    return re.split(pattern, title)[0].strip()
+
+def safe_git_sync(commit_msg, workdir):
+    rebase_dir = os.path.join(workdir, ".git", "rebase-merge")
+    rebase_apply = os.path.join(workdir, ".git", "rebase-apply")
+    if os.path.exists(rebase_dir) or os.path.exists(rebase_apply):
+        print("--> [Git Warning] Leftover rebase state detected. Aborting rebase...")
+        subprocess.run(["git", "rebase", "--abort"], cwd=workdir, capture_output=True)
+
+    subprocess.run(["git", "add", "dict.tsv", "shows.json", "playlist.json"], cwd=workdir)
+    subprocess.run(["git", "commit", "-m", commit_msg], cwd=workdir, check=False)
+
+    pull_res = subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=workdir, capture_output=True, text=True)
+    if pull_res.returncode != 0:
+        print(f"--> [Git Error] Pull rebase failed: {pull_res.stderr.strip()}")
+        subprocess.run(["git", "rebase", "--abort"], cwd=workdir, capture_output=True)
+        return False
+
+    push_res = subprocess.run(["git", "push", "origin", "main"], cwd=workdir, capture_output=True, text=True)
+    if push_res.returncode != 0:
+        print(f"--> [Git Push Error] {push_res.stderr.strip()}")
+        return False
+
+    print("==> Changes successfully pushed to GitHub.")
+    return True
+
+def main():
+    if len(sys.argv) == 1 or '-h' in sys.argv or '--help' in sys.argv:
+        print("Usage: gp [-p] [-n] [-k] [-f] [-c] [-u <show_id> <files>] [-l <list_file>] [-rm [-d] <target>]\n")
+        sys.exit(0)
+
+    commit_msg = "Automated metadata sync"
+    dict_path = os.path.join(WORKDIR, "dict.tsv")
+    shows_path = os.path.join(WORKDIR, "shows.json")
+    playlist_path = os.path.join(WORKDIR, "playlist.json")
+
+    # --- Local File Upload Handler (-u) ---
+    if len(sys.argv) > 1 and sys.argv[1] == "-u":
+        if len(sys.argv) < 4:
+            print("Usage: gp -u <show_id> <file_or_pattern> [more_files...]")
+            sys.exit(1)
+
+        if not os.path.isdir(WORKDIR):
+            print(f"Error: {WORKDIR} does not exist.")
+            sys.exit(1)
+
+        os.chdir(WORKDIR)
+        subprocess.run(["git", "stash"], cwd=WORKDIR, capture_output=True)
+        subprocess.run(["git", "checkout", "main"], cwd=WORKDIR, capture_output=True)
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=WORKDIR, capture_output=True)
+        subprocess.run(["git", "stash", "pop"], cwd=WORKDIR, capture_output=True)
+
+        target_show_id = sys.argv[2].strip()
+        raw_inputs = sys.argv[3:]
+
+        try:
+            with open(shows_path, "r", encoding="utf-8") as f:
+                shows_data = json.load(f)
+        except Exception:
+            shows_data = {}
+
+        if target_show_id not in shows_data:
+            print(f"Error: show_id '{target_show_id}' not found in shows.json.")
+            sys.exit(1)
+
+        base_episodes_url = f"{BASE_R2}/episodes/{target_show_id}"
+
+        resolved_files = []
+        for item in raw_inputs:
+            p_obj = pathlib.Path(item)
+            if not p_obj.is_absolute():
+                p_obj = pathlib.Path(ORIGINAL_CWD) / p_obj
+            matched = list(glob.glob(str(p_obj)))
+            if matched:
+                resolved_files.extend(matched)
+            elif p_obj.exists():
+                resolved_files.append(str(p_obj))
+
+        resolved_files = sorted(list(set(resolved_files)))
+        if not resolved_files:
+            print("Error: No files found matching input arguments.")
+            sys.exit(1)
+
+        try:
+            with open(playlist_path, "r", encoding="utf-8") as f:
+                playlist_data = json.load(f)
+        except Exception:
+            playlist_data = []
+
+        highest_idx = 0
+        for ep in playlist_data:
+            u = ep.get("url", "")
+            m = re.match(r"^local_(\d+)$", u)
+            if m:
+                highest_idx = max(highest_idx, int(m.group(1)))
+
+        AUDIO_EXTS = {".m4a", ".mp3", ".wav", ".flac", ".aac", ".ogg"}
+        audio_by_stem = {}
+        vtt_by_stem = {}
+
+        for f_str in resolved_files:
+            fp = pathlib.Path(f_str)
+            ext = fp.suffix.lower()
+            stem = fp.stem
+            if ext == ".vtt":
+                clean_stem = re.sub(r"\.[a-z]{2}$", "", stem)
+                vtt_by_stem[clean_stem] = fp
+            elif ext in AUDIO_EXTS:
+                audio_by_stem[stem] = fp
+
+        new_episodes_added = 0
+        vtt_updated_count = 0
+
+        for stem, audio_fp in audio_by_stem.items():
+            res = subprocess.run(
+                ["ffprobe", "-hide_banner", "-show_entries", "format_tags", "-of", "json", str(audio_fp)],
+                capture_output=True,
+                text=True,
+            )
+            raw_tags = {}
+            try:
+                raw_tags = json.loads(res.stdout).get("format", {}).get("tags", {})
+            except Exception:
+                pass
+
+            tags = {k.lower().split(":")[-1]: str(v) for k, v in raw_tags.items()}
+            candidate_date = tags.get("date") or tags.get("creation_time") or tags.get("year") or ""
+
+            date_match = re.search(r"(\d{4})[-_:]?(\d{2})[-_:]?(\d{2})", candidate_date)
+            if not date_match:
+                fallback_match = re.search(
+                    r"(?:date|creation_time)\s*:\s*(\d{4})[-_:]?(\d{2})[-_:]?(\d{2})", res.stdout, re.IGNORECASE
+                )
+                if fallback_match:
+                    date_match = fallback_match
+
+            if not date_match:
+                print(f"Error: No valid date found in metadata for '{audio_fp.name}'. Process stopped.")
+                sys.exit(1)
+
+            raw_date = f"{date_match.group(1)}{date_match.group(2)}{date_match.group(3)}"
+            upload_date = f"{date_match.group(1)}-{date_match.group(2)}-{date_match.group(3)}"
+
+            audio_dest_filename = f"{stem}{audio_fp.suffix}"
+            r2_audio_dest = f"{RCLONE_REM}/episodes/{target_show_id}/{audio_dest_filename}"
+            print(f"==> Uploading audio to Cloudflare R2: {r2_audio_dest}")
+            subprocess.run(["rclone", "copyto", "--s3-no-check-bucket", str(audio_fp), r2_audio_dest], check=True)
+
+            vtt_url = ""
+            if stem in vtt_by_stem:
+                paired_vtt = vtt_by_stem[stem]
+                vtt_dest_filename = paired_vtt.name
+                r2_vtt_dest = f"{RCLONE_REM}/episodes/{target_show_id}/{vtt_dest_filename}"
+                clean_vtt_content(str(paired_vtt))
+                print(f"==> Uploading paired VTT to Cloudflare R2: {r2_vtt_dest}")
+                subprocess.run(["rclone", "copyto", "--s3-no-check-bucket", str(paired_vtt), r2_vtt_dest], check=True)
+                vtt_url = f"{base_episodes_url}/{vtt_dest_filename}"
+
+            highest_idx += 1
+            local_id = f"local_{highest_idx:06d}"
+
+            entry = {
+                "show_id": target_show_id,
+                "title": stem,
+                "url": local_id,
+                "audio": f"{base_episodes_url}/{audio_dest_filename}",
+                "vtt": vtt_url,
+                "upload_date": upload_date,
+                "raw_date": raw_date,
+                "format": audio_fp.suffix.lstrip(".").upper(),
+            }
+            playlist_data.append(entry)
+            new_episodes_added += 1
+
+        standalone_vtts = {s: fp for s, fp in vtt_by_stem.items() if s not in audio_by_stem}
+        for stem, vtt_fp in standalone_vtts.items():
+            matched_ep = next((ep for ep in playlist_data if ep.get("show_id") == target_show_id and ep.get("title") == stem), None)
+            if matched_ep:
+                vtt_name = vtt_fp.name
+                dest_vtt = f"{RCLONE_REM}/episodes/{target_show_id}/{vtt_name}"
+                clean_vtt_content(str(vtt_fp))
+                print(f"==> Uploading standalone VTT to Cloudflare R2: {dest_vtt}")
+                subprocess.run(["rclone", "copyto", "--s3-no-check-bucket", str(vtt_fp), dest_vtt], check=True)
+                matched_ep["vtt"] = f"{base_episodes_url}/{vtt_name}"
+                vtt_updated_count += 1
+
+        if new_episodes_added > 0 or vtt_updated_count > 0:
+            with open(playlist_path, "w", encoding="utf-8") as f:
+                json.dump(playlist_data, f, ensure_ascii=False, indent=2)
+
+            print("==> Syncing changes to GitHub...")
+            subprocess.run(["git", "add", "playlist.json"], cwd=WORKDIR)
+            commit_msg = f"Upload local episodes/vtts to show {target_show_id}"
+            subprocess.run(["git", "commit", "-m", commit_msg], cwd=WORKDIR, check=False)
+            subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=WORKDIR)
+            subprocess.run(["git", "push", "origin", "main"], cwd=WORKDIR)
+            print("==> Successfully uploaded and updated playlist.json.")
+        sys.exit(0)
+
+    # --- Batch List Handler (-l) ---
+    if len(sys.argv) > 1 and sys.argv[1] == "-l":
+        if len(sys.argv) < 3:
+            print("Usage: gp -l <path_to_list_file>")
+            sys.exit(1)
+
+        raw_path = os.path.expanduser(sys.argv[2])
+        list_file = raw_path if os.path.isabs(raw_path) else os.path.abspath(os.path.join(ORIGINAL_CWD, raw_path))
+        if not os.path.isfile(list_file):
+            print(f"Error: File '{list_file}' not found.")
+            sys.exit(1)
+
+        with open(list_file, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f]
+
+        urls = [line for line in lines if line and not line.startswith("#")]
+        print(f"==> Found {len(urls)} URLs in '{list_file}' to process.")
+
+        for i, list_url in enumerate(urls, 1):
+            print(f"\n[{i}/{len(urls)}] Processing: {list_url}")
+            subprocess.run([sys.executable, "/usr/local/bin/gp", list_url])
+
+        sys.exit(0)
+
+    # --- Removal Handler (-rm) ---
+    if len(sys.argv) > 1 and sys.argv[1] == "-rm":
+        if not os.path.isdir(WORKDIR):
+            print(f"Error: {WORKDIR} does not exist.")
+            sys.exit(1)
+
+        os.chdir(WORKDIR)
+        args = sys.argv[2:]
+        delete_show_meta = "-d" in args
+        targets = [a for a in args if a != "-d"]
+
+        if not targets:
+            print("Usage: gp -rm [-d] <URL | show_id>")
+            sys.exit(1)
+
+        target = targets[0].strip()
+
+        try:
+            with open(playlist_path, "r", encoding="utf-8") as f:
+                playlist_data = json.load(f)
+        except Exception:
+            playlist_data = []
+
+        try:
+            with open(shows_path, "r", encoding="utf-8") as f:
+                shows_data = json.load(f)
+        except Exception:
+            shows_data = {}
+
+        is_url = bool(re.search(r'(?:https?://|youtu[.]be/|watch[?]v=)', target))
+
+        if is_url:
+            yt_id_match = re.search(r'(?:v=|youtu[.]be/|shorts/|live/)([a-zA-Z0-9_-]{11})', target)
+            yt_id = yt_id_match.group(1) if yt_id_match else None
+
+            to_remove = []
+            kept = []
+            for ep in playlist_data:
+                ep_url = ep.get("url") or ""
+                if target == ep_url or (yt_id and yt_id in ep_url):
+                    to_remove.append(ep)
+                else:
+                    kept.append(ep)
+
+            if not to_remove:
+                print(f"--> [Warning] No episode matching URL found: {target}")
+                sys.exit(0)
+
+            for ep in to_remove:
+                s_id = ep.get("show_id")
+                title = ep.get("title")
+                print(f"==> Deleting episode audio and subtitles for '{title}' from R2 (show: {s_id})...")
+                subprocess.run(["rclone", "deletefile", "--s3-no-check-bucket", f"{RCLONE_REM}/episodes/{s_id}/{title}.m4a"], check=False)
+                subprocess.run(["rclone", "delete", "--s3-no-check-bucket", f"{RCLONE_REM}/episodes/{s_id}", "--include", f"{title}*.vtt"], check=False)
+
+            with open(playlist_path, "w", encoding="utf-8") as f:
+                json.dump(kept, f, ensure_ascii=False, indent=2)
+
+            commit_msg = f"Remove episode: {to_remove[0].get('title')}"
+        else:
+            show_id = target
+            to_remove = [ep for ep in playlist_data if ep.get("show_id") == show_id]
+            kept = [ep for ep in playlist_data if ep.get("show_id") != show_id]
+
+            print(f"==> Deleting all episodes and subtitles for show {show_id} from R2...")
+            subprocess.run(["rclone", "delete", "--s3-no-check-bucket", f"{RCLONE_REM}/episodes/{show_id}"], check=False)
+
+            with open(playlist_path, "w", encoding="utf-8") as f:
+                json.dump(kept, f, ensure_ascii=False, indent=2)
+
+            commit_msg = f"Remove all episodes for show {show_id}"
+
+            if delete_show_meta:
+                print(f"==> Removing show {show_id} metadata and logo...")
+                subprocess.run(["rclone", "deletefile", "--s3-no-check-bucket", f"{RCLONE_REM}/logos/{show_id}.png"], check=False)
+                if show_id in shows_data:
+                    del shows_data[show_id]
+                    with open(shows_path, "w", encoding="utf-8") as f:
+                        json.dump(shows_data, f, ensure_ascii=False, indent=2)
+
+                if os.path.exists(dict_path):
+                    with open(dict_path, "r", encoding="utf-8") as f:
+                        rows = [r for r in csv.reader(f, delimiter="\t") if len(r) > 1 and r[1] != show_id]
+                    with open(dict_path, "w", encoding="utf-8", newline="") as f:
+                        csv.writer(f, delimiter="\t").writerows(rows)
+
+                commit_msg = f"Delete show {show_id} and its episodes"
+
+        print("==> Syncing deletions to GitHub...")
+        safe_git_sync(commit_msg, WORKDIR)
+        sys.exit(0)
+
+    # --- Regular URL Download Handler ---
+    args = sys.argv[1:]
+    is_playlist = False
+    keep_temp = False
+    check_lang = False
+    url = None
+    keep_original_names = False
+
+    for arg in args:
+        if arg in ("-p", "--playlist"):
+            is_playlist = True
+        elif arg in ("-k", "--keep"):
+            keep_temp = True
+        elif arg == "-c":
+            check_lang = True
+        elif arg == "-n":
+            keep_original_names = True
+        elif not arg.startswith("-"):
+            url = arg
+
+    if not url:
+        sys.exit(1)
+
+    url = re.sub(r'youtube\.com/shorts/([a-zA-Z0-9_-]+)', r'youtube.com/watch?v=\1', url)
+
+    if not os.path.isdir(WORKDIR):
+        print(f"Error: {WORKDIR} does not exist.")
+        sys.exit(1)
+
+    os.chdir(WORKDIR)
+    update_ytdlp()
+
+    subprocess.run(["git", "stash"], cwd=WORKDIR, capture_output=True)
+    subprocess.run(["git", "checkout", "main"], cwd=WORKDIR, capture_output=True)
+    subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=WORKDIR, capture_output=True)
+    subprocess.run(["git", "stash", "pop"], cwd=WORKDIR, capture_output=True)
+
+    force_upload = "-f" in sys.argv or "--force" in sys.argv
+    if os.path.exists(playlist_path) and url and not force_upload and not is_playlist:
+        try:
+            with open(playlist_path, "r", encoding="utf-8") as _pf:
+                _pdata = json.load(_pf)
+            _yt_id_match = re.search(r'(?:v=|youtu[.]be/|shorts/|live/)([a-zA-Z0-9_-]{11})', url)
+            _yt_id = _yt_id_match.group(1) if _yt_id_match else None
+            for _ep in _pdata:
+                _ep_url = _ep.get("url") or ""
+                if url == _ep_url or (_yt_id and _yt_id in _ep_url):
+                    print(f"--> [Skip] Episode already exists in playlist.json: {_ep.get('title')}")
+                    sys.exit(0)
+        except Exception:
+            pass
+
+    if not os.path.exists(dict_path):
+        open(dict_path, "a").close()
+    if not os.path.exists(shows_path):
+        with open(shows_path, "w", encoding="utf-8") as f:
+            json.dump({}, f)
+    if not os.path.exists(playlist_path):
+        with open(playlist_path, "w", encoding="utf-8") as f:
+            json.dump([], f)
+
+    print("==> Fetching channel & video metadata...")
+    meta_cmd = ["yt-dlp", "--extractor-args", "youtube:player_client=android,web", "--dump-json", "--playlist-items", "1", url]
+    if not is_playlist:
+        meta_cmd.insert(1, "--no-playlist")
+    res = subprocess.run(meta_cmd, capture_output=True, text=True)
+    if res.returncode != 0 or not res.stdout.strip():
+        print("Error: Could not retrieve metadata with yt-dlp.")
+        sys.exit(1)
+
+    first_line = res.stdout.strip().split("\n")[0]
+    meta = json.loads(first_line)
+
+    ch_name = meta.get("uploader") or meta.get("channel") or "Unknown"
+    avatar_url = meta.get("channel_avatar") or meta.get("uploader_avatar") or ""
+    channel_url = meta.get("channel_url") or meta.get("uploader_url")
+
+    if not avatar_url and channel_url:
+        page_res = subprocess.run(["curl", "-sL", channel_url], capture_output=True, text=True)
+        if page_res.returncode == 0:
+            match = re.search(r"https://yt3\.(?:ggpht|googleusercontent)\.com/[^\s<>]+", page_res.stdout)
+            if match:
+                avatar_url = match.group(0)
+
+    if not avatar_url:
+        for t in reversed(meta.get("thumbnails") or []):
+            u = t.get("url", "")
+            if any(x in u for x in ["s176", "s800", "avatar", "photo"]):
+                avatar_url = u
+                break
+
+    sub_keys = list((meta.get("subtitles") or {}).keys()) + list((meta.get("automatic_captions") or {}).keys())
+    ch_lang = meta.get("language") or ""
+    if not ch_lang:
+        for k in sub_keys:
+            if "-" not in k or k.endswith("-orig"):
+                ch_lang = k.split("-")[0]
+                break
+    ch_lang = ch_lang or "hu"
+
+    rows = []
+    show_id = None
+    max_id = 0
+
+    if os.path.exists(dict_path):
+        with open(dict_path, "r", encoding="utf-8") as f:
+            for r in csv.reader(f, delimiter="\t"):
+                if not r:
+                    continue
+                rows.append(r)
+                try:
+                    val = int(r[0])
+                    if val > max_id:
+                        max_id = val
+                except ValueError:
+                    pass
+                if len(r) > 1 and r[1] == ch_name:
+                    show_id = r[0]
+
+    if not show_id:
+        show_id = f"{max_id + 1:06d}"
+        rows.append([show_id, ch_name, ch_lang, avatar_url])
+        with open(dict_path, "w", encoding="utf-8", newline="") as f:
+            csv.writer(f, delimiter="\t").writerows(rows)
+
+    print(f"==> Show: {ch_name} ({show_id}) | Lang: {ch_lang}")
+
+    logo_exists = subprocess.run(["rclone", "check", "--s3-no-check-bucket", f"{RCLONE_REM}/logos/{show_id}.png", "/dev/null"], capture_output=True).returncode == 0
+    if avatar_url and not logo_exists:
+        temp_dir_logos = os.path.join(WORKDIR, "temp_downloads")
+        os.makedirs(temp_dir_logos, exist_ok=True)
+        raw_avatar = os.path.join(temp_dir_logos, f"avatar_{show_id}.raw")
+        png_avatar = os.path.join(temp_dir_logos, f"{show_id}.png")
+
+        curl_res = subprocess.run(["curl", "-sL", avatar_url, "-o", raw_avatar])
+        if curl_res.returncode == 0 and os.path.exists(raw_avatar) and os.path.getsize(raw_avatar) > 0:
+            sips_res = subprocess.run(["sips", "-s", "format", "png", raw_avatar, "--out", png_avatar], capture_output=True)
+            if sips_res.returncode == 0 and os.path.exists(png_avatar):
+                print(f"==> Uploading logo to R2: logos/{show_id}.png...")
+                subprocess.run([
+                    "rclone", "copyto", "--s3-no-check-bucket",
+                    png_avatar, f"{RCLONE_REM}/logos/{show_id}.png"
+                ], check=False)
+                os.remove(png_avatar)
+            if os.path.exists(raw_avatar):
+                os.remove(raw_avatar)
+
+    try:
+        with open(shows_path, "r", encoding="utf-8") as f:
+            shows_data = json.load(f)
+    except Exception:
+        shows_data = {}
+
+    shows_data[show_id] = {
+        "show_id": show_id,
+        "name": ch_name,
+        "lang": ch_lang,
+        "flag": lang_to_flag(ch_lang)
+    }
+    with open(shows_path, "w", encoding="utf-8") as f:
+        json.dump(shows_data, f, ensure_ascii=False, indent=2)
+
+    temp_dir = os.path.join(WORKDIR, "temp_downloads", show_id)
+    os.makedirs(temp_dir, exist_ok=True)
+
+    output_template = os.path.join(temp_dir, "%(id)s.%(ext)s") if keep_original_names else os.path.join(temp_dir, "%(title)s.%(ext)s")
+    dl_cmd = [
+        "yt-dlp",
+        "--extractor-args", "youtube:player_client=android,web",
+        "-x", "--audio-format", "m4a",
+        "--write-subs", "--no-write-auto-subs",
+        "--sub-lang", ch_lang, "--convert-subs", "vtt",
+        "--sub-format", "vtt",
+        "--output", output_template,
+        "--write-info-json"
+    ]
+    if is_playlist:
+        dl_cmd.append("--yes-playlist")
+    else:
+        dl_cmd.append("--no-playlist")
+    dl_cmd.append(url)
+
+    print(f"==> Downloading media and subtitles into {temp_dir}...")
+    subprocess.run(dl_cmd)
+
+    m4a_files = glob.glob(os.path.join(temp_dir, "*.m4a")) + glob.glob(os.path.join(temp_dir, "*.webm")) + glob.glob(os.path.join(temp_dir, "*.mp4"))
+    if not m4a_files:
+        print("Error: No media downloaded (YouTube 403/block). Aborting before touching playlist.json.")
+        sys.exit(1)
+
+    meta_by_stem = {}
+    for ip in glob.glob(os.path.join(temp_dir, "*.info.json")):
+        try:
+            with open(ip, "r", encoding="utf-8") as f:
+                item_meta = json.load(f)
+                stem = os.path.basename(ip).replace(".info.json", "")
+                meta_by_stem[stem] = item_meta
+        except Exception:
+            continue
+
+    current_stems = {os.path.splitext(os.path.basename(m))[0] for m in m4a_files}
+    for stem in current_stems:
+        vtts = [v for v in glob.glob(os.path.join(temp_dir, "*.vtt")) if stem in os.path.basename(v)]
+        valid_found = bool(vtts)
+
+        if check_lang and vtts:
+            for vfile in vtts:
+                if not validate_vtt_language(vfile, ch_lang):
+                    try: os.remove(vfile)
+                    except Exception: pass
+                    valid_found = False
+
+        if not valid_found:
+            item_meta = meta_by_stem.get(stem, {})
+            yt_id_val = item_meta.get('id')
+            if yt_id_val:
+                direct_video_url = f"https://www.youtube.com/watch?v={yt_id_val}"
+                auto_cmd = [
+                    "yt-dlp", "--skip-download", "--no-playlist", "--no-write-playlist",
+                    "--write-auto-subs", "--no-write-subs",
+                    "--sub-lang", f"{ch_lang}-orig,{ch_lang}",
+                    "--sub-format", "vtt", "--convert-subs", "vtt",
+                    "--output", os.path.join(temp_dir, f"{stem}.%(ext)s"), direct_video_url
+                ]
+                subprocess.run(auto_cmd, check=False)
+
+        item_vtts = sorted([v for v in glob.glob(os.path.join(temp_dir, "*.vtt")) if stem in os.path.basename(v)])
+        if item_vtts:
+            target_vtt = item_vtts[0]
+            if os.path.exists(target_vtt):
+                clean_vtt_content(target_vtt)
+                item_meta = meta_by_stem.get(stem, {})
+                raw_title_stem = (item_meta.get("title") or stem) if keep_original_names else sanitize_title(stem)
+                final_title_stem = safe_filename(raw_title_stem)
+                clean_vtt_path = os.path.join(temp_dir, f"{final_title_stem}.vtt")
+                if target_vtt != clean_vtt_path:
+                    if os.path.exists(clean_vtt_path):
+                        os.remove(clean_vtt_path)
+                    shutil.move(target_vtt, clean_vtt_path)
+        # Remove leftover language-tagged VTT files (e.g., .hu.vtt, .en.vtt, .hu-orig.vtt)
+        for extra_vtt in glob.glob(os.path.join(temp_dir, "*.vtt")):
+            if extra_vtt != clean_vtt_path and os.path.exists(extra_vtt):
+                try: os.remove(extra_vtt)
+                except Exception: pass
+
+
+    print(f"==> Uploading media to Cloudflare R2: episodes/{show_id}...")
+    subprocess.run([
+        "rclone", "copy", "--s3-no-check-bucket",
+        temp_dir, f"{RCLONE_REM}/episodes/{show_id}",
+        "--include", "*.m4a",
+        "--include", "*.vtt"
+    ], check=False)
+
+    if os.path.exists(playlist_path):
+        try:
+            with open(playlist_path, "r", encoding="utf-8") as f:
+                playlist_data = json.load(f)
+        except Exception:
+            playlist_data = []
+    else:
+        playlist_data = []
+
+    base_episodes_url = f"{BASE_R2}/episodes/{show_id}"
+
+    for audio_path in m4a_files:
+        filename = os.path.basename(audio_path)
+        stem_name = os.path.splitext(filename)[0]
+
+        item_meta = meta_by_stem.get(stem_name)
+        if not item_meta and len(meta_by_stem) == 1:
+            item_meta = list(meta_by_stem.values())[0]
+        if not item_meta:
+            item_meta = {}
+
+        title = (item_meta.get("title") or stem_name) if keep_original_names else stem_name
+        yt_id_val = item_meta.get('id')
+        video_url = item_meta.get("webpage_url") or item_meta.get("original_url") or (f"https://www.youtube.com/watch?v={yt_id_val}" if yt_id_val else url)
+
+        raw_date = item_meta.get("upload_date") or ""
+        fmt_date = f"{raw_date[0:4]}-{raw_date[4:6]}-{raw_date[6:8]}" if len(raw_date) == 8 else ""
+
+        subtitle_title = title if keep_original_names else sanitize_title(stem_name)
+        subtitle_filename_stem = safe_filename(subtitle_title)
+        vtt_matches = glob.glob(
+            os.path.join(temp_dir, f"{glob.escape(subtitle_filename_stem)}*.vtt")
+        )
+        vtt_url = (
+            f"{base_episodes_url}/{os.path.basename(vtt_matches[0])}"
+            if vtt_matches
+            else (
+                f"{base_episodes_url}/{subtitle_filename_stem}.vtt"
+                if rclone_check_vtt(show_id, subtitle_filename_stem)
+                else ""
+            )
+        )
+
+        entry = {
+            "show_id": show_id,
+            "title": title,
+            "url": video_url,
+            "audio": f"{base_episodes_url}/{filename}",
+            "vtt": vtt_url,
+            "upload_date": fmt_date,
+            "raw_date": raw_date,
+            "format": os.path.splitext(audio_path)[1].lstrip(".").upper()
+        }
+
+        playlist_data = [x for x in playlist_data if not (x.get("title") == title and x.get("show_id") == show_id)]
+        playlist_data.append(entry)
+
+    playlist_data.sort(key=lambda x: (x.get("show_id") or "", x.get("raw_date") or "", x.get("title") or ""))
+    with open(playlist_path, "w", encoding="utf-8") as f:
+        json.dump(playlist_data, f, ensure_ascii=False, indent=2)
+
+    print("==> Syncing metadata to GitHub...")
+    subprocess.run(["git", "add", "-A"], cwd=WORKDIR)
+    subprocess.run(["git", "commit", "-m", f"Update metadata for {show_id} ({ch_name})"], cwd=WORKDIR, check=False)
+    subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=WORKDIR, check=False)
+    res_push = subprocess.run(["git", "push", "origin", "main"], cwd=WORKDIR, capture_output=True, text=True)
+    if res_push.returncode != 0:
+        print(f"==> Git Push Warning: {res_push.stderr.strip()}")
+
+    if not keep_temp:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    print(f"==> Successfully completed show {show_id} ({ch_name}).")
+
+if __name__ == "__main__":
+    main()
+
