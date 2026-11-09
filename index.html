@@ -1842,33 +1842,39 @@
     }
 
     async function loadTranscript(vttUrl) {
-      cues = [];
-      activeCueIndex = -1;
-      transcriptView.innerHTML = '';
+    cues = [];
+    activeCueIndex = -1;
+    transcriptView.innerHTML = "";
 
-      if (!vttUrl) {
-        transcriptView.innerHTML = '<div class="empty-state">No transcript available for this track.</div>';
-        return;
-      }
-
-      try {
-        const urlToFetch = safeUrl(vttUrl);
-        const glue = urlToFetch.includes('?') ? '&' : '?';
-        const res = await fetch(urlToFetch + glue + 'nocache=' + Date.now());
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const text = await res.text();
-        cues = parseVtt(text);
-        if (cues.length > 0) {
-          renderTranscript();
-        } else {
-          transcriptView.innerHTML = '<div class="empty-state">Transcript contains no text cues.</div>';
-        }
-      } catch (err) {
-        transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
-      }
+    if (!vttUrl || typeof vttUrl !== "string" || !vttUrl.trim()) {
+      transcriptView.innerHTML = "<div class=\"empty-state\">No transcript available for this track.</div>";
+      return;
     }
 
-    function renderTranscript() {
+    try {
+      let fullUrl = vttUrl.startsWith("http") ? vttUrl : `${R2_BASE}/${vttUrl.replace(/^\//, "")}`;
+      const parsedUrl = new URL(fullUrl);
+      parsedUrl.searchParams.set("nocache", Date.now().toString());
+
+      const res = await fetch(parsedUrl.toString());
+      if (res.status === 404) {
+        transcriptView.innerHTML = "<div class=\"empty-state\">No transcript available for this track.</div>";
+        return;
+      }
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const text = await res.text();
+      cues = parseVtt(text);
+      if (cues.length > 0) {
+        renderTranscript();
+      } else {
+        transcriptView.innerHTML = "<div class=\"empty-state\">Transcript contains no text cues.</div>";
+      }
+    } catch (err) {
+      transcriptView.innerHTML = `<div class="empty-state" style="color:var(--danger)">Could not load transcript (${err.message})</div>`;
+    }
+  }
+
+  function renderTranscript() {
       if (!transcriptView) return;
       transcriptView.innerHTML = '';
       cues.forEach((cue, index) => {
