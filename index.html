@@ -1254,6 +1254,8 @@
     let currentTranslatedSentence = null;
     let isSentenceTranslateActive = false;
     let previousActiveScreen = 'home';
+    let homeScrollPos = 0;
+    let showScrollPos = 0;
 
     const FLAG_TO_LANG = {
       '🇭🇺': 'hu', '🇩🇪': 'de', '🇪🇸': 'es', '🇫🇷': 'fr', '🇮🇹': 'it',
@@ -1526,8 +1528,10 @@
       if (screen === 'player') {
         if (showScreen.classList.contains('active')) {
           previousActiveScreen = 'show';
+          showScrollPos = mainContainer.scrollTop;
         } else if (homeScreen.classList.contains('active')) {
           previousActiveScreen = 'home';
+          homeScrollPos = mainContainer.scrollTop;
         }
       }
       let targetHash = "#/";
@@ -1631,6 +1635,11 @@
         if (previousActiveScreen === 'show' && currentShow) {
           showScreen.classList.add('active');
           homeScreen.classList.remove('active');
+          requestAnimationFrame(() => mainContainer.scrollTop = showScrollPos);
+        } else {
+          homeScreen.classList.add('active');
+          showScreen.classList.remove('active');
+          requestAnimationFrame(() => mainContainer.scrollTop = homeScrollPos);
         } else {
           homeScreen.classList.add('active');
           showScreen.classList.remove('active');
@@ -1825,6 +1834,7 @@
             <div class="card-title">${ep.title}</div>
             <div class="card-meta">
               ${ep.upload_date ? `<span>📅 ${ep.upload_date}</span>` : ''}
+              ${ep.duration ? `<span>⏱ ${formatTime(ep.duration)}</span>` : ''}
               ${!ep.vtt ? '<span class="badge badge-audio">Audio only</span>' : ''}
               ${isDone ? '<span class="badge badge-completed">Completed</span>' : ''}
               ${!isDone && savedPos > 5 ? `<span class="badge badge-resume">Resume ${formatTime(savedPos)}</span>` : ''}
@@ -2124,10 +2134,12 @@
         if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
         return;
       }
-      if (mainContainer.scrollTop > 180) {
-        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'flex';
-      } else {
-        if (ssScrollTopBtn) ssScrollTopBtn.style.display = 'none';
+      if (ssScrollTopBtn) {
+        if (mainContainer.scrollTop > 180) {
+          ssScrollTopBtn.style.display = 'flex';
+        } else {
+          ssScrollTopBtn.style.display = 'none';
+        }
       }
     });
 
@@ -2315,7 +2327,7 @@
         isDragging = false;
 
         const vh = window.innerHeight || document.documentElement.clientHeight || 600;
-        const minSwipeDistance = vh * 0.4; // 2/5 of screen height
+        const minSwipeDistance = vh * 0.3; // Standard 30% iOS sheet threshold
 
                 if (fromHandle && curDeltaY < 6) {
           ps.style.removeProperty('transform');
